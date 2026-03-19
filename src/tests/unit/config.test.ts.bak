@@ -12,6 +12,10 @@ describe('config — 应用配置', () => {
       expect(API_CONFIG).toHaveProperty('standby1');
       expect(API_CONFIG).toHaveProperty('standby2');
     });
+
+    it('TC-CONF-003: API_CONFIG 应该包含 endpoints 方法', () => {
+      expect(typeof API_CONFIG.endpoints).toBe('function');
+    });
   });
 
   describe('缓存配置测试', () => {
