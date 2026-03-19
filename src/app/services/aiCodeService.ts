@@ -2,7 +2,7 @@
  * @file aiCodeService.ts
  * @description YYC3 AI 代码生成服务 — 核心功能：根据自然语言描述生成代码
  * @author YanYuCloudCube Team <admin@0379.email>
- * @version v1.0.0
+ * @version v1.1.0
  * @created 2026-03-19
  * @updated 2026-03-19
  * @status dev
@@ -34,18 +34,21 @@ export interface CodeGenerationResponse {
 
 // ── System Prompts ──
 
-const SYSTEM_PROMPT = `You are a senior software engineer and AI coding assistant.
+const SYSTEM_PROMPT = `You are a senior software engineer and AI coding assistant for YYC³.
 Your task is to generate high-quality, clean, and maintainable code based on user requirements.
 
-Requirements:
-1. Provide complete, runnable code snippets.
-2. Include comments for complex logic.
-3. Adhere to modern best practices for the specified language.
-4. If the request is ambiguous, ask clarifying questions (output as comments).
+Guidelines:
+1. Analyze the Context (if provided) to ensure code compatibility.
+2. Provide complete, runnable code snippets. Do not omit imports.
+3. Include comments for complex logic.
+4. Adhere to modern best practices for the specified language.
+5. Use Type hints/Annotations where applicable (TS, Python).
+6. Handle edge cases and errors gracefully.
 
-Output format:
-- Return ONLY the code block.
-- If explanation is needed, output as a markdown comment at the top.`;
+Output Format:
+- Return ONLY the code block inside triple backticks.
+- Do not include conversational text outside the code block.
+- If a brief explanation is helpful, add it as a markdown comment at the top of the code block.`;
 
 // ── Service ──
 
@@ -73,17 +76,13 @@ export class AICodeService {
     const { prompt, context = '', language = 'typescript', style = 'concise' } = request;
 
     // 构造完整的 Prompt
-    const fullPrompt = `
-Language: ${language}
-Style: ${style}
-Context:
-${context}
+    let userPrompt = `Language: ${language}\nStyle: ${style}\nRequest: ${prompt}\n`;
 
-User Request:
-${prompt}
+    if (context) {
+      userPrompt += `\nExisting Context:\n${context}`;
+    }
 
-Generate the code below:
-    `.trim();
+    userPrompt += `\nGenerate the code below:`;
 
     try {
       const response = await fetch(this.endpoint, {
@@ -96,7 +95,7 @@ Generate the code below:
           model: this.modelId,
           messages: [
             { role: 'system', content: SYSTEM_PROMPT },
-            { role: 'user', content: fullPrompt }
+            { role: 'user', content: userPrompt }
           ],
           temperature: 0.2, // 较低的温度以确保代码的准确性
           max_tokens: 2048,

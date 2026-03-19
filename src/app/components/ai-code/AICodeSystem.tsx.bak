@@ -2449,11 +2449,6 @@ export function AICodeSystem() {
   // Activity bar view change handler
   const handleActivityViewChange = useCallback((view: ActivityView) => {
     // Toggle: clicking same view collapses/expands the left panel
-    if (view === 'generator') {
-      navigate('/ai-generator');
-      return;
-    }
-
     if (view === activityView && leftPanelOpen) {
       leftPanelRef.current?.collapse();
       setLeftPanelOpen(false);

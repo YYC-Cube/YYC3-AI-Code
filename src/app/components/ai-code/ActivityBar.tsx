@@ -2,21 +2,21 @@
  * @file ActivityBar.tsx
  * @description VS Code 风格纤细垂直活动栏 — AI Code System 最左侧导航
  * @author YanYuCloudCube Team <admin@0379.email>
- * @version v1.1.0
+ * @version v1.2.0
  * @created 2026-03-10
- * @updated 2026-03-14
+ * @updated 2026-03-19
  * @status dev
  * @license MIT
  * @copyright Copyright (c) 2026 YanYuCloudCube Team
  * @tags ui,activity-bar,navigation,ai-code
  */
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FolderOpen, Search, GitBranch, Puzzle, Bot, Bug, Play,
-  Database, Settings, AppWindow, type LucideIcon
+  Database, Settings, AppWindow, Sparkles, type LucideIcon
 } from 'lucide-react';
 
-export type ActivityView = 'files' | 'search' | 'git' | 'debug' | 'extensions' | 'ai' | 'database' | 'run' | 'multi-instance';
+export type ActivityView = 'files' | 'search' | 'git' | 'debug' | 'extensions' | 'ai' | 'database' | 'run' | 'multi-instance' | 'generator';
 
 interface ActivityItem {
   id: ActivityView;
@@ -35,16 +35,17 @@ const ACTIVITIES: ActivityItem[] = [
   { id: 'extensions', icon: Puzzle, tip: '扩展', color: 'text-violet-400/70' },
   { id: 'database', icon: Database, tip: '数据库', color: 'text-rose-400/70' },
   { id: 'ai', icon: Bot, tip: 'AI 助手', color: 'text-indigo-400/70' },
+  { id: 'generator', icon: Sparkles, tip: 'AI 代码生成', color: 'text-purple-400/70' },
   { id: 'multi-instance', icon: AppWindow, tip: '多实例管理', color: 'text-[var(--yyc3-brand)]' },
 ];
 
-export function ActivityBar({
-  activeView,
+export const ActivityBar = ({
+  activeView = 'files',
   onViewChange,
 }: {
-  activeView: ActivityView;
+  activeView?: ActivityView;
   onViewChange: (view: ActivityView) => void;
-}) {
+}) => {
   return (
     <div className="w-11 flex flex-col items-center py-2 gap-0.5 bg-[#0a0b10] border-r border-white/[0.06] shrink-0">
       {ACTIVITIES.map((item) => {
@@ -92,4 +93,4 @@ export function ActivityBar({
       </div>
     </div>
   );
-}
+};

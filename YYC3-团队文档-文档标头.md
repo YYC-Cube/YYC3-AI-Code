@@ -6,16 +6,16 @@
 
 ```markdown
 ---
-@file: {FILE_NAME}
-@description: {FILE_DESCRIPTION}
-@author: {AUTHOR_NAME} <{AUTHOR_EMAIL}>
-@version: {VERSION}
-@created: {CREATE_DATE}
-@updated: {UPDATE_DATE}
-@status: {STATUS}
-@tags: {TAGS}
-@category: {CATEGORY}
-@language: {LANGUAGE}
+file: {FILE_NAME}
+description: {FILE_DESCRIPTION}
+author: {AUTHOR_NAME} <{AUTHOR_EMAIL}>
+version: {VERSION}
+created: {CREATE_DATE}
+updated: {UPDATE_DATE}
+status: {STATUS}
+tags: {TAGS}
+category: {CATEGORY}
+language: {LANGUAGE}
 ---
 
 > ***YanYuCloudCube***
@@ -31,18 +31,18 @@
 
 ```markdown
 ---
-@file: {FILE_NAME}
-@description: {FILE_DESCRIPTION}
-@author: {AUTHOR_NAME} <{AUTHOR_EMAIL}>
-@version: {VERSION}
-@created: {CREATE_DATE}
-@updated: {UPDATE_DATE}
-@status: {STATUS}
-@tags: {TAGS}
-@category: technical
-@language: {LANGUAGE}
-@audience: {AUDIENCE}
-@complexity: {COMPLEXITY}
+file: {FILE_NAME}
+description: {FILE_DESCRIPTION}
+author: {AUTHOR_NAME} <{AUTHOR_EMAIL}>
+version: {VERSION}
+created: {CREATE_DATE}
+updated: {UPDATE_DATE}
+status: {STATUS}
+tags: {TAGS}
+category: technical
+language: {LANGUAGE}
+audience: {AUDIENCE}
+complexity: {COMPLEXITY}
 ---
 
 > ***YanYuCloudCube***
@@ -58,18 +58,18 @@
 
 ```markdown
 ---
-@file: {FILE_NAME}
-@description: {FILE_DESCRIPTION}
-@author: {AUTHOR_NAME} <{AUTHOR_EMAIL}>
-@version: {VERSION}
-@created: {CREATE_DATE}
-@updated: {UPDATE_DATE}
-@status: {STATUS}
-@tags: {TAGS}
-@category: api
-@language: {LANGUAGE}
-@base_url: {BASE_URL}
-@authentication: {AUTH_TYPE}
+file: {FILE_NAME}
+description: {FILE_DESCRIPTION}
+author: {AUTHOR_NAME} <{AUTHOR_EMAIL}>
+version: {VERSION}
+created: {CREATE_DATE}
+updated: {UPDATE_DATE}
+status: {STATUS}
+tags: {TAGS}
+category: api
+language: {LANGUAGE}
+base_url: {BASE_URL}
+authentication: {AUTH_TYPE}
 ---
 
 > ***YanYuCloudCube***
@@ -85,18 +85,18 @@
 
 ```markdown
 ---
-@file: {FILE_NAME}
-@description: {FILE_DESCRIPTION}
-@author: {AUTHOR_NAME} <{AUTHOR_EMAIL}>
-@version: {VERSION}
-@created: {CREATE_DATE}
-@updated: {UPDATE_DATE}
-@status: {STATUS}
-@tags: {TAGS}
-@category: project
-@language: {LANGUAGE}
-@project: {PROJECT_NAME}
-@phase: {PROJECT_PHASE}
+file: {FILE_NAME}
+description: {FILE_DESCRIPTION}
+author: {AUTHOR_NAME} <{AUTHOR_EMAIL}>
+version: {VERSION}
+created: {CREATE_DATE}
+updated: {UPDATE_DATE}
+status: {STATUS}
+tags: {TAGS}
+category: project
+language: {LANGUAGE}
+project: {PROJECT_NAME}
+phase: {PROJECT_PHASE}
 ---
 
 > ***YanYuCloudCube***
@@ -112,18 +112,18 @@
 
 ```markdown
 ---
-@file: {FILE_NAME}
-@description: {FILE_DESCRIPTION}
-@author: {AUTHOR_NAME} <{AUTHOR_EMAIL}>
-@version: {VERSION}
-@created: {CREATE_DATE}
-@updated: {UPDATE_DATE}
-@status: {STATUS}
-@tags: {TAGS}
-@category: design
-@language: {LANGUAGE}
-@design_type: {DESIGN_TYPE}
-@review_status: {REVIEW_STATUS}
+file: {FILE_NAME}
+description: {FILE_DESCRIPTION}
+author: {AUTHOR_NAME} <{AUTHOR_EMAIL}>
+version: {VERSION}
+created: {CREATE_DATE}
+updated: {UPDATE_DATE}
+status: {STATUS}
+tags: {TAGS}
+category: design
+language: {LANGUAGE}
+design_type: {DESIGN_TYPE}
+review_status: {REVIEW_STATUS}
 ---
 
 > ***YanYuCloudCube***
@@ -141,36 +141,36 @@
 
 | 字段 | 说明 | 格式要求 | 示例 |
 |------|------|----------|------|
-| @file | 文件名称 | 相对路径或文件名 | `README.md` |
-| @description | 文档描述 | 简洁描述文档内容和用途 | `项目总览文档，包含项目介绍、快速开始等内容` |
-| @author | 作者信息 | 姓名 <邮箱> | `张三 <zhangsan@0379.email>` |
-| @version | 版本号 | 语义化版本号 (SemVer) | `v1.2.3` |
-| @created | 创建日期 | YYYY-MM-DD 格式 | `2026-03-06` |
-| @updated | 更新日期 | YYYY-MM-DD 格式 | `2026-03-06` |
-| @status | 文档状态 | draft/dev/review/stable/deprecated | `stable` |
-| @tags | 标签 | 逗号分隔的标签列表 | `project,overview,getting-started` |
-| @category | 文档分类 | technical/api/project/design/general | `technical` |
-| @language | 文档语言 | zh-CN/en-US/ja-JP | `zh-CN` |
+| file | 文件名称 | 相对路径或文件名 | `README.md` |
+| description | 文档描述 | 简洁描述文档内容和用途 | `项目总览文档，包含项目介绍、快速开始等内容` |
+| author | 作者信息 | 姓名 <邮箱> | `张三 <zhangsan0379.email>` |
+| version | 版本号 | 语义化版本号 (SemVer) | `v1.2.3` |
+| created | 创建日期 | YYYY-MM-DD 格式 | `2026-03-06` |
+| updated | 更新日期 | YYYY-MM-DD 格式 | `2026-03-06` |
+| status | 文档状态 | draft/dev/review/stable/deprecated | `stable` |
+| tags | 标签 | 逗号分隔的标签列表 | `project,overview,getting-started` |
+| category | 文档分类 | technical/api/project/design/general | `technical` |
+| language | 文档语言 | zh-CN/en-US/ja-JP | `zh-CN` |
 
 ### 可选字段
 
 | 字段 | 说明 | 格式要求 | 示例 |
 |------|------|----------|------|
-| @audience | 目标读者 | developers/managers/users/stakeholders | `developers` |
-| @complexity | 复杂度 | basic/intermediate/advanced/expert | `intermediate` |
-| @base_url | API 基础地址 | URL 地址 | `https://api.yyc3.com/v1` |
-| @authentication | 认证方式 | none/api-key/oauth2/jwt | `oauth2` |
-| @project | 项目名称 | 项目标识符 | `yyc3-platform` |
-| @phase | 项目阶段 | planning/development/testing/production | `development` |
-| @design_type | 设计类型 | architecture/ui/ux/database | `architecture` |
-| @review_status | 审核状态 | pending/reviewed/approved/rejected | `approved` |
-| @related_docs | 相关文档 | 逗号分隔的文档列表 | `API.md,Architecture.md` |
-| @license | 许可证 | 标准许可证名称 | `MIT` |
-| @copyright | 版权声明 | 版权信息 | `Copyright (c) 2026 YanYuCloudCube Team` |
+| audience | 目标读者 | developers/managers/users/stakeholders | `developers` |
+| complexity | 复杂度 | basic/intermediate/advanced/expert | `intermediate` |
+| base_url | API 基础地址 | URL 地址 | `https://api.yyc3.com/v1` |
+| authentication | 认证方式 | none/api-key/oauth2/jwt | `oauth2` |
+| project | 项目名称 | 项目标识符 | `yyc3-platform` |
+| phase | 项目阶段 | planning/development/testing/production | `development` |
+| design_type | 设计类型 | architecture/ui/ux/database | `architecture` |
+| review_status | 审核状态 | pending/reviewed/approved/rejected | `approved` |
+| related_docs | 相关文档 | 逗号分隔的文档列表 | `API.md,Architecture.md` |
+| license | 许可证 | 标准许可证名称 | `MIT` |
+| copyright | 版权声明 | 版权信息 | `Copyright (c) 2026 YanYuCloudCube Team` |
 
 ## 状态值说明
 
-### 文档状态 (@status)
+### 文档状态 (status)
 
 | 状态值 | 说明 | 使用场景 |
 |--------|------|----------|
@@ -180,7 +180,7 @@
 | stable | 稳定 | 内容稳定，可供参考 |
 | deprecated | 已废弃 | 不再维护，将被替换或删除 |
 
-### 审核状态 (@review_status)
+### 审核状态 (review_status)
 
 | 状态值 | 说明 | 使用场景 |
 |--------|------|----------|
@@ -189,7 +189,7 @@
 | approved | 已批准 | 审核通过，正式发布 |
 | rejected | 已拒绝 | 审核未通过，需要修改 |
 
-### 项目阶段 (@phase)
+### 项目阶段 (phase)
 
 | 阶段值 | 说明 | 使用场景 |
 |--------|------|----------|
@@ -201,7 +201,7 @@
 
 ## 分类规范
 
-### 文档分类 (@category)
+### 文档分类 (category)
 
 | 分类 | 说明 | 示例文档 |
 |------|------|----------|
@@ -213,7 +213,7 @@
 | guide | 指南文档 | Getting-Started.md,Tutorial.md |
 | policy | 策略文档 | Coding-Standard.md,Security-Policy.md |
 
-### 复杂度等级 (@complexity)
+### 复杂度等级 (complexity)
 
 | 等级 | 说明 | 目标读者 |
 |------|------|----------|
@@ -222,7 +222,7 @@
 | advanced | 高级 | 经验丰富的开发者 |
 | expert | 专家 | 架构师、技术专家 |
 
-### 目标读者 (@audience)
+### 目标读者 (audience)
 
 | 读者类型 | 说明 | 文档特点 |
 |----------|------|----------|
@@ -261,7 +261,7 @@
 
 ```markdown
 ---
-@tags: guide,frontend,getting-started,critical,zh-CN
+tags: guide,frontend,getting-started,critical,zh-CN
 ---
 ```
 
@@ -270,9 +270,9 @@
 ### 变更记录
 
 每次文档更新时，必须更新以下字段：
-1. **@updated**: 更新为当前日期
-2. **@version**: 根据变更类型递增版本号
-3. **@description**: 如有重大变更，更新描述
+1. **updated**: 更新为当前日期
+2. **version**: 根据变更类型递增版本号
+3. **description**: 如有重大变更，更新描述
 
 ### 变更类型与版本号对应
 
@@ -370,20 +370,20 @@ git commit -m "docs: v2.0.0 重组文档结构"
 
 ```markdown
 ---
-@file: YYC³-Platform-项目总览.md
-@description: YYC³ 平台项目总览文档，包含项目介绍、架构设计、技术栈、快速开始等内容
-@author: 张三 <zhangsan@0379.email>
-@version: v1.2.0
-@created: 2026-01-15
-@updated: 2026-03-06
-@status: stable
-@tags: project,overview,getting-started,critical,zh-CN
-@category: project
-@language: zh-CN
-@project: yyc3-platform
-@phase: production
-@audience: developers,managers,stakeholders
-@complexity: intermediate
+file: YYC³-Platform-项目总览.md
+description: YYC³ 平台项目总览文档，包含项目介绍、架构设计、技术栈、快速开始等内容
+author: 张三 <zhangsan0379.email>
+version: v1.2.0
+created: 2026-01-15
+updated: 2026-03-06
+status: stable
+tags: project,overview,getting-started,critical,zh-CN
+category: project
+language: zh-CN
+project: yyc3-platform
+phase: production
+audience: developers,managers,stakeholders
+complexity: intermediate
 ---
 
 > ***YanYuCloudCube***
@@ -429,7 +429,7 @@ YYC³ Platform 是一个基于云原生架构的企业级平台...
 <div align="center">
 
 > 「***YanYuCloudCube***」
-> 「***<admin@0379.email>***」
+> 「***<admin0379.email>***」
 > 「***Words Initiate Quadrants, Language Serves as Core for Future***」
 > 「***All things converge in cloud pivot; Deep stacks ignite a new era of intelligence***」
 
@@ -440,20 +440,20 @@ YYC³ Platform 是一个基于云原生架构的企业级平台...
 
 ```markdown
 ---
-@file: YYC³-Platform-API文档.md
-@description: YYC³ Platform API 接口文档，包含所有 RESTful API 的详细说明
-@author: 李四 <lisi@0379.email>
-@version: v2.1.0
-@created: 2026-02-01
-@updated: 2026-03-06
-@status: stable
-@tags: api,restful,reference,critical,zh-CN
-@category: api
-@language: zh-CN
-@base_url: https://api.yyc3.com/v1
-@authentication: oauth2
-@audience: developers
-@complexity: advanced
+file: YYC³-Platform-API文档.md
+description: YYC³ Platform API 接口文档，包含所有 RESTful API 的详细说明
+author: 李四 <lisi0379.email>
+version: v2.1.0
+created: 2026-02-01
+updated: 2026-03-06
+status: stable
+tags: api,restful,reference,critical,zh-CN
+category: api
+language: zh-CN
+base_url: https://api.yyc3.com/v1
+authentication: oauth2
+audience: developers
+complexity: advanced
 ---
 
 > ***YanYuCloudCube***
@@ -510,7 +510,7 @@ POST /api/v1/auth/login
 <div align="center">
 
 > 「***YanYuCloudCube***」
-> 「***<admin@0379.email>***」
+> 「***<admin0379.email>***」
 > 「***Words Initiate Quadrants, Language Serves as Core for Future***」
 > 「***All things converge in cloud pivot; Deep stacks ignite a new era of intelligence***」
 
@@ -528,7 +528,7 @@ POST /api/v1/auth/login
 ### 联系方式
 
 - **维护团队**: YanYuCloudCube Team
-- **联系邮箱**: admin@0379.email
+- **联系邮箱**: admin0379.email
 - **项目地址**: https://github.com/YYC3/
 
 ## 附录
@@ -552,7 +552,7 @@ POST /api/v1/auth/login
 <div align="center">
 
 > 「***YanYuCloudCube***」
-> 「***<admin@0379.email>***」
+> 「***<admin0379.email>***」
 > 「***Words Initiate Quadrants, Language Serves as Core for Future***」
 > 「***All things converge in cloud pivot; Deep stacks ignite a new era of intelligence***」
 
