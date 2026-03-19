@@ -9,31 +9,31 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/tests/setup.ts'],
     include: ['src/**/*.test.{ts,tsx}'],
-    // Optimize test performance
     maxConcurrency: 4,
     cache: {
-      dir: '.vitest_cache',
+      dir: 'cacheDir/vitest',
     },
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
-      // Ignore empty lines to improve percentage accuracy
       ignoreEmptyLines: true,
-      // Check all files, even uncovered ones
-      all: true,
+      all: true, // 统计所有文件
       include: [
         'src/app/**/*.{ts,tsx}',
+        'src/components/**/*.{ts,tsx}', // 如果有这个目录
       ],
       exclude: [
         '**/*.test.*',
         '**/*.spec.*',
         '**/node_modules/**',
         '**/dist/**',
-        '**/tests/**', // Exclude test files from coverage
+        '**/tests/**', // 排除测试文件本身
         '**/*.config.*',
         '**/coverage/**',
+        '**/cacheDir/**', // 排除缓存
+        '**/stories/**', // 排除 Storybook stories
+        '**/*.mock.*', // 排除 mock 文件
       ],
-      // Thresholds (optional, set high to encourage quality)
       thresholds: {
         statements: 10,
         branches: 10,
