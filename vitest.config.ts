@@ -7,14 +7,16 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./src/tests/setup.ts'], // 修复：指向正确的 setup 文件
+    setupFiles: ['./src/tests/setup.ts'],
     include: ['src/**/*.test.{ts,tsx}'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      include: ['src/app/**/*.{ts,tsx}'],
+      include: [
+        'src/app/**/*.{ts,tsx}',
+        'src/tests/**/*.{ts,tsx}',
+      ],
       exclude: [
-        'src/app/testing/**',
         '**/*.test.*',
         '**/*.spec.*',
         '**/node_modules/**',
