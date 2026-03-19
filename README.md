@@ -1,5 +1,7 @@
 <div align="center">
 
+![YYC³ AI Code](public/yyc3-article-cover.png)
+
 # YYC³ AI Code
 
 **AI 驱动的智能代码生成与协作工作台**
