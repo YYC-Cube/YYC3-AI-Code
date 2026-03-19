@@ -1,0 +1,436 @@
+/* ================================================================
+   Aurora Theme — YanYuCloudCube
+   Inspired by natural aurora borealis — flowing gradients,
+   translucent surfaces, vibrant glow effects
+   ================================================================ */
+
+/* ---------- Aurora animated background ---------- */
+@keyframes aurora-gradient-flow {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 100% 50%; }
+  50%  { background-position: 100% 100%; }
+  75%  { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes aurora-particle-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  25%  { transform: translate(40px, -60px) scale(1.3); opacity: 0.6; }
+  50%  { transform: translate(-30px, 30px) scale(0.9); opacity: 0.4; }
+  75%  { transform: translate(60px, 15px) scale(1.15); opacity: 0.55; }
+}
+
+@keyframes aurora-shimmer {
+  0%   { transform: translateX(-120%); opacity: 0; }
+  50%  { opacity: 1; }
+  100% { transform: translateX(120%); opacity: 0; }
+}
+
+@keyframes aurora-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(0, 255, 135, 0.15),
+      0 0 40px rgba(96, 239, 255, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(0, 255, 135, 0.25),
+      0 0 60px rgba(96, 239, 255, 0.15);
+  }
+}
+
+@keyframes aurora-fade-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes aurora-glow-rotate {
+  0%   { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* ---------- Aurora background root ---------- */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 15% 30%, rgba(0, 255, 135, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 15%, rgba(96, 239, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 70%, rgba(236, 72, 153, 0.12) 0%, transparent 50%),
+    linear-gradient(160deg, #0a1a12 0%, #0d0e14 30%, #0a0f1e 60%, #120a1c 100%);
+  background-size: 300% 300%;
+  animation: aurora-gradient-flow 30s ease infinite;
+}
+
+.aurora-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 135, 0.4) 0%, rgba(96, 239, 255, 0.1) 70%, transparent 100%);
+  animation: aurora-particle-drift 25s ease-in-out infinite;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+/* ---------- Aurora glass surfaces ---------- */
+.aurora-glass {
+  background: rgba(0, 20, 15, 0.4);
+  backdrop-filter: blur(40px) saturate(160%);
+  -webkit-backdrop-filter: blur(40px) saturate(160%);
+  border: 1px solid rgba(0, 255, 135, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(0, 255, 135, 0.04),
+    inset 0 -1px 0 rgba(96, 239, 255, 0.02),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.aurora-glass-medium {
+  background: rgba(0, 25, 20, 0.5);
+  backdrop-filter: blur(50px) saturate(180%);
+  -webkit-backdrop-filter: blur(50px) saturate(180%);
+  border: 1px solid rgba(0, 255, 135, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(0, 255, 135, 0.06),
+    inset 0 -1px 0 rgba(96, 239, 255, 0.03),
+    0 2px 8px rgba(0, 0, 0, 0.25),
+    0 0 20px rgba(0, 255, 135, 0.03);
+}
+
+.aurora-glass-strong {
+  background: rgba(0, 30, 25, 0.6);
+  backdrop-filter: blur(60px) saturate(200%);
+  -webkit-backdrop-filter: blur(60px) saturate(200%);
+  border: 1px solid rgba(0, 255, 135, 0.15);
+  box-shadow:
+    inset 0 1px 0 rgba(0, 255, 135, 0.08),
+    inset 0 -1px 0 rgba(96, 239, 255, 0.04),
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(0, 255, 135, 0.04);
+}
+
+/* ---------- Shimmer overlay ---------- */
+.aurora-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 135, 0.04),
+    rgba(96, 239, 255, 0.04),
+    transparent
+  );
+  animation: aurora-shimmer 8s infinite;
+  pointer-events: none;
+}
+
+/* ---------- Glow effects ---------- */
+.aurora-glow {
+  animation: aurora-pulse 5s ease-in-out infinite;
+}
+
+/* ---------- Card hover ---------- */
+.aurora-card-hover {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.aurora-card-hover:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25), 0 0 20px rgba(0, 255, 135, 0.08);
+  border-color: rgba(0, 255, 135, 0.2);
+}
+
+/* ---------- Aurora buttons ---------- */
+.aurora-btn-primary {
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
+  border: none;
+  border-radius: 12px;
+  color: #0a1a12;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 255, 135, 0.25);
+}
+
+.aurora-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 135, 0.35);
+}
+
+.aurora-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 255, 135, 0.2);
+}
+
+.aurora-btn-glass {
+  background: rgba(0, 255, 135, 0.06);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(0, 255, 135, 0.1);
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.aurora-btn-glass:hover {
+  background: rgba(0, 255, 135, 0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- Aurora input ---------- */
+.aurora-input {
+  background: rgba(0, 20, 15, 0.3);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(0, 255, 135, 0.06);
+  border-radius: 12px;
+  color: white;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.aurora-input:focus {
+  border-color: rgba(0, 255, 135, 0.3);
+  box-shadow:
+    0 0 0 3px rgba(0, 255, 135, 0.08),
+    0 0 20px rgba(0, 255, 135, 0.1);
+  background: rgba(0, 25, 20, 0.4);
+}
+
+.aurora-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ---------- Animation entry ---------- */
+.aurora-animate-in {
+  animation: aurora-fade-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ---------- Nav active ---------- */
+.aurora-nav-active {
+  background: rgba(0, 255, 135, 0.12);
+  box-shadow: 0 4px 15px rgba(0, 255, 135, 0.15);
+  border-color: rgba(0, 255, 135, 0.2);
+}
+
+/* ---------- Gradient text ---------- */
+.aurora-gradient-text {
+  background: linear-gradient(135deg, #00ff87, #60efff, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---------- Scrollbar ---------- */
+.aurora-theme ::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 135, 0.12);
+  border-radius: 3px;
+}
+
+.aurora-theme ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 135, 0.25);
+}
+
+/* ---------- Aurora accent colors for active states ---------- */
+.aurora-accent-green  { color: #00ff87; }
+.aurora-accent-cyan   { color: #60efff; }
+.aurora-accent-purple { color: #a855f7; }
+.aurora-accent-pink   { color: #ec4899; }
+
+/* ---------- Enhanced particle types (Liquid Glass parity) ---------- */
+
+@keyframes aurora-particle-float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0.15; }
+  20%  { transform: translate(60px, -80px) rotate(72deg) scale(1.4); opacity: 0.45; }
+  40%  { transform: translate(-40px, 40px) rotate(144deg) scale(0.7); opacity: 0.25; }
+  60%  { transform: translate(80px, 20px) rotate(216deg) scale(1.2); opacity: 0.5; }
+  80%  { transform: translate(-20px, -40px) rotate(288deg) scale(0.9); opacity: 0.35; }
+}
+
+@keyframes aurora-particle-glow {
+  0%, 100% { box-shadow: 0 0 6px rgba(0, 255, 135, 0.3), 0 0 12px rgba(0, 255, 135, 0.1); }
+  50%      { box-shadow: 0 0 14px rgba(96, 239, 255, 0.5), 0 0 28px rgba(96, 239, 255, 0.15); }
+}
+
+@keyframes aurora-light-ray {
+  0%   { transform: rotate(-10deg) scaleY(0.8); opacity: 0; }
+  15%  { opacity: 0.06; }
+  50%  { transform: rotate(5deg) scaleY(1.3); opacity: 0.04; }
+  85%  { opacity: 0.07; }
+  100% { transform: rotate(-10deg) scaleY(0.8); opacity: 0; }
+}
+
+@keyframes aurora-caustic-shift {
+  0%   { background-position: 0% 0%; filter: hue-rotate(0deg); }
+  33%  { background-position: 100% 50%; filter: hue-rotate(40deg); }
+  66%  { background-position: 50% 100%; filter: hue-rotate(-20deg); }
+  100% { background-position: 0% 0%; filter: hue-rotate(0deg); }
+}
+
+@keyframes aurora-chromatic-pulse {
+  0%, 100% { text-shadow: none; }
+  50% {
+    text-shadow:
+      -1px 0 rgba(0, 255, 135, 0.15),
+      1px 0 rgba(96, 239, 255, 0.15);
+  }
+}
+
+/* Glow particle — larger, pulsing halo */
+.aurora-particle-glow {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 135, 0.5) 0%, rgba(96, 239, 255, 0.15) 40%, transparent 70%);
+  animation: aurora-particle-float 30s ease-in-out infinite,
+             aurora-particle-glow 4s ease-in-out infinite;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+/* Cyan particle variant */
+.aurora-particle-cyan {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96, 239, 255, 0.4) 0%, rgba(168, 85, 247, 0.1) 60%, transparent 100%);
+  animation: aurora-particle-drift 22s ease-in-out infinite;
+  pointer-events: none;
+  filter: blur(1.5px);
+}
+
+/* Purple particle variant */
+.aurora-particle-purple {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(236, 72, 153, 0.1) 60%, transparent 100%);
+  animation: aurora-particle-float 28s ease-in-out infinite;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+/* ---------- Light ray penetration effect ---------- */
+
+.aurora-light-ray {
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 255, 135, 0.03) 20%,
+    rgba(96, 239, 255, 0.05) 50%,
+    rgba(168, 85, 247, 0.03) 80%,
+    transparent 100%
+  );
+  animation: aurora-light-ray 12s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+
+/* ---------- Glass caustics overlay ---------- */
+
+.aurora-glass-caustics::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(0, 255, 135, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(96, 239, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(168, 85, 247, 0.02) 0%, transparent 50%);
+  background-size: 200% 200%;
+  animation: aurora-caustic-shift 15s ease infinite;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+/* ---------- Chromatic aberration on hover ---------- */
+
+.aurora-chromatic:hover {
+  text-shadow:
+    -1px 0 rgba(0, 255, 135, 0.2),
+    1px 0 rgba(96, 239, 255, 0.2);
+}
+
+/* ---------- Light bleed glow for active elements ---------- */
+
+.aurora-light-bleed {
+  position: relative;
+}
+
+.aurora-light-bleed::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg,
+    rgba(0, 255, 135, 0.08),
+    rgba(96, 239, 255, 0.05),
+    rgba(168, 85, 247, 0.06)
+  );
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.aurora-light-bleed:hover::after {
+  opacity: 1;
+}
+
+/* ---------- Enhanced glass with refraction ---------- */
+
+.aurora-glass-refract {
+  background: rgba(0, 20, 15, 0.35);
+  backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
+  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
+  border: 1px solid rgba(0, 255, 135, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora-glass-refract::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    conic-gradient(
+      from 0deg at 50% 50%,
+      rgba(0, 255, 135, 0.02) 0deg,
+      transparent 60deg,
+      rgba(96, 239, 255, 0.02) 120deg,
+      transparent 180deg,
+      rgba(168, 85, 247, 0.02) 240deg,
+      transparent 300deg,
+      rgba(0, 255, 135, 0.02) 360deg
+    );
+  animation: aurora-glow-rotate 20s linear infinite;
+  pointer-events: none;
+}
+
+/* ---------- Floating sparkle (tiny bright dots) ---------- */
+
+@keyframes aurora-sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50%      { opacity: 0.8; transform: scale(1.2); }
+}
+
+.aurora-sparkle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(0, 255, 135, 0.6), 0 0 8px rgba(96, 239, 255, 0.3);
+  animation: aurora-sparkle 3s ease-in-out infinite;
+  pointer-events: none;
+}

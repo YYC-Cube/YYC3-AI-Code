@@ -1,0 +1,379 @@
+/**
+ * @file multiInstance.test.ts
+ * @description IPCManager + useMultiInstanceStore 单元测试 (Vitest)
+ * @author YanYuCloudCube Team <admin@0379.email>
+ * @version v1.0.0
+ * @created 2026-03-18
+ * @updated 2026-03-18
+ * @status dev
+ * @license MIT
+ * @copyright Copyright (c) 2026 YanYuCloudCube Team
+ * @tags test,multi-instance,ipc,vitest
+ */
+
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+
+/* ================================================================
+   Mock BroadcastChannel for test environment
+   ================================================================ */
+
+class MockBroadcastChannel {
+  name: string;
+  onmessage: ((event: MessageEvent) => void) | null = null;
+  static _channels: Map<string, Set<MockBroadcastChannel>> = new Map();
+
+  constructor(name: string) {
+    this.name = name;
+    if (!MockBroadcastChannel._channels.has(name)) {
+      MockBroadcastChannel._channels.set(name, new Set());
+    }
+    MockBroadcastChannel._channels.get(name)!.add(this);
+  }
+
+  postMessage(data: unknown): void {
+    const peers = MockBroadcastChannel._channels.get(this.name);
+    if (!peers) return;
+    peers.forEach((ch) => {
+      if (ch !== this && ch.onmessage) {
+        ch.onmessage(new MessageEvent('message', { data }));
+      }
+    });
+  }
+
+  close(): void {
+    MockBroadcastChannel._channels.get(this.name)?.delete(this);
+  }
+
+  static _reset(): void {
+    MockBroadcastChannel._channels.clear();
+  }
+}
+
+// Install global mock
+(globalThis as any).BroadcastChannel = MockBroadcastChannel;
+
+// Mock crypto.randomUUID
+let uuidCounter = 0;
+vi.stubGlobal('crypto', {
+  ...globalThis.crypto,
+  randomUUID: () => `test-uuid-${++uuidCounter}`,
+});
+
+/* ================================================================
+   IPCManager Tests
+   ================================================================ */
+
+describe('IPCManager', () => {
+  let IPCManager: any;
+
+  beforeEach(async () => {
+    MockBroadcastChannel._reset();
+    uuidCounter = 0;
+    // Dynamic import to get fresh module
+    const mod = await import('../services/multi-instance/IPCManager');
+    IPCManager = mod.IPCManager;
+  });
+
+  afterEach(() => {
+    MockBroadcastChannel._reset();
+  });
+
+  it('should create an instance with a unique ID', () => {
+    const ipc = new IPCManager('tab-1');
+    expect(ipc.getInstanceId()).toBe('tab-1');
+    ipc.destroy();
+  });
+
+  it('should broadcast messages to other instances', () => {
+    const ipcA = new IPCManager('tab-a');
+    const ipcB = new IPCManager('tab-b');
+
+    const handler = vi.fn();
+    ipcB.on('state-sync', handler);
+
+    ipcA.broadcast('state-sync', { hello: 'world' });
+
+    expect(handler).toHaveBeenCalledTimes(1);
+    expect(handler).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'state-sync',
+        senderId: 'tab-a',
+        data: { hello: 'world' },
+      })
+    );
+
+    ipcA.destroy();
+    ipcB.destroy();
+  });
+
+  it('should NOT receive own messages', () => {
+    const ipc = new IPCManager('tab-self');
+    const handler = vi.fn();
+    ipc.on('state-sync', handler);
+
+    ipc.broadcast('state-sync', { data: 1 });
+
+    expect(handler).not.toHaveBeenCalled();
+    ipc.destroy();
+  });
+
+  it('should support targeted messages (sendTo)', () => {
+    const ipcA = new IPCManager('tab-a');
+    const ipcB = new IPCManager('tab-b');
+    const ipcC = new IPCManager('tab-c');
+
+    const handlerB = vi.fn();
+    const handlerC = vi.fn();
+    ipcB.on('focus-request', handlerB);
+    ipcC.on('focus-request', handlerC);
+
+    ipcA.sendTo('tab-b', 'focus-request', {});
+
+    expect(handlerB).toHaveBeenCalledTimes(1);
+    expect(handlerC).not.toHaveBeenCalled();
+
+    ipcA.destroy();
+    ipcB.destroy();
+    ipcC.destroy();
+  });
+
+  it('should support onAny wildcard handler', () => {
+    const ipcA = new IPCManager('tab-a');
+    const ipcB = new IPCManager('tab-b');
+
+    const anyHandler = vi.fn();
+    ipcB.onAny(anyHandler);
+
+    ipcA.broadcast('state-sync', { x: 1 });
+    ipcA.broadcast('clipboard-share', { y: 2 });
+
+    expect(anyHandler).toHaveBeenCalledTimes(2);
+
+    ipcA.destroy();
+    ipcB.destroy();
+  });
+
+  it('should unsubscribe handlers correctly', () => {
+    const ipcA = new IPCManager('tab-a');
+    const ipcB = new IPCManager('tab-b');
+
+    const handler = vi.fn();
+    const unsub = ipcB.on('state-sync', handler);
+
+    ipcA.broadcast('state-sync', {});
+    expect(handler).toHaveBeenCalledTimes(1);
+
+    unsub();
+    ipcA.broadcast('state-sync', {});
+    expect(handler).toHaveBeenCalledTimes(1); // still 1
+
+    ipcA.destroy();
+    ipcB.destroy();
+  });
+
+  it('should clean up on destroy', () => {
+    const ipcA = new IPCManager('tab-a');
+    const ipcB = new IPCManager('tab-b');
+
+    const handler = vi.fn();
+    ipcB.on('state-sync', handler);
+
+    ipcB.destroy();
+    ipcA.broadcast('state-sync', {});
+
+    expect(handler).not.toHaveBeenCalled();
+    ipcA.destroy();
+  });
+
+  it('STALE_THRESHOLD should be 10000ms', () => {
+    expect(IPCManager.STALE_THRESHOLD).toBe(10000);
+  });
+});
+
+/* ================================================================
+   Multi-Instance Types Validation Tests
+   ================================================================ */
+
+describe('Multi-Instance Types', () => {
+  it('should define valid AppInstance structure', async () => {
+    // Verify types exist by importing and creating mock data
+    const types = await import('../types/multi-instance');
+
+    const instance: import('../types/multi-instance').AppInstance = {
+      id: 'inst-1',
+      type: 'main',
+      windowId: 'win-1',
+      windowType: 'main',
+      title: 'Test Instance',
+      createdAt: Date.now(),
+      lastActiveAt: Date.now(),
+      isMain: true,
+      isVisible: true,
+      isMinimized: false,
+      position: { x: 0, y: 0 },
+      size: { width: 1200, height: 800 },
+      sessionIds: [],
+      state: {},
+      tabId: 'tab-1',
+      route: '/',
+    };
+
+    expect(instance.id).toBe('inst-1');
+    expect(instance.type).toBe('main');
+    expect(instance.isMain).toBe(true);
+  });
+
+  it('should define valid Workspace structure', () => {
+    const workspace: import('../types/multi-instance').Workspace = {
+      id: 'ws-1',
+      name: 'Test Project',
+      type: 'project',
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      config: {},
+      sessionIds: [],
+      windowIds: [],
+      isActive: false,
+    };
+
+    expect(workspace.name).toBe('Test Project');
+    expect(workspace.type).toBe('project');
+  });
+
+  it('should define valid Session structure', () => {
+    const session: import('../types/multi-instance').Session = {
+      id: 'sess-1',
+      type: 'ai-chat',
+      name: 'Chat Session',
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      status: 'active',
+      data: { aiMessages: [{ role: 'user', content: 'Hello' }] },
+      workspaceId: 'ws-1',
+      windowId: 'win-1',
+    };
+
+    expect(session.status).toBe('active');
+    expect(session.data.aiMessages).toHaveLength(1);
+  });
+
+  it('should define valid IPCMessage structure', () => {
+    const msg: import('../types/multi-instance').IPCMessage = {
+      id: 'msg-1',
+      type: 'state-sync',
+      senderId: 'tab-1',
+      data: { key: 'value' },
+      timestamp: Date.now(),
+    };
+
+    expect(msg.type).toBe('state-sync');
+    expect(msg.receiverId).toBeUndefined();
+  });
+
+  it('should support all IPCMessageType values', () => {
+    const validTypes: import('../types/multi-instance').IPCMessageType[] = [
+      'instance-created', 'instance-closed', 'instance-heartbeat',
+      'workspace-created', 'workspace-updated', 'workspace-closed',
+      'session-created', 'session-updated', 'session-closed',
+      'state-sync', 'resource-share', 'clipboard-share',
+      'focus-request', 'navigate-request',
+    ];
+    expect(validTypes).toHaveLength(14);
+  });
+
+  it('should define SharedClipboardItem structure', () => {
+    const item: import('../types/multi-instance').SharedClipboardItem = {
+      id: 'clip-1',
+      type: 'code',
+      content: 'const x = 42;',
+      metadata: { language: 'typescript' },
+      sourceInstanceId: 'tab-1',
+      timestamp: Date.now(),
+    };
+
+    expect(item.type).toBe('code');
+    expect(item.content).toBe('const x = 42;');
+  });
+});
+
+/* ================================================================
+   Cross-Tab Communication Integration Tests
+   ================================================================ */
+
+describe('Cross-Tab IPC Integration', () => {
+  let IPCManager: any;
+
+  beforeEach(async () => {
+    MockBroadcastChannel._reset();
+    const mod = await import('../services/multi-instance/IPCManager');
+    IPCManager = mod.IPCManager;
+  });
+
+  afterEach(() => {
+    MockBroadcastChannel._reset();
+  });
+
+  it('should sync clipboard items across tabs', () => {
+    const IPC = IPCManager;
+    const ipcA = new IPC('tab-a');
+    const ipcB = new IPC('tab-b');
+
+    const received: any[] = [];
+    ipcB.on('clipboard-share', (msg: any) => received.push(msg.data));
+
+    ipcA.broadcast('clipboard-share', {
+      id: 'clip-1',
+      type: 'code',
+      content: 'function hello() {}',
+      sourceInstanceId: 'tab-a',
+      timestamp: Date.now(),
+    });
+
+    expect(received).toHaveLength(1);
+    expect(received[0].content).toBe('function hello() {}');
+
+    ipcA.destroy();
+    ipcB.destroy();
+  });
+
+  it('should handle multiple message types simultaneously', () => {
+    const IPC = IPCManager;
+    const ipcA = new IPC('sender');
+    const ipcB = new IPC('receiver');
+
+    const log: string[] = [];
+    ipcB.on('instance-created', () => log.push('created'));
+    ipcB.on('workspace-created', () => log.push('workspace'));
+    ipcB.on('session-created', () => log.push('session'));
+
+    ipcA.broadcast('instance-created', {});
+    ipcA.broadcast('workspace-created', {});
+    ipcA.broadcast('session-created', {});
+
+    expect(log).toEqual(['created', 'workspace', 'session']);
+
+    ipcA.destroy();
+    ipcB.destroy();
+  });
+
+  it('should support 3+ tabs communicating', () => {
+    const IPC = IPCManager;
+    const tabs = ['tab-1', 'tab-2', 'tab-3'].map((id) => new IPC(id));
+    const counts = [0, 0, 0];
+
+    tabs.forEach((tab, i) => {
+      tab.on('state-sync', () => { counts[i]++; });
+    });
+
+    // tab-1 broadcasts
+    tabs[0].broadcast('state-sync', {});
+    // tab-1 should NOT receive its own, tab-2 and tab-3 should
+    expect(counts).toEqual([0, 1, 1]);
+
+    // tab-2 broadcasts
+    tabs[1].broadcast('state-sync', {});
+    expect(counts).toEqual([1, 1, 2]);
+
+    tabs.forEach((t) => t.destroy());
+  });
+});

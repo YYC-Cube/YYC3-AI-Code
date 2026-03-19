@@ -1,0 +1,231 @@
+/* ================================================================
+   Liquid Glass UI Theme — YanYuCloudCube
+   ================================================================ */
+
+/* ---------- Animated liquid background ---------- */
+@keyframes lg-gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes lg-float {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.25; }
+  25% { transform: translate(30px, -50px) scale(1.2); opacity: 0.45; }
+  50% { transform: translate(-20px, 20px) scale(0.8); opacity: 0.35; }
+  75% { transform: translate(50px, 10px) scale(1.1); opacity: 0.5; }
+}
+
+@keyframes lg-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes lg-pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(99, 102, 241, 0.2),
+      0 0 40px rgba(99, 102, 241, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(99, 102, 241, 0.3),
+      0 0 60px rgba(99, 102, 241, 0.15);
+  }
+}
+
+@keyframes lg-fade-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---------- Liquid background root ---------- */
+.lg-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.30) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(129, 100, 220, 0.26) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.20) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(79, 70, 229, 0.18) 0%, transparent 50%),
+    linear-gradient(135deg, #1a1548 0%, #110f28 40%, #0e1238 100%);
+  background-size: 200% 200%;
+  animation: lg-gradient-flow 25s ease infinite;
+}
+
+.lg-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(180, 168, 255, 0.18);
+  backdrop-filter: blur(2px);
+  animation: lg-float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ---------- Glass surfaces ---------- */
+.lg-glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+    0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.lg-glass-medium {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(50px) saturate(200%);
+  -webkit-backdrop-filter: blur(50px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(102, 126, 234, 0.04);
+}
+
+.lg-glass-strong {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(60px) saturate(220%);
+  -webkit-backdrop-filter: blur(60px) saturate(220%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    0 4px 16px rgba(0, 0, 0, 0.25),
+    0 0 30px rgba(102, 126, 234, 0.05);
+}
+
+/* ---------- Shimmer overlay ---------- */
+.lg-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.lg-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  animation: lg-shimmer 6s infinite;
+  pointer-events: none;
+}
+
+/* ---------- Glow effect ---------- */
+.lg-glow {
+  animation: lg-pulse-glow 4s ease-in-out infinite;
+}
+
+/* ---------- Glass card hover ---------- */
+.lg-card-hover {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lg-card-hover:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* ---------- Glass button ---------- */
+.lg-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #7c3aed 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.lg-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+.lg-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.lg-btn-glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lg-btn-glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- Glass input ---------- */
+.lg-input {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: white;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.lg-input:focus {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.1),
+    0 0 20px rgba(99, 102, 241, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.lg-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* ---------- Animation entry ---------- */
+.lg-animate-in {
+  animation: lg-fade-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ---------- Nav active glow ---------- */
+.lg-nav-active {
+  background: rgba(99, 102, 241, 0.2);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* ---------- Gradient text ---------- */
+.lg-gradient-text {
+  background: linear-gradient(135deg, #667eea, #8b5cf6, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---------- Scrollbar override for liquid glass ---------- */
+.lg-theme ::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.15);
+  border-radius: 3px;
+}
+
+.lg-theme ::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.3);
+}
