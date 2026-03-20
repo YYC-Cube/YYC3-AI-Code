@@ -614,6 +614,26 @@ async function validateApiKey(
 function AccountSection() {
   const { settings, updateUserProfile } = useSettingsStore();
   const { userProfile } = settings;
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleAvatarClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const result = event.target?.result as string;
+        updateUserProfile({ avatar: result });
+        toast.success('头像已更新');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <>
@@ -626,7 +646,7 @@ function AccountSection() {
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center text-white text-[20px]" style={{ fontWeight: 600 }}>
               {userProfile.username.charAt(0).toUpperCase()}
             </div>
-            <div className="absolute inset-0 rounded-2xl bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
+            <div onClick={() => { const input = document.createElement('input'); input.type='file'; input.accept='image/*'; input.onchange = e => { const f = (e.target as HTMLInputElement).files?.[0]; if(f) { const r = new FileReader(); r.onload = ev => { useSettingsStore.getState().updateUserProfile({avatar: ev.target?.result as string}); toast.success('头像已更新'); }; r.readAsDataURL(f); } }; input.click(); }} className="absolute inset-0 rounded-2xl bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
               <User size={16} className="text-white/70" />
             </div>
           </div>
@@ -983,6 +1003,33 @@ function AgentsSection() {
 
 function MCPSection() {
   const { settings, addMCP, updateMCP, removeMCP } = useSettingsStore();
+  const [showJson, setShowJson] = useState(false);
+  const [jsonInput, setJsonInput] = useState('');
+
+  const handleJsonImport = () => {
+    try {
+      const parsed = JSON.parse(jsonInput);
+      if (parsed.mcpServers) {
+        Object.entries(parsed.mcpServers).forEach(([name]: string) => {
+          addMCP({
+            id: `mcp-${Date.now()}-${Math.random()}`,
+            name,
+            type: 'manual',
+            endpoint: undefined,
+            enabled: true,
+            projectLevel: false,
+          });
+        });
+        toast.success('成功导入 JSON 配置');
+        setJsonInput('');
+        setShowJson(false);
+      } else {
+        toast.error('JSON 格式不正确，请确保包含 mcpServers');
+      }
+    } catch (e) {
+      toast.error('JSON 解析失败，请检查格式');
+    }
+  };
   const [showAdd, setShowAdd] = useState(false);
   const [newName, setNewName] = useState('');
   const [newEndpoint, setNewEndpoint] = useState('');
@@ -1007,6 +1054,63 @@ function MCPSection() {
   return (
     <>
       <SectionHeader title="MCP 连接管理" subtitle="Model Context Protocol" />
+
+      <div className="flex items-center justify-between mb-4 gap-3">
+        <div className="text-[11px] text-white/30">
+          {settings.mcpConfigs.filter(m => m.enabled).length} / {settings.mcpConfigs.length} 已启用
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setShowJson(!showJson)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.06] text-white/70 text-[11px] hover:bg-white/[0.08] transition-colors"
+            style={{ fontWeight: 500 }}
+          >
+            <FileText size={13} />
+            粘贴 JSON
+          </button>
+          <button
+            onClick={() => setShowAdd(!showAdd)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#667eea]/10 text-[#667eea] text-[11px] hover:bg-[#667eea]/20 transition-colors"
+            style={{ fontWeight: 500 }}
+          >
+            <Plus size={13} />
+            添加 MCP
+          </button>
+        </div>
+      </div>
+
+      {/* JSON Import Form */}
+      <AnimatePresence>
+        {showJson && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden mb-4"
+          >
+            <SettingCard className="border-[#667eea]/20">
+              <div className="text-[10px] text-white/30 mb-2">
+                请从 MCP Servers 的介绍页面复制配置 JSON(优先使用 NPX或 UVX 配置)，并粘贴到输入框中。
+              </div>
+              <div className="text-[10px] text-red-400 mb-2">
+                配置前请确认来源，甄别风险
+              </div>
+              <textarea
+                value={jsonInput}
+                onChange={(e) => setJsonInput(e.target.value)}
+                placeholder='// 示例: { "mcpServers": { "example": { "command": "npx", "args": ["server"] } } }'
+                rows={8}
+                className="w-full px-2.5 py-1.5 rounded-lg bg-[#0d0e14] border border-white/[0.08] text-[11px] text-white/70 placeholder:text-white/20 focus:outline-none focus:border-[#667eea]/40 resize-none font-mono"
+              />
+              <div className="flex gap-2 mt-3 justify-end">
+                <button onClick={() => setShowJson(false)} className="px-3 py-1 rounded-lg bg-white/[0.06] text-white/50 text-[11px] hover:bg-white/[0.08] transition-colors">取消</button>
+                <button onClick={handleJsonImport} className="px-3 py-1 rounded-lg bg-[#667eea] text-white text-[11px] hover:bg-[#667eea]/80 transition-colors">确认</button>
+              </div>
+            </SettingCard>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
 
       <div className="flex items-center justify-between mb-4">
         <div className="text-[11px] text-white/30">
