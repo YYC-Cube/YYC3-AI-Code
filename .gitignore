@@ -128,3 +128,4 @@ $RECYCLE.BIN/
 # Local development
 .local
 .local-dev
+cacheDir/
