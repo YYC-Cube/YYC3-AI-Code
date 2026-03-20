@@ -7,17 +7,17 @@
  */
 
 // AI Services
-export { AICodeService, getAICodeService, CodeGenerationRequest, CodeGenerationResponse } from './aiCodeService';
+export { AICodeService, getAICodeService } from './aiCodeService';
 export type { CodeGenerationRequest, CodeGenerationResponse } from './aiCodeService';
 
 // Realtime Services
-export { WebSocketService, getWebSocketService, WSMessage, WSConnectionStatus } from './websocketService';
+export { WebSocketService, getWebSocketService } from './websocketService';
 export type { WSMessage, WSConnectionStatus, WSMessageType } from './websocketService';
 
 // Quality Services
-export { ErrorDetectionService, getErrorDetectionService, CodeError, AnalysisResult } from './errorDetectionService';
+export { ErrorDetectionService, getErrorDetectionService } from './errorDetectionService';
 export type { CodeError, AnalysisResult } from './errorDetectionService';
 
 // Suggestion Services
-export { SuggestionService, getSuggestionService, CodeSuggestion, UserStyleProfile } from './suggestionService';
+export { SuggestionService, getSuggestionService } from './suggestionService';
 export type { CodeSuggestion, UserStyleProfile } from './suggestionService';

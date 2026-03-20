@@ -52,7 +52,7 @@ describe('CodeGeneratorPanel — AI 代码生成面板组件', () => {
 
     it('TC-COMP-003: 应该渲染 Context 输入框', () => {
       renderComponent();
-      const contextInput = screen.getByPlaceholderText(/current code or variables/i);
+      const contextInput = screen.getByPlaceholderText(/Provide context for better results/i);
       expect(contextInput).toBeInTheDocument();
     });
 

@@ -73,7 +73,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
-    errorElement: <ErrorBoundary level="root" />,
+    errorElement: <ErrorBoundary level="route">{null}</ErrorBoundary>,
   },
   {
     path: '/designer',

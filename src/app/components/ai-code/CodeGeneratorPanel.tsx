@@ -1,184 +1,152 @@
-/**
- * @file CodeGeneratorPanel.tsx
- * @description YYC3 AI 代码生成面板 — MVP 功能演示界面
- * @author YanYuCloudCube Team <admin@0379.email>
- * @version v1.0.0
- * @created 2026-03-19
- * @updated 2026-03-19
- * @status dev
- * @license MIT
- * @copyright Copyright (c) 2026 YanYuCloudCube Team
- * @tags ui,component,mvp,code-generator
- */
-
-import { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { Sparkles, Code2, Loader2, Copy, Check, AlertCircle } from 'lucide-react';
 import { useAICodeGeneration } from '../../hooks/useAICodeGeneration';
-import { Button } from '../ui/Button'; // 假设存在 UI 库，或者使用原生 button
-import { Textarea } from '../ui/Textarea'; // 假设存在
-import { Select } from '../ui/Select'; // 假设存在
-import { Loader2, Sparkles, Code2, Copy, Check, AlertCircle } from 'lucide-react';
-
-// 简单的内联 UI 组件 (如果不存在 ui 库)
-const InlineButton = ({ children, ...props }: any) => (
-  <button 
-    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-    {...props}
-  >
-    {children}
-  </button>
-);
-
-const InlineTextarea = ({ placeholder, value, onChange, rows = 3, ...props }: any) => (
-  <textarea
-    className="w-full bg-neutral-900/50 border border-neutral-700 rounded-md p-3 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-    placeholder={placeholder}
-    value={value}
-    onChange={onChange}
-    rows={rows}
-    {...props}
-  />
-);
+import { Button } from '../ui/button';
+import { Textarea } from '../ui/textarea';
 
 export const CodeGeneratorPanel = () => {
+  const {
+    generateCode,
+    generatedCode,
+    isGenerating,
+    error,
+    clearCode
+  } = useAICodeGeneration();
+
   const [prompt, setPrompt] = useState('');
   const [context, setContext] = useState('');
   const [language, setLanguage] = useState('typescript');
   const [copied, setCopied] = useState(false);
 
-  const { generateCode, generatedCode, isGenerating, error, clearCode } = useAICodeGeneration();
-
-  const handleGenerate = async () => {
+  const handleGenerate = useCallback(async () => {
     if (!prompt.trim()) return;
-    
-    try {
-      await generateCode({ prompt, context, language, style: 'concise' });
-    } catch (err) {
-      // Error handled by hook
-    }
-  };
+    await generateCode({ prompt, context, language });
+  }, [prompt, context, language, generateCode]);
 
-  const handleClear = () => {
+  const handleCopy = useCallback(() => {
+    if (!generatedCode) return;
+    navigator.clipboard.writeText(generatedCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, [generatedCode]);
+
+  const handleClear = useCallback(() => {
     clearCode();
     setPrompt('');
     setContext('');
-  };
-
-  const handleCopy = () => {
-    if (generatedCode) {
-      navigator.clipboard.writeText(generatedCode);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
+  }, [clearCode]);
 
   return (
-    <div className="flex flex-col h-full bg-neutral-950/80 border border-neutral-800">
+    <div className="flex flex-col h-full bg-[#0d1117] text-neutral-200">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-800">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-purple-400" />
-          <h3 className="text-sm font-semibold text-neutral-200">AI Code Generator</h3>
+          <Sparkles size={16} className="text-purple-400" />
+          <span className="text-sm font-semibold">AI Code Generator</span>
         </div>
-        <div className="text-xs text-neutral-500">MVP v1.0</div>
       </div>
 
       {/* Input Area */}
-      <div className="flex-1 p-4 overflow-y-auto space-y-4">
+      <div className="flex-1 flex flex-col p-4 gap-4 overflow-y-auto">
         {/* Prompt Input */}
-        <div>
-          <label className="block text-xs font-medium text-neutral-400 mb-1.5">
+        <div className="flex flex-col gap-2">
+          <label className="text-xs font-medium text-neutral-400">
             Describe what you want to build
           </label>
-          <InlineTextarea
-            placeholder="e.g., Create a React hook that fetches data with pagination..."
+          <Textarea
+            placeholder="e.g., Create a React hook for debouncing..."
             value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            rows={4}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPrompt(e.target.value)}
+            className="min-h-[80px] bg-[#161b22] border-neutral-700 focus:border-purple-500"
           />
         </div>
 
-        {/* Context & Settings */}
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-xs font-medium text-neutral-400 mb-1.5">
-              Context (Optional)
-            </label>
-            <InlineTextarea
-              placeholder="Current code or variables..."
-              value={context}
-              onChange={(e) => setContext(e.target.value)}
-              rows={3}
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-medium text-neutral-400 mb-1.5">
+        {/* Context Input */}
+        <div className="flex flex-col gap-2">
+          <label className="text-xs font-medium text-neutral-400">
+            Current code or variables (optional)
+          </label>
+          <Textarea
+            placeholder="Provide context for better results..."
+            value={context}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setContext(e.target.value)}
+            className="min-h-[60px] bg-[#161b22] border-neutral-700 focus:border-purple-500"
+          />
+        </div>
+
+        {/* Settings - Native Select */}
+        <div className="flex items-center gap-4">
+          <div className="flex-1">
+            <label className="text-xs font-medium text-neutral-400 mb-1 block">
               Language
             </label>
             <select
-              className="w-full bg-neutral-900/50 border border-neutral-700 rounded-md p-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
+              className="w-full bg-[#161b22] border border-neutral-700 text-neutral-200 rounded-md px-3 py-2 text-xs focus:outline-none focus:border-purple-500"
             >
               <option value="typescript">TypeScript</option>
               <option value="javascript">JavaScript</option>
               <option value="python">Python</option>
-              <option value="java">Java</option>
               <option value="go">Go</option>
-              <option value="rust">Rust</option>
             </select>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2">
-          <InlineButton
+        <div className="flex items-center gap-2 mt-auto">
+          <Button
             onClick={handleGenerate}
             disabled={isGenerating || !prompt.trim()}
-            className="w-full"
+            className="flex-1 bg-purple-600 hover:bg-purple-700 text-white"
           >
             {isGenerating ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Generating...
               </>
             ) : (
               <>
-                <Code2 className="w-4 h-4" />
+                <Sparkles className="mr-2 h-4 w-4" />
                 Generate Code
               </>
             )}
-          </InlineButton>
-          <button
+          </Button>
+          
+          <Button
             onClick={handleClear}
-            disabled={isGenerating}
-            className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded-md transition-colors"
+            variant="outline"
+            className="bg-[#161b22] border-neutral-700 hover:bg-[#1c2128]"
           >
             Clear
-          </button>
+          </Button>
         </div>
 
-        {/* Error Message */}
+        {/* Error Display */}
         {error && (
-          <div className="flex items-start gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-md">
-            <AlertCircle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
-            <p className="text-xs text-red-400">{error}</p>
+          <div className="flex items-start gap-2 p-3 rounded bg-red-500/10 border border-red-500/20">
+            <AlertCircle size={16} className="text-red-400 mt-0.5 flex-shrink-0" />
+            <span className="text-sm text-red-400">{error}</span>
           </div>
         )}
 
         {/* Result Area */}
         {generatedCode && (
-          <div className="mt-4 pt-4 border-t border-neutral-800">
-            <div className="flex items-center justify-between mb-2">
-              <label className="block text-xs font-medium text-neutral-400">
+          <div className="flex flex-col gap-2 mt-4">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-medium text-neutral-400">
                 Generated Code
               </label>
-              <button
+              <Button
                 onClick={handleCopy}
+                variant="ghost"
+                size="sm"
                 className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-neutral-200 transition-colors"
               >
-                {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                {copied ? 'Copied' : 'Copy'}
-              </button>
+                <Copy size={14} className={copied ? 'hidden' : ''} />
+                <Check size={14} className={!copied ? 'hidden' : 'text-green-400'} />
+                {copied ? 'Copied!' : 'Copy'}
+              </Button>
             </div>
             <div className="relative group">
               <pre className="bg-[#0d1117] border border-neutral-800 rounded-md p-4 overflow-x-auto text-xs font-mono text-green-400">

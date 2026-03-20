@@ -1,3 +1,4 @@
+/// <reference types="vitest/globals" />
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { AIChatPanel } from '../../app/components/ai-code/AIChatPanel';
@@ -15,6 +16,7 @@ vi.mock('../../app/store', () => ({
 import { useAIService } from '../../app/hooks/useAIService';
 import * as store from '../../app/store';
 
+// @ts-ignore
 const mockUseAIService = useAIService as vi.MockedFunction<typeof useAIService>;
 const mockStore = store as any;
 

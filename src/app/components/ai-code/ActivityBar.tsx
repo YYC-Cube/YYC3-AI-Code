@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   FolderOpen, Search, GitBranch, Puzzle, Bot, Bug, Play,
   Database, Settings, AppWindow, Sparkles, type LucideIcon

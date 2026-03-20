@@ -2632,7 +2632,9 @@ describe('useAIService — AI 服务层', () => {
       // Make multiple requests to trigger cache cleanup
       const messages1 = [{ role: 'user', content: 'Test message 1' }];
       const messages2 = [{ role: 'user', content: 'Test message 2' }];
+// @ts-ignore
       await result.current.chat(messages1);
+// @ts-ignore
       await result.current.chat(messages2);
       
       // Restore fetch
@@ -2705,7 +2707,7 @@ describe('useAIService — AI 服务层', () => {
       }
       
       expect(error).toBeInstanceOf(Error);
-      expect(error?.message).toContain('Stream request failed');
+      expect((error as any).message).toContain('Stream request failed');
       
       // Restore fetch
       vi.restoreAllMocks();
