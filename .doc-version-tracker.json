@@ -1,0 +1,933 @@
+{
+  "README.md": {
+    "filePath": "README.md",
+    "version": "1.0.0",
+    "category": "general",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "VERSION_REPORT.md": {
+    "filePath": "VERSION_REPORT.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "YYC3-AI-「文档总览」.md": {
+    "filePath": "YYC3-AI-「文档总览」.md",
+    "version": "1.0.0",
+    "category": "general",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "YYC3-AI-「团队标头-实施总结」.md": {
+    "filePath": "YYC3-AI-「团队标头-实施总结」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "YYC3-团队文档-文档标头.md": {
+    "filePath": "YYC3-团队文档-文档标头.md",
+    "version": "1.2.0",
+    "category": "technical",
+    "lastModified": "2026-03-06",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.2.0",
+        "date": "2026-03-06",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「变量词库」/YYC3-AI-「变量词库-技术栈版本」.md": {
+    "filePath": "docs/YYC3-AI-「变量词库」/YYC3-AI-「变量词库-技术栈版本」.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「变量词库」/YYC3-AI-「变量词库-环境变量配置」.md": {
+    "filePath": "docs/YYC3-AI-「变量词库」/YYC3-AI-「变量词库-环境变量配置」.md",
+    "version": "1.0.0",
+    "category": "configuration",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「变量词库」/YYC3-AI-「变量词库-配置参数」.md": {
+    "filePath": "docs/YYC3-AI-「变量词库」/YYC3-AI-「变量词库-配置参数」.md",
+    "version": "1.0.0",
+    "category": "configuration",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「开发指南」/YYC3-AI-「开发指南-主题设计系统」.md": {
+    "filePath": "docs/YYC3-AI-「开发指南」/YYC3-AI-「开发指南-主题设计系统」.md",
+    "version": "1.0.0",
+    "category": "design",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「开发指南」/YYC3-AI-「开发指南-液态玻璃设计」.md": {
+    "filePath": "docs/YYC3-AI-「开发指南」/YYC3-AI-「开发指南-液态玻璃设计」.md",
+    "version": "1.0.0",
+    "category": "design",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「开发指南」/YYC3-AI-「开发者文档-开发指南」.md": {
+    "filePath": "docs/YYC3-AI-「开发指南」/YYC3-AI-「开发者文档-开发指南」.md",
+    "version": "1.0.0",
+    "category": "development",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「核心功能」/YYC3-AI-「核心功能-AI任务板」.md": {
+    "filePath": "docs/YYC3-AI-「核心功能」/YYC3-AI-「核心功能-AI任务板」.md",
+    "version": "1.0.0",
+    "category": "general",
+    "lastModified": "2026-03-17",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-17",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「核心功能」/YYC3-AI-「核心功能-AI快速操作」.md": {
+    "filePath": "docs/YYC3-AI-「核心功能」/YYC3-AI-「核心功能-AI快速操作」.md",
+    "version": "1.0.0",
+    "category": "general",
+    "lastModified": "2026-03-17",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-17",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「核心功能」/YYC3-AI-「核心功能-左侧面板」.md": {
+    "filePath": "docs/YYC3-AI-「核心功能」/YYC3-AI-「核心功能-左侧面板」.md",
+    "version": "1.0.0",
+    "category": "general",
+    "lastModified": "2026-03-17",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-17",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-关闭审查报告」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-关闭审查报告」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-关闭审查提醒」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-关闭审查提醒」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接v2」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接v2」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接v3」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接v3」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接v4」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接v4」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接v5」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接v5」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接v6」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接v6」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-开发交接」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-最终阶段报告」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-最终阶段报告」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-索引」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-索引」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-资产清单」.md": {
+    "filePath": "docs/YYC3-AI-「项目文档」/YYC3-AI-「项目文档-资产清单」.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "docs/YYC3-AI-「高级功能」/YYC3-AI-「高级功能-多实例」.md": {
+    "filePath": "docs/YYC3-AI-「高级功能」/YYC3-AI-「高级功能-多实例」.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/advanced-features-plan.md": {
+    "filePath": "src/imports/pasted_text/advanced-features-plan.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/audit-report-phase10.md": {
+    "filePath": "src/imports/pasted_text/audit-report-phase10.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/core-features-and-tech-solutio.md": {
+    "filePath": "src/imports/pasted_text/core-features-and-tech-solutio.md",
+    "version": "1.0.0",
+    "category": "general",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/fe-full-stack-arch.md": {
+    "filePath": "src/imports/pasted_text/fe-full-stack-arch.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/figma-ai-overview.md": {
+    "filePath": "src/imports/pasted_text/figma-ai-overview.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/figma-ai-prompts.md": {
+    "filePath": "src/imports/pasted_text/figma-ai-prompts.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/left-panel-features.md": {
+    "filePath": "src/imports/pasted_text/left-panel-features.md",
+    "version": "1.0.0",
+    "category": "general",
+    "lastModified": "2026-03-17",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-17",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/liquid-glass-design.md": {
+    "filePath": "src/imports/pasted_text/liquid-glass-design.md",
+    "version": "1.0.0",
+    "category": "design",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/mvp-expansion-plan.md": {
+    "filePath": "src/imports/pasted_text/mvp-expansion-plan.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/mvp-expansion-report.md": {
+    "filePath": "src/imports/pasted_text/mvp-expansion-report.md",
+    "version": "1.0.0",
+    "category": "project",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/project-standardization-1.md": {
+    "filePath": "src/imports/pasted_text/project-standardization-1.md",
+    "version": "1.0.0",
+    "category": "policy",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/project-standardization.md": {
+    "filePath": "src/imports/pasted_text/project-standardization.md",
+    "version": "1.0.0",
+    "category": "policy",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/tech-architecture-overview.md": {
+    "filePath": "src/imports/pasted_text/tech-architecture-overview.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/yyc3-code-gen-spec.md": {
+    "filePath": "src/imports/pasted_text/yyc3-code-gen-spec.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-10",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-10",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/yyc3-data-model-arch.md": {
+    "filePath": "src/imports/pasted_text/yyc3-data-model-arch.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-10",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-10",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/yyc3-dev-guidelines.md": {
+    "filePath": "src/imports/pasted_text/yyc3-dev-guidelines.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-10",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-10",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/yyc3-homepage-design.md": {
+    "filePath": "src/imports/pasted_text/yyc3-homepage-design.md",
+    "version": "1.0.0",
+    "category": "design",
+    "lastModified": "2026-03-10",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-10",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/yyc3-icon-design-spec.md": {
+    "filePath": "src/imports/pasted_text/yyc3-icon-design-spec.md",
+    "version": "1.0.0",
+    "category": "design",
+    "lastModified": "2026-03-10",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-10",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/yyc3-internationalization-plan.md": {
+    "filePath": "src/imports/pasted_text/yyc3-internationalization-plan.md",
+    "version": "1.0.0",
+    "category": "features",
+    "lastModified": "2026-03-10",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-10",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/yyc3-multi-panel-layout.md": {
+    "filePath": "src/imports/pasted_text/yyc3-multi-panel-layout.md",
+    "version": "1.0.0",
+    "category": "design",
+    "lastModified": "2026-03-10",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-10",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/yyc3-quality-assurance.md": {
+    "filePath": "src/imports/pasted_text/yyc3-quality-assurance.md",
+    "version": "1.0.0",
+    "category": "quality",
+    "lastModified": "2026-03-10",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-10",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/yyc3-security-performance-opti.md": {
+    "filePath": "src/imports/pasted_text/yyc3-security-performance-opti.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-10",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-10",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/imports/pasted_text/yyc3-tech-stack-spec.md": {
+    "filePath": "src/imports/pasted_text/yyc3-tech-stack-spec.md",
+    "version": "1.0.0",
+    "category": "technical",
+    "lastModified": "2026-03-10",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-10",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  }
+}

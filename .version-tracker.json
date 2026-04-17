@@ -1,0 +1,3080 @@
+{
+  "src/app/App.tsx": {
+    "filePath": "src/app/App.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ArchitecturePage.tsx": {
+    "filePath": "src/app/components/ArchitecturePage.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/DesignerPage.tsx": {
+    "filePath": "src/app/components/DesignerPage.tsx",
+    "version": "1.1.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.1.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/DevToolsPage.tsx": {
+    "filePath": "src/app/components/DevToolsPage.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ErrorBoundary.tsx": {
+    "filePath": "src/app/components/ErrorBoundary.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/HomePage.tsx": {
+    "filePath": "src/app/components/HomePage.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-13",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-13",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/SettingsPage.tsx": {
+    "filePath": "src/app/components/SettingsPage.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-17",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-17",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/BrandingPanel.tsx": {
+    "filePath": "src/app/components/designer/BrandingPanel.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/CenterPanel.tsx": {
+    "filePath": "src/app/components/designer/CenterPanel.tsx",
+    "version": "4.1.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "4.1.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/CodeIntelligence.tsx": {
+    "filePath": "src/app/components/designer/CodeIntelligence.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/CodeTranslator.tsx": {
+    "filePath": "src/app/components/designer/CodeTranslator.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/CollabIndicator.tsx": {
+    "filePath": "src/app/components/designer/CollabIndicator.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/CommandPalette.tsx": {
+    "filePath": "src/app/components/designer/CommandPalette.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/CreateProjectDialog.tsx": {
+    "filePath": "src/app/components/designer/CreateProjectDialog.tsx",
+    "version": "1.1.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.1.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/DatabaseManager.tsx": {
+    "filePath": "src/app/components/designer/DatabaseManager.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/DiffViewer.tsx": {
+    "filePath": "src/app/components/designer/DiffViewer.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/EnvVarsPanel.tsx": {
+    "filePath": "src/app/components/designer/EnvVarsPanel.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/FileSystemManager.tsx": {
+    "filePath": "src/app/components/designer/FileSystemManager.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/FlameGraph.tsx": {
+    "filePath": "src/app/components/designer/FlameGraph.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/GanttView.tsx": {
+    "filePath": "src/app/components/designer/GanttView.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-18",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-18",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/HeartbeatManager.tsx": {
+    "filePath": "src/app/components/designer/HeartbeatManager.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/LayoutManager.tsx": {
+    "filePath": "src/app/components/designer/LayoutManager.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/LeftPanel.tsx": {
+    "filePath": "src/app/components/designer/LeftPanel.tsx",
+    "version": "3.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "3.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/ModelSettings.tsx": {
+    "filePath": "src/app/components/designer/ModelSettings.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/MultiInstancePanel.tsx": {
+    "filePath": "src/app/components/designer/MultiInstancePanel.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-18",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-18",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/NotificationCenter.tsx": {
+    "filePath": "src/app/components/designer/NotificationCenter.tsx",
+    "version": "1.1.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.1.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/PerfDashboard.tsx": {
+    "filePath": "src/app/components/designer/PerfDashboard.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/PluginManager.tsx": {
+    "filePath": "src/app/components/designer/PluginManager.tsx",
+    "version": "1.1.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.1.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/PreviewPanel.tsx": {
+    "filePath": "src/app/components/designer/PreviewPanel.tsx",
+    "version": "4.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "4.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/QuickActionsPanel.tsx": {
+    "filePath": "src/app/components/designer/QuickActionsPanel.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-17",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-17",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/RightPanel.tsx": {
+    "filePath": "src/app/components/designer/RightPanel.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/SecurityPanel.tsx": {
+    "filePath": "src/app/components/designer/SecurityPanel.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/SyncStatusBar.tsx": {
+    "filePath": "src/app/components/designer/SyncStatusBar.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/TaskBoardPanel.tsx": {
+    "filePath": "src/app/components/designer/TaskBoardPanel.tsx",
+    "version": "2.0.0",
+    "lastModified": "2026-03-17",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-17",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/TopNavBar.tsx": {
+    "filePath": "src/app/components/designer/TopNavBar.tsx",
+    "version": "4.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "4.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/designer/ViewSwitchBar.tsx": {
+    "filePath": "src/app/components/designer/ViewSwitchBar.tsx",
+    "version": "1.1.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.1.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/figma/ImageWithFallback.tsx": {
+    "filePath": "src/app/components/figma/ImageWithFallback.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/icons/AppIcon.tsx": {
+    "filePath": "src/app/components/icons/AppIcon.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-13",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-13",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/icons/icon-registry.ts": {
+    "filePath": "src/app/components/icons/icon-registry.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-13",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-13",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/theme/LiquidGlassBackground.tsx": {
+    "filePath": "src/app/components/theme/LiquidGlassBackground.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/theme/ThemeCustomizer.tsx": {
+    "filePath": "src/app/components/theme/ThemeCustomizer.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/theme/ThemeProvider.tsx": {
+    "filePath": "src/app/components/theme/ThemeProvider.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/accordion.tsx": {
+    "filePath": "src/app/components/ui/accordion.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/alert-dialog.tsx": {
+    "filePath": "src/app/components/ui/alert-dialog.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/alert.tsx": {
+    "filePath": "src/app/components/ui/alert.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/aspect-ratio.tsx": {
+    "filePath": "src/app/components/ui/aspect-ratio.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/avatar.tsx": {
+    "filePath": "src/app/components/ui/avatar.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/badge.tsx": {
+    "filePath": "src/app/components/ui/badge.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/breadcrumb.tsx": {
+    "filePath": "src/app/components/ui/breadcrumb.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/button.tsx": {
+    "filePath": "src/app/components/ui/button.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/calendar.tsx": {
+    "filePath": "src/app/components/ui/calendar.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/card.tsx": {
+    "filePath": "src/app/components/ui/card.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/carousel.tsx": {
+    "filePath": "src/app/components/ui/carousel.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/chart.tsx": {
+    "filePath": "src/app/components/ui/chart.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/checkbox.tsx": {
+    "filePath": "src/app/components/ui/checkbox.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/collapsible.tsx": {
+    "filePath": "src/app/components/ui/collapsible.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/command.tsx": {
+    "filePath": "src/app/components/ui/command.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/context-menu.tsx": {
+    "filePath": "src/app/components/ui/context-menu.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/dialog.tsx": {
+    "filePath": "src/app/components/ui/dialog.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/drawer.tsx": {
+    "filePath": "src/app/components/ui/drawer.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/dropdown-menu.tsx": {
+    "filePath": "src/app/components/ui/dropdown-menu.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/form.tsx": {
+    "filePath": "src/app/components/ui/form.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/hover-card.tsx": {
+    "filePath": "src/app/components/ui/hover-card.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/input-otp.tsx": {
+    "filePath": "src/app/components/ui/input-otp.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/input.tsx": {
+    "filePath": "src/app/components/ui/input.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/label.tsx": {
+    "filePath": "src/app/components/ui/label.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/menubar.tsx": {
+    "filePath": "src/app/components/ui/menubar.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/navigation-menu.tsx": {
+    "filePath": "src/app/components/ui/navigation-menu.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/pagination.tsx": {
+    "filePath": "src/app/components/ui/pagination.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/popover.tsx": {
+    "filePath": "src/app/components/ui/popover.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/progress.tsx": {
+    "filePath": "src/app/components/ui/progress.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/radio-group.tsx": {
+    "filePath": "src/app/components/ui/radio-group.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/resizable.tsx": {
+    "filePath": "src/app/components/ui/resizable.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/scroll-area.tsx": {
+    "filePath": "src/app/components/ui/scroll-area.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/select.tsx": {
+    "filePath": "src/app/components/ui/select.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/separator.tsx": {
+    "filePath": "src/app/components/ui/separator.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/sheet.tsx": {
+    "filePath": "src/app/components/ui/sheet.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/sidebar.tsx": {
+    "filePath": "src/app/components/ui/sidebar.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/skeleton.tsx": {
+    "filePath": "src/app/components/ui/skeleton.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/slider.tsx": {
+    "filePath": "src/app/components/ui/slider.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/sonner.tsx": {
+    "filePath": "src/app/components/ui/sonner.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/switch.tsx": {
+    "filePath": "src/app/components/ui/switch.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/table.tsx": {
+    "filePath": "src/app/components/ui/table.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/tabs.tsx": {
+    "filePath": "src/app/components/ui/tabs.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/textarea.tsx": {
+    "filePath": "src/app/components/ui/textarea.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/toggle-group.tsx": {
+    "filePath": "src/app/components/ui/toggle-group.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/toggle.tsx": {
+    "filePath": "src/app/components/ui/toggle.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/tooltip.tsx": {
+    "filePath": "src/app/components/ui/tooltip.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/use-mobile.ts": {
+    "filePath": "src/app/components/ui/use-mobile.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/components/ui/utils.ts": {
+    "filePath": "src/app/components/ui/utils.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/routes.ts": {
+    "filePath": "src/app/routes.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/ai-cost-service.ts": {
+    "filePath": "src/app/services/ai-cost-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/api-service.ts": {
+    "filePath": "src/app/services/api-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/auth-service.ts": {
+    "filePath": "src/app/services/auth-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/code-generation-service.ts": {
+    "filePath": "src/app/services/code-generation-service.ts",
+    "version": "2.0.0",
+    "lastModified": "2026-03-13",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-13",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/code-quality-service.ts": {
+    "filePath": "src/app/services/code-quality-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/crypto-service.ts": {
+    "filePath": "src/app/services/crypto-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/host-bridge-service.ts": {
+    "filePath": "src/app/services/host-bridge-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/i18n-service.ts": {
+    "filePath": "src/app/services/i18n-service.ts",
+    "version": "1.7.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.7.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/index.ts": {
+    "filePath": "src/app/services/index.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-13",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-13",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/intent-service.ts": {
+    "filePath": "src/app/services/intent-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-13",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-13",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/local-storage-service.ts": {
+    "filePath": "src/app/services/local-storage-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/monitoring-service.ts": {
+    "filePath": "src/app/services/monitoring-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/performance-monitor-service.ts": {
+    "filePath": "src/app/services/performance-monitor-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-13",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-13",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/persistence-service.ts": {
+    "filePath": "src/app/services/persistence-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/plugin-api.ts": {
+    "filePath": "src/app/services/plugin-api.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/plugin-service.ts": {
+    "filePath": "src/app/services/plugin-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/prompt-builder.ts": {
+    "filePath": "src/app/services/prompt-builder.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/quality-gate-service.ts": {
+    "filePath": "src/app/services/quality-gate-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/route-decision-service.ts": {
+    "filePath": "src/app/services/route-decision-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-13",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-13",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/security-service.ts": {
+    "filePath": "src/app/services/security-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/tech-stack-version-manager.ts": {
+    "filePath": "src/app/services/tech-stack-version-manager.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-13",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-13",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/template-engine.ts": {
+    "filePath": "src/app/services/template-engine.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/test-runner-service.ts": {
+    "filePath": "src/app/services/test-runner-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/services/worker-service.ts": {
+    "filePath": "src/app/services/worker-service.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/ai-service-store.ts": {
+    "filePath": "src/app/stores/ai-service-store.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/app-store.ts": {
+    "filePath": "src/app/stores/app-store.ts",
+    "version": "2.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/branding-store.ts": {
+    "filePath": "src/app/stores/branding-store.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/collab-store.ts": {
+    "filePath": "src/app/stores/collab-store.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/db-store.ts": {
+    "filePath": "src/app/stores/db-store.ts",
+    "version": "2.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/design-store.ts": {
+    "filePath": "src/app/stores/design-store.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/file-tree-store.ts": {
+    "filePath": "src/app/stores/file-tree-store.ts",
+    "version": "2.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/heartbeat-store.ts": {
+    "filePath": "src/app/stores/heartbeat-store.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/layout-store.ts": {
+    "filePath": "src/app/stores/layout-store.ts",
+    "version": "2.1.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.1.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/multi-instance-store.tsx": {
+    "filePath": "src/app/stores/multi-instance-store.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-18",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-18",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/notification-store.ts": {
+    "filePath": "src/app/stores/notification-store.ts",
+    "version": "1.1.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.1.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/offline-store.ts": {
+    "filePath": "src/app/stores/offline-store.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/plugin-store.ts": {
+    "filePath": "src/app/stores/plugin-store.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/preview-store.ts": {
+    "filePath": "src/app/stores/preview-store.ts",
+    "version": "2.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/quick-actions-store.tsx": {
+    "filePath": "src/app/stores/quick-actions-store.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-17",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-17",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/security-store.ts": {
+    "filePath": "src/app/stores/security-store.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/session-store.ts": {
+    "filePath": "src/app/stores/session-store.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/settings-store.ts": {
+    "filePath": "src/app/stores/settings-store.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-17",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-17",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/sync-store.ts": {
+    "filePath": "src/app/stores/sync-store.ts",
+    "version": "1.1.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.1.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/task-store.tsx": {
+    "filePath": "src/app/stores/task-store.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-17",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-17",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/stores/theme-store.ts": {
+    "filePath": "src/app/stores/theme-store.ts",
+    "version": "2.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "2.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/types/api.ts": {
+    "filePath": "src/app/types/api.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/types/architecture.ts": {
+    "filePath": "src/app/types/architecture.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-13",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-13",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/types/codegen.ts": {
+    "filePath": "src/app/types/codegen.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/types/i18n.ts": {
+    "filePath": "src/app/types/i18n.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/types/models.ts": {
+    "filePath": "src/app/types/models.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/types/security.ts": {
+    "filePath": "src/app/types/security.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/types/storage.ts": {
+    "filePath": "src/app/types/storage.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/types/testing.ts": {
+    "filePath": "src/app/types/testing.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/utils/api-client.ts": {
+    "filePath": "src/app/utils/api-client.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/utils/data-export.ts": {
+    "filePath": "src/app/utils/data-export.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/utils/debounce.ts": {
+    "filePath": "src/app/utils/debounce.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/utils/file-contents.ts": {
+    "filePath": "src/app/utils/file-contents.ts",
+    "version": "1.1.0",
+    "lastModified": "2026-03-14",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.1.0",
+        "date": "2026-03-14",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/utils/liquid-glass.ts": {
+    "filePath": "src/app/utils/liquid-glass.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/utils/logger.ts": {
+    "filePath": "src/app/utils/logger.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/utils/time-format.ts": {
+    "filePath": "src/app/utils/time-format.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/utils/useI18n.ts": {
+    "filePath": "src/app/utils/useI18n.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/utils/validation.ts": {
+    "filePath": "src/app/utils/validation.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/workers/backup-worker.ts": {
+    "filePath": "src/app/workers/backup-worker.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/workers/diff-worker.ts": {
+    "filePath": "src/app/workers/diff-worker.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/app/workers/paging-worker.ts": {
+    "filePath": "src/app/workers/paging-worker.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-15",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-15",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/main.tsx": {
+    "filePath": "src/main.tsx",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/styles/fonts.css": {
+    "filePath": "src/styles/fonts.css",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/styles/index.css": {
+    "filePath": "src/styles/index.css",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/styles/liquid-glass.css": {
+    "filePath": "src/styles/liquid-glass.css",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/styles/tailwind.css": {
+    "filePath": "src/styles/tailwind.css",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "src/styles/theme.css": {
+    "filePath": "src/styles/theme.css",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "tests/mocks/data.ts": {
+    "filePath": "tests/mocks/data.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "tests/setup.ts": {
+    "filePath": "tests/setup.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "tests/unit/services/i18n-service.test.ts": {
+    "filePath": "tests/unit/services/i18n-service.test.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "tests/unit/stores/app-store.test.ts": {
+    "filePath": "tests/unit/stores/app-store.test.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "tests/unit/stores/theme-store.test.ts": {
+    "filePath": "tests/unit/stores/theme-store.test.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "tests/unit/utils/logger.test.ts": {
+    "filePath": "tests/unit/utils/logger.test.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "vite.config.ts": {
+    "filePath": "vite.config.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "vitest.config.ts": {
+    "filePath": "vitest.config.ts",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  },
+  "tsconfig.json": {
+    "filePath": "tsconfig.json",
+    "version": "1.0.0",
+    "lastModified": "2026-03-19",
+    "lastAuthor": "Unknown",
+    "lastCommit": "unknown",
+    "changeType": "none",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-03-19",
+        "author": "Unknown",
+        "commit": "unknown",
+        "message": "No git info",
+        "changeType": "none"
+      }
+    ]
+  }
+}
