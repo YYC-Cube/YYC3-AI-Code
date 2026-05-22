@@ -33,28 +33,24 @@ export default defineConfig({
         main: path.resolve(__dirname, 'index.html'),
       },
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom', 'react-router'],
-          'vendor-ui-radix': [
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-popover',
-            '@radix-ui/react-tooltip',
-            '@radix-ui/react-tabs',
-            '@radix-ui/react-select',
-            '@radix-ui/react-scroll-area',
-            '@radix-ui/react-separator',
-            '@radix-ui/react-switch',
-            '@radix-ui/react-slider',
-            '@radix-ui/react-accordion',
-            '@radix-ui/react-checkbox',
-          ],
-          'vendor-motion': ['motion'],
-          'vendor-dnd': ['react-dnd', 'react-dnd-html5-backend'],
-          'vendor-editor': ['@monaco-editor/react'],
-          'vendor-crdt': ['yjs', 'y-indexeddb', 'y-websocket'],
-          'vendor-state': ['zustand'],
-          'vendor-chart': ['recharts'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react-dom') || id.includes('react-router') || id.includes('scheduler')) {
+              return 'vendor-react'
+            }
+            if (id.includes('@radix-ui')) {
+              return 'vendor-radix'
+            }
+            if (id.includes('motion')) {
+              return 'vendor-motion'
+            }
+            if (id.includes('recharts') || id.includes('d3-')) {
+              return 'vendor-chart'
+            }
+            if (id.includes('monaco-editor')) {
+              return 'vendor-editor'
+            }
+          }
         },
       },
     },
