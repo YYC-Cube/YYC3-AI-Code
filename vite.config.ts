@@ -38,10 +38,18 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // 将React和Radix UI合并到同一个chunk避免循环依赖
+            // React生态完全独立，优先返回
+            if (id.includes('react/') || id.includes('react-dom/') || id.includes('scheduler/')) {
+              return 'vendor-react-core'
+            }
+            // 其他React相关包
             if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') ||
-                id.includes('scheduler') || id.includes('@radix-ui') || id.includes('@emotion')) {
-              return 'vendor-react-ui'
+                id.includes('scheduler')) {
+              return 'vendor-react'
+            }
+            // UI组件库依赖React
+            if (id.includes('@radix-ui') || id.includes('@emotion')) {
+              return 'vendor-ui'
             }
             if (id.includes('motion')) {
               return 'vendor-motion'
