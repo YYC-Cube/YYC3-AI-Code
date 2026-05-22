@@ -52,6 +52,7 @@ import {
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ModelSettings } from './designer/ModelSettings'
+import { DesignerProvider } from '../store'
 import { IntentService } from '../services/intent-service'
 import { createLogger } from '../utils/logger'
 import { useLiquidGlass } from '../utils/liquid-glass'
@@ -408,7 +409,8 @@ export function HomePage() {
     : { background: '#1a1a2e', borderColor: 'rgba(255,255,255,0.1)' }
 
   return (
-    <div className="min-h-screen text-white flex flex-col" style={bgStyle} data-testid="home-page">
+    <DesignerProvider>
+      <div className="min-h-screen text-white flex flex-col" style={bgStyle} data-testid="home-page">
       {/* ───── Header ───── */}
       <header className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4" role="banner">
         <div className="flex items-center gap-2 sm:gap-3">
@@ -979,6 +981,7 @@ export function HomePage() {
           navigate('/designer')
         }}
       />
-    </div>
+      </div>
+    </DesignerProvider>
   )
 }
