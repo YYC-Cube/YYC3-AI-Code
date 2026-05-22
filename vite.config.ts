@@ -55,12 +55,45 @@ export default defineConfig({
             }
           }
         },
+        // Asset file naming for better caching
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name?.split('.') ?? []
+          const extType = info[info.length - 1]
+          if (/\.(css)$/.test(assetInfo.name ?? '')) {
+            return `assets/css/[name]-[hash][extname]`
+          }
+          if (/\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/.test(assetInfo.name ?? '')) {
+            return `assets/images/[name]-[hash][extname]`
+          }
+          return `assets/[name]-[hash][extname]`
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
       },
+    },
+    // Enable better caching with content hashing
+    chunkSizeWarningLimit: 1000,
+    // Optimize dependencies
+    commonjsOptions: {
+      transformMixedEsModules: true,
     },
   },
   server: {
     port: 3160,
     host: true,
     open: true,
+    headers: {
+      'Cache-Control': 'public, max-age=31536000, immutable',
+    },
+  },
+
+  // Preview server configuration
+  preview: {
+    port: 4173,
+    host: true,
+    open: true,
+    headers: {
+      'Cache-Control': 'public, max-age=31536000, immutable',
+    },
   },
 })

@@ -10,52 +10,70 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "/favicon.png",
-      "sizes": "16x16 32x32",
+      "src": "/yyc3-icons/favicon/favicon-16x16.png",
+      "sizes": "16x16",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-192x192.png",
+      "src": "/yyc3-icons/favicon/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icon-512x512.png",
+      "src": "/yyc3-icons/pwa/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/yyc3-icons/pwa/icon-72x72.png",
-      "sizes": "72x72",
-      "type": "image/png"
-    },
-    {
-      "src": "/yyc3-icons/pwa/icon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "/yyc3-icons/pwa/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png"
-    },
-    {
-      "src": "/yyc3-icons/pwa/icon-144x144.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "/yyc3-icons/pwa/icon-152x152.png",
-      "sizes": "152x152",
-      "type": "image/png"
-    },
-    {
-      "src": "/yyc3-icons/pwa/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png"
+      "src": "/yyc3-icons/ios/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "categories": ["developer-tools", "productivity", "education"],
@@ -73,21 +91,21 @@
       "short_name": "设计",
       "description": "打开可视化设计画布",
       "url": "/designer",
-      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/yyc3-icons/pwa/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "AI助手",
       "short_name": "AI",
       "description": "打开AI编程助手",
       "url": "/ai-assistant",
-      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/yyc3-icons/pwa/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "任务看板",
       "short_name": "任务",
       "description": "查看任务看板",
       "url": "/tasks",
-      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/yyc3-icons/pwa/icon-192x192.png", "sizes": "192x192" }]
     }
   ]
 }
