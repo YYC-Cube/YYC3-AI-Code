@@ -1,7 +1,7 @@
 {
-  "name": "YYC³ AI 编程应用",
-  "short_name": "YYC³",
-  "description": "智能多面板可视化 AI 编程应用，支持 AI 驱动的代码生成、可视化设计和实时协同编辑",
+  "name": "FAmily AI",
+  "short_name": "FAmily AI",
+  "description": "智能AI编程应用",
   "theme_color": "#667eea",
   "background_color": "#ffffff",
   "display": "standalone",
@@ -82,7 +82,7 @@
       "src": "/yyc3-logo-blue.png",
       "sizes": "512x512",
       "type": "image/png",
-      "description": "YYC³ 主界面"
+      "description": "FAmily AI 主界面"
     }
   ],
   "shortcuts": [
