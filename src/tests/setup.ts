@@ -41,6 +41,21 @@ Object.defineProperty(globalThis, 'localStorage', {
   configurable: true,
 });
 
+Object.defineProperty(globalThis, 'matchMedia', {
+  value: (query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  }),
+  writable: true,
+  configurable: true,
+});
+
 // performance.memory mock (仅 Chrome 存在)
 if (typeof performance !== 'undefined' && !(performance as any).memory) {
   (performance as any).memory = {
