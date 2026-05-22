@@ -15,7 +15,7 @@ declare module '*.svg' {
   export default value
 }
 
-declare module '/yyc3-white.png' {
+declare module '/yyc3-logo.png' {
   const value: string
   export default value
 }

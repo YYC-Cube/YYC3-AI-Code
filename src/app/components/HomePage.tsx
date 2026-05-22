@@ -58,7 +58,7 @@ import { useLiquidGlass } from '../utils/liquid-glass'
 import { toast } from 'sonner'
 import { CreateProjectDialog } from './designer/CreateProjectDialog'
 import { useI18n } from '../utils/useI18n'
-import logoImage from '/yyc3-white.png'
+import logoImage from '/yyc3-logo.png'
 
 const log = createLogger('HomePage')
 

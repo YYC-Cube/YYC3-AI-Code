@@ -12,7 +12,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import logoImage from '/yyc3-white.png'
+import logoImage from '/yyc3-logo.png'
 import { createLogger } from '../utils/logger'
 
 const log = createLogger('SplashScreen')

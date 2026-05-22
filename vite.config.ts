@@ -19,15 +19,18 @@ export default defineConfig({
   },
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
-  assetsInclude: ['**/*.svg', '**/*.csv'],
+  assetsInclude: ['**/*.svg', '**/*.csv', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.webp'],
 
   // Entry point configuration
   root: '.',
   publicDir: 'public',
+
+  // Build configuration
   build: {
     outDir: 'dist',
     emptyOutDir: true,
     sourcemap: true,
+    copyPublicDir: true,
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),

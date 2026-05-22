@@ -1,0 +1,93 @@
+{
+  "name": "YYC³ AI 编程应用",
+  "short_name": "YYC³",
+  "description": "智能多面板可视化 AI 编程应用，支持 AI 驱动的代码生成、可视化设计和实时协同编辑",
+  "theme_color": "#667eea",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "16x16 32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/yyc3-icons/pwa/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["developer-tools", "productivity", "education"],
+  "screenshots": [
+    {
+      "src": "/yyc3-logo-blue.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "description": "YYC³ 主界面"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "设计画布",
+      "short_name": "设计",
+      "description": "打开可视化设计画布",
+      "url": "/designer",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "AI助手",
+      "short_name": "AI",
+      "description": "打开AI编程助手",
+      "url": "/ai-assistant",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "任务看板",
+      "short_name": "任务",
+      "description": "查看任务看板",
+      "url": "/tasks",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}
