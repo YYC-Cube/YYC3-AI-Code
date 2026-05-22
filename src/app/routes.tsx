@@ -1,18 +1,4 @@
-/**
- * @file routes.tsx
- * @description YYC3 应用路由配置 — 首页 / Designer / AI Code / AI Generator 四大入口（全部路由级 lazy loading）
- * @author YanYuCloudCube Team <admin@0379.email>
- * @version v1.3.0
- * @created 2026-03-08
- * @updated 2026-03-19
- * @status dev
- * @license MIT
- * @copyright Copyright (c) 2026 YanYuCloudCube Team
- * @tags router,routes,navigation,app,error-boundary,lazy-loading
- */
-
 import { lazy, Suspense } from 'react';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { createBrowserRouter } from 'react-router';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LoadingPage } from './components/LoadingPage';
@@ -29,20 +15,12 @@ const CodeGeneratorPanel = lazy(() =>
   import('./components/ai-code/CodeGeneratorPanel').then(m => ({ default: m.CodeGeneratorPanel }))
 );
 
-const DesignerLayout = lazy(() =>
-  import('./components/designer/DesignerLayout').then(m => ({ default: m.DesignerLayout }))
+const DesignerPage = lazy(() =>
+  import('./components/DesignerPage').then(m => ({ default: m.DesignerPage }))
 );
 
 const SettingsPage = lazy(() =>
   import('./components/settings/SettingsPage').then(m => ({ default: m.SettingsPage }))
-);
-
-const DndProvider = lazy(() =>
-  import('react-dnd').then(m => ({ default: m.DndProvider }))
-);
-
-const DesignerProvider = lazy(() =>
-  import('./store').then(m => ({ default: m.DesignerProvider }))
 );
 
 function withSuspense(name: string, autoRecoveryMs: number, maxAutoRecovery: number, element: React.ReactNode) {
@@ -63,13 +41,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/designer',
-    element: withSuspense('Designer', 3000, 3,
-      <DesignerProvider>
-        <DndProvider backend={HTML5Backend}>
-          <DesignerLayout />
-        </DndProvider>
-      </DesignerProvider>
-    ),
+    element: withSuspense('Designer', 3000, 3, <DesignerPage />),
   },
   {
     path: '/ai-code',

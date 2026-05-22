@@ -11,23 +11,26 @@
  * @tags designer, layout, keyboard-shortcuts, preview, panels
  */
 
-import { useState, useRef, useEffect, lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useNavigate } from 'react-router'
+import { DesignerProvider } from '../store'
 import { useAppStore } from '../stores/app-store'
-import { useThemeStore } from '../stores/theme-store'
 import { useLayoutStore } from '../stores/layout-store'
 import { usePreviewStore } from '../stores/preview-store'
-import {
-  ResizablePanelGroup,
-  ResizablePanel,
-  ResizableHandle,
-} from './ui/resizable'
+import { useThemeStore } from '../stores/theme-store'
+import { CenterPanel } from './designer/CenterPanel'
+import { LeftPanel } from './designer/LeftPanel'
+import { PreviewPanel } from './designer/PreviewPanel'
+import { RightPanel } from './designer/RightPanel'
 import { TopNavBar } from './designer/TopNavBar'
 import { ViewSwitchBar } from './designer/ViewSwitchBar'
-import { LeftPanel } from './designer/LeftPanel'
-import { CenterPanel } from './designer/CenterPanel'
-import { RightPanel } from './designer/RightPanel'
-import { PreviewPanel } from './designer/PreviewPanel'
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from './ui/resizable'
 
 // Lazy-loaded sub-panels (loaded on demand to reduce initial bundle size)
 const ModelSettings = lazy(() => import('./designer/ModelSettings').then(m => ({ default: m.ModelSettings })))
@@ -43,15 +46,15 @@ const QuickActionsPanel = lazy(() => import('./designer/QuickActionsPanel').then
 const TaskBoardPanel = lazy(() => import('./designer/TaskBoardPanel').then(m => ({ default: m.TaskBoardPanel })))
 const MultiInstancePanel = lazy(() => import('./designer/MultiInstancePanel').then(m => ({ default: m.MultiInstancePanel })))
 
-import { createLogger } from '../utils/logger'
-import { Search, FileCode2, FolderOpen, Database, Shield, X, Sparkles, ClipboardList, Monitor } from 'lucide-react'
-import { MOCK_FILE_CONTENTS, getLanguage } from '../utils/file-contents'
-import { useDebounce } from '../utils/debounce'
+import { ClipboardList, Database, FileCode2, FolderOpen, Monitor, Search, Shield, Sparkles, X } from 'lucide-react'
 import { SearchWorker } from '../services/search-service'
-import { ErrorBoundary } from './ErrorBoundary'
-import { useLiquidGlass } from '../utils/liquid-glass'
-import { useI18n } from '../utils/useI18n'
 import { useSettingsStore } from '../stores/settings-store'
+import { useDebounce } from '../utils/debounce'
+import { MOCK_FILE_CONTENTS } from '../utils/file-contents'
+import { useLiquidGlass } from '../utils/liquid-glass'
+import { createLogger } from '../utils/logger'
+import { useI18n } from '../utils/useI18n'
+import { ErrorBoundary } from './ErrorBoundary'
 import { useMobileLayout } from './ui/use-responsive'
 
 const log = createLogger('DesignerPage')
@@ -117,14 +120,13 @@ function GlobalSearchPanel() {
     }
   }, [debouncedQuery])
 
-  if (!searchPanelOpen) {return null}
+  if (!searchPanelOpen) { return null }
 
   return (
     <div className="absolute inset-0 z-50 flex items-start justify-center pt-16" onClick={() => setSearchPanelOpen(false)}>
       <div
-        className={`w-full max-w-xl rounded-xl border overflow-hidden ${
-          isLG ? 'border-emerald-500/[0.1]' : 'border-white/[0.08]'
-        }`}
+        className={`w-full max-w-xl rounded-xl border overflow-hidden ${isLG ? 'border-emerald-500/[0.1]' : 'border-white/[0.08]'
+          }`}
         style={{
           background: isLG ? 'rgba(10,15,10,0.92)' : 'rgba(14,14,24,0.96)',
           backdropFilter: isLG ? 'blur(30px) saturate(180%)' : 'blur(20px)',
@@ -134,9 +136,8 @@ function GlobalSearchPanel() {
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={`flex items-center gap-2 px-4 py-3 border-b ${
-          isLG ? 'border-emerald-500/[0.08]' : 'border-white/[0.06]'
-        }`}>
+        <div className={`flex items-center gap-2 px-4 py-3 border-b ${isLG ? 'border-emerald-500/[0.08]' : 'border-white/[0.06]'
+          }`}>
           <Search className={`w-4 h-4 ${isLG ? 'text-emerald-400/40' : 'text-white/30'}`} />
           <input
             ref={inputRef}
@@ -144,11 +145,10 @@ function GlobalSearchPanel() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t('search.placeholder', 'designer')}
-            className={`flex-1 bg-transparent outline-none text-sm text-white/80 placeholder:text-white/20 ${
-              isLG ? 'caret-emerald-400' : ''
-            }`}
+            className={`flex-1 bg-transparent outline-none text-sm text-white/80 placeholder:text-white/20 ${isLG ? 'caret-emerald-400' : ''
+              }`}
             onKeyDown={(e) => {
-              if (e.key === 'Escape') {setSearchPanelOpen(false)}
+              if (e.key === 'Escape') { setSearchPanelOpen(false) }
             }}
           />
           <kbd className="text-[9px] text-white/15 bg-white/[0.04] px-1.5 py-0.5 rounded font-mono">Esc</kbd>
@@ -202,6 +202,16 @@ function GlobalSearchPanel() {
 // ============================================
 
 export function DesignerPage() {
+  return (
+    <DesignerProvider>
+      <DndProvider backend={HTML5Backend}>
+        <DesignerPageContent />
+      </DndProvider>
+    </DesignerProvider>
+  )
+}
+
+function DesignerPageContent() {
   const navigate = useNavigate()
   const { currentView, setCurrentView, searchPanelOpen, setSearchPanelOpen, toggleTerminal, toggleSearchPanel, bottomPanelVisible, selectedFile } = useAppStore()
   const { currentTheme } = useThemeStore()
@@ -231,13 +241,13 @@ export function DesignerPage() {
       const needAlt = parts.includes('Alt')
       const keyPart = parts.filter(p => !['Ctrl', 'Shift', 'Alt'].includes(p))[0] || ''
       const ctrl = e.ctrlKey || e.metaKey
-      if (needCtrl !== ctrl) {return false}
-      if (needShift !== e.shiftKey) {return false}
-      if (needAlt !== e.altKey) {return false}
+      if (needCtrl !== ctrl) { return false }
+      if (needShift !== e.shiftKey) { return false }
+      if (needAlt !== e.altKey) { return false }
       // Special key matching
-      if (keyPart === '`') {return e.key === '`'}
-      if (keyPart === ',') {return e.key === ','}
-      if (/^[0-9]$/.test(keyPart)) {return e.key === keyPart}
+      if (keyPart === '`') { return e.key === '`' }
+      if (keyPart === ',') { return e.key === ',' }
+      if (/^[0-9]$/.test(keyPart)) { return e.key === keyPart }
       return e.key.toLowerCase() === keyPart.toLowerCase()
     }
 
@@ -277,16 +287,16 @@ export function DesignerPage() {
       if (matchKey(keybindings.toggleFileSystem || 'Ctrl+Shift+E', e)) {
         e.preventDefault()
         const app = useAppStore.getState()
-        if (app.bottomPanelVisible && app.bottomPanelTab === 'filesystem') {app.toggleBottomPanel()}
-        else {app.openBottomPanel('filesystem')}
+        if (app.bottomPanelVisible && app.bottomPanelTab === 'filesystem') { app.toggleBottomPanel() }
+        else { app.openBottomPanel('filesystem') }
         return
       }
       if (matchKey(keybindings.toggleDatabase || 'Ctrl+Shift+D', e)) {
         if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
           e.preventDefault()
           const app = useAppStore.getState()
-          if (app.bottomPanelVisible && app.bottomPanelTab === 'database') {app.toggleBottomPanel()}
-          else {app.openBottomPanel('database')}
+          if (app.bottomPanelVisible && app.bottomPanelTab === 'database') { app.toggleBottomPanel() }
+          else { app.openBottomPanel('database') }
         }
         return
       }
@@ -359,11 +369,10 @@ export function DesignerPage() {
             <button
               key={tab.id}
               onClick={() => mobileLayout.setActiveTab(tab.id)}
-              className={`flex flex-col items-center gap-0.5 py-2 px-4 transition-colors ${
-                mobileLayout.activeTab === tab.id
+              className={`flex flex-col items-center gap-0.5 py-2 px-4 transition-colors ${mobileLayout.activeTab === tab.id
                   ? currentTheme.type === 'dark' ? 'text-white/80' : 'text-gray-900'
                   : currentTheme.type === 'dark' ? 'text-white/25' : 'text-gray-400'
-              }`}
+                }`}
             >
               {tab.icon}
               <span className="text-[9px]">{tab.label}</span>
@@ -640,21 +649,19 @@ function BottomToolPanel() {
       style={{ background: isLG ? 'rgba(10,15,10,0.35)' : 'var(--sidebar, #0d0d14)' }}
     >
       {/* Tab bar */}
-      <div className={`h-7 flex items-center justify-between px-1 border-b shrink-0 ${
-        isLG ? 'border-emerald-500/[0.06]' : 'border-white/[0.04]'
-      }`} style={{ background: isLG ? 'rgba(10,15,10,0.25)' : 'rgba(0,0,0,0.1)' }}>
+      <div className={`h-7 flex items-center justify-between px-1 border-b shrink-0 ${isLG ? 'border-emerald-500/[0.06]' : 'border-white/[0.04]'
+        }`} style={{ background: isLG ? 'rgba(10,15,10,0.25)' : 'rgba(0,0,0,0.1)' }}>
         <div className="flex items-center gap-0.5">
           {tabs.map(({ key, label, icon: Icon }) => (
             <button
               key={key}
               onClick={() => setBottomPanelTab(key)}
-              className={`flex items-center gap-1 px-2.5 py-1 text-[10px] border-b-2 transition-colors ${
-                bottomPanelTab === key
+              className={`flex items-center gap-1 px-2.5 py-1 text-[10px] border-b-2 transition-colors ${bottomPanelTab === key
                   ? isLG
                     ? 'border-emerald-400/40 text-white/60'
                     : 'border-violet-400/40 text-white/60'
                   : 'border-transparent text-white/25 hover:text-white/40'
-              }`}
+                }`}
             >
               <Icon className="w-3 h-3" />
               {label}
