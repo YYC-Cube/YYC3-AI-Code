@@ -74,6 +74,12 @@ $RECYCLE.BIN/
 # Vite
 .vite/
 
+# pnpm store (local)
+.pnpm-store/
+
+# Vitest cache
+cacheDir/
+
 # Figma Make
 .figmake/
 

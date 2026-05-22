@@ -5,25 +5,41 @@
  * @version 3.0.0
  */
 
-import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import {
-  Send, Copy, Check, X, RotateCcw, ThumbsUp, ThumbsDown,
-  Pencil, Square, Paperclip, FileCode2, Settings2, ImagePlus,
-  ChevronDown, Trash2, MessageSquarePlus, FileUp, Play,
-  Sparkles, Globe,
+  Check,
+  ChevronDown,
+  Copy,
+  FileCode2,
+  FileUp,
+  Globe,
+  ImagePlus,
+  MessageSquarePlus,
+  Paperclip,
+  Pencil,
+  Play,
+  RotateCcw,
+  Send,
+  Settings2,
+  Sparkles,
+  Square,
+  ThumbsDown,
+  ThumbsUp,
+  Trash2,
+  X,
 } from 'lucide-react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Virtuoso, type VirtuosoHandle } from 'react-virtuoso'
-import { useAppStore } from '../../stores/app-store'
-import type { AIModel } from '../../stores/app-store'
-import { useSessionStore } from '../../stores/session-store'
-import { useAIServiceStore } from '../../stores/ai-service-store'
-import type { SessionMessage } from '../../types/models'
-import { createLogger } from '../../utils/logger'
-import { useLiquidGlass } from '../../utils/liquid-glass'
-import { useFileTreeStore } from '../../stores/file-tree-store'
-import { useI18n } from '../../utils/useI18n'
-import { useSettingsStore } from '../../stores/settings-store'
 import { toast } from 'sonner'
+import { useAIServiceStore } from '../../stores/ai-service-store'
+import type { AIModel } from '../../stores/app-store'
+import { useAppStore } from '../../stores/app-store'
+import { useFileTreeStore } from '../../stores/file-tree-store'
+import { useSessionStore } from '../../stores/session-store'
+import { useSettingsStore } from '../../stores/settings-store'
+import type { SessionMessage } from '../../types/models'
+import { useLiquidGlass } from '../../utils/liquid-glass'
+import { createLogger } from '../../utils/logger'
+import { useI18n } from '../../utils/useI18n'
 import logoImage from '/yyc3-logo.png'
 
 const log = createLogger('LeftPanel')
@@ -62,14 +78,14 @@ async function fetchOpenAIStreamResponse(
     }
 
     const reader = res.body?.getReader()
-    if (!reader) {throw new Error('No response body')}
+    if (!reader) { throw new Error('No response body') }
 
     const decoder = new TextDecoder()
     let buffer = ''
 
     while (true) {
       const { done, value } = await reader.read()
-      if (done) {break}
+      if (done) { break }
 
       buffer += decoder.decode(value, { stream: true })
       const lines = buffer.split('\n')
@@ -77,12 +93,12 @@ async function fetchOpenAIStreamResponse(
 
       for (const line of lines) {
         const trimmed = line.trim()
-        if (!trimmed || trimmed === 'data: [DONE]') {continue}
+        if (!trimmed || trimmed === 'data: [DONE]') { continue }
         if (trimmed.startsWith('data: ')) {
           try {
             const json = JSON.parse(trimmed.slice(6))
             const delta = json.choices?.[0]?.delta?.content
-            if (delta) {onChunk(delta)}
+            if (delta) { onChunk(delta) }
           } catch { /* skip malformed SSE */ }
         }
       }
@@ -127,9 +143,9 @@ async function simulateMockAIResponse(
   ]
 
   for (const chunk of mockResponses) {
-    if (signal.aborted) {return}
+    if (signal.aborted) { return }
     await new Promise(r => setTimeout(r, 30 + Math.random() * 60))
-    if (signal.aborted) {return}
+    if (signal.aborted) { return }
     onChunk(chunk)
   }
 }
@@ -167,7 +183,7 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 
   const handleNewFile = () => {
     const name = newFileName.trim()
-    if (!name) {return}
+    if (!name) { return }
     const parentPath = 'src/app/components'
     const fullPath = `${parentPath}/${name}`
     createFile(parentPath, name)
@@ -184,23 +200,20 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
   const isCodeApplicable = language && ['typescript', 'tsx', 'jsx', 'javascript', 'js', 'ts', 'css', 'json', 'html'].includes(language.toLowerCase())
 
   return (
-    <div className={`rounded-lg overflow-hidden my-2 border ${
-      isLG ? 'border-emerald-500/[0.08]' : 'border-white/[0.06]'
-    }`}>
-      <div className={`flex items-center justify-between px-3 py-1.5 ${
-        isLG ? 'bg-emerald-500/[0.04]' : 'bg-white/[0.04]'
+    <div className={`rounded-lg overflow-hidden my-2 border ${isLG ? 'border-emerald-500/[0.08]' : 'border-white/[0.06]'
       }`}>
+      <div className={`flex items-center justify-between px-3 py-1.5 ${isLG ? 'bg-emerald-500/[0.04]' : 'bg-white/[0.04]'
+        }`}>
         <span className="text-[9px] text-white/30 font-mono">{language}</span>
         <div className="flex items-center gap-1">
           {isCodeApplicable && (
             <>
               <button
                 onClick={handleApply}
-                className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] transition-colors whitespace-nowrap ${
-                  isLG
-                    ? 'text-emerald-400/50 hover:text-emerald-400/80 hover:bg-emerald-500/[0.08]'
-                    : 'text-violet-400/50 hover:text-violet-400/80 hover:bg-violet-500/[0.08]'
-                }`}
+                className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] transition-colors whitespace-nowrap ${isLG
+                  ? 'text-emerald-400/50 hover:text-emerald-400/80 hover:bg-emerald-500/[0.08]'
+                  : 'text-violet-400/50 hover:text-violet-400/80 hover:bg-violet-500/[0.08]'
+                  }`}
                 title={t('left.applyToFile', 'designer')}
               >
                 <Play className="w-3 h-3" />
@@ -224,34 +237,31 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 
       {/* New File Inline Input */}
       {showNewFileInput && (
-        <div className={`flex items-center gap-2 px-3 py-1.5 border-b ${
-          isLG ? 'border-emerald-500/[0.06] bg-emerald-500/[0.02]' : 'border-white/[0.04] bg-white/[0.02]'
-        }`}>
+        <div className={`flex items-center gap-2 px-3 py-1.5 border-b ${isLG ? 'border-emerald-500/[0.06] bg-emerald-500/[0.02]' : 'border-white/[0.04] bg-white/[0.02]'
+          }`}>
           <FileCode2 className="w-3 h-3 text-white/20 shrink-0" />
           <input
             type="text"
             value={newFileName}
             onChange={e => setNewFileName(e.target.value)}
             onKeyDown={e => {
-              if (e.key === 'Enter') {handleNewFile()}
+              if (e.key === 'Enter') { handleNewFile() }
               if (e.key === 'Escape') { setShowNewFileInput(false); setNewFileName('') }
             }}
             placeholder="filename.tsx"
-            className={`flex-1 bg-transparent outline-none text-[10px] text-white/60 placeholder:text-white/20 ${
-              isLG ? 'caret-emerald-400' : ''
-            }`}
+            className={`flex-1 bg-transparent outline-none text-[10px] text-white/60 placeholder:text-white/20 ${isLG ? 'caret-emerald-400' : ''
+              }`}
             autoFocus
           />
           <button
             onClick={handleNewFile}
             disabled={!newFileName.trim()}
-            className={`px-2 py-0.5 rounded text-[9px] transition-colors ${
-              newFileName.trim()
-                ? isLG
-                  ? 'bg-emerald-500/20 text-emerald-400/80 hover:bg-emerald-500/30'
-                  : 'bg-violet-500/20 text-violet-400/80 hover:bg-violet-500/30'
-                : 'bg-white/[0.04] text-white/15'
-            }`}
+            className={`px-2 py-0.5 rounded text-[9px] transition-colors ${newFileName.trim()
+              ? isLG
+                ? 'bg-emerald-500/20 text-emerald-400/80 hover:bg-emerald-500/30'
+                : 'bg-violet-500/20 text-violet-400/80 hover:bg-violet-500/30'
+              : 'bg-white/[0.04] text-white/15'
+              }`}
           >
             {t('left.create', 'designer')}
           </button>
@@ -447,13 +457,12 @@ function ChatMessageBubble({ message, isStreaming, onEdit, onResend }: {
     <div className={`group px-4 py-3 ${isUser ? '' : 'bg-white/[0.01]'}`}>
       {/* Header */}
       <div className="flex items-center gap-2 mb-1.5">
-        <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[9px] ${
-          isUser
-            ? 'bg-blue-500/20 text-blue-400/80'
-            : isLG
-              ? 'bg-emerald-500/20 text-emerald-400/80'
-              : 'bg-violet-500/20 text-violet-400/80'
-        }`}>
+        <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[9px] ${isUser
+          ? 'bg-blue-500/20 text-blue-400/80'
+          : isLG
+            ? 'bg-emerald-500/20 text-emerald-400/80'
+            : 'bg-violet-500/20 text-violet-400/80'
+          }`}>
           {isUser ? '你' : 'AI'}
         </div>
         <span className="text-[10px] text-white/30">
@@ -463,14 +472,12 @@ function ChatMessageBubble({ message, isStreaming, onEdit, onResend }: {
       </div>
 
       {/* Content */}
-      <div className={`ml-7 text-[12px] leading-relaxed overflow-wrap-break-word break-words ${
-        isStreaming ? 'text-white/60' : 'text-white/70'
-      }`}>
+      <div className={`ml-7 text-[12px] leading-relaxed overflow-wrap-break-word break-words ${isStreaming ? 'text-white/60' : 'text-white/70'
+        }`}>
         {renderMessageContent(message.content)}
         {isStreaming && (
-          <span className={`inline-block w-1.5 h-4 ml-0.5 animate-pulse ${
-            isLG ? 'bg-emerald-400/60' : 'bg-violet-400/60'
-          }`} />
+          <span className={`inline-block w-1.5 h-4 ml-0.5 animate-pulse ${isLG ? 'bg-emerald-400/60' : 'bg-violet-400/60'
+            }`} />
         )}
       </div>
 
@@ -494,18 +501,16 @@ function ChatMessageBubble({ message, isStreaming, onEdit, onResend }: {
             <>
               <button
                 onClick={() => setFeedback(feedback === 'up' ? null : 'up')}
-                className={`p-1 rounded transition-colors ${
-                  feedback === 'up' ? 'text-emerald-400/70 bg-emerald-500/10' : 'text-white/20 hover:text-white/50 hover:bg-white/[0.06]'
-                }`}
+                className={`p-1 rounded transition-colors ${feedback === 'up' ? 'text-emerald-400/70 bg-emerald-500/10' : 'text-white/20 hover:text-white/50 hover:bg-white/[0.06]'
+                  }`}
                 title={t('left.helpful', 'designer')}
               >
                 <ThumbsUp className="w-3 h-3" />
               </button>
               <button
                 onClick={() => setFeedback(feedback === 'down' ? null : 'down')}
-                className={`p-1 rounded transition-colors ${
-                  feedback === 'down' ? 'text-red-400/70 bg-red-500/10' : 'text-white/20 hover:text-white/50 hover:bg-white/[0.06]'
-                }`}
+                className={`p-1 rounded transition-colors ${feedback === 'down' ? 'text-red-400/70 bg-red-500/10' : 'text-white/20 hover:text-white/50 hover:bg-white/[0.06]'
+                  }`}
                 title={t('left.notHelpful', 'designer')}
               >
                 <ThumbsDown className="w-3 h-3" />
@@ -537,7 +542,7 @@ function SessionSelector() {
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (dropRef.current && !dropRef.current.contains(e.target as Node)) {setOpen(false)}
+      if (dropRef.current && !dropRef.current.contains(e.target as Node)) { setOpen(false) }
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
@@ -547,11 +552,10 @@ function SessionSelector() {
     <div className="relative" ref={dropRef}>
       <button
         onClick={() => setOpen(!open)}
-        className={`flex items-center gap-1.5 px-2 py-1 rounded-md text-[10px] transition-colors max-w-[140px] ${
-          isLG
-            ? 'bg-emerald-500/[0.06] text-emerald-400/60 hover:bg-emerald-500/[0.1]'
-            : 'bg-white/[0.04] text-white/40 hover:bg-white/[0.08]'
-        }`}
+        className={`flex items-center gap-1.5 px-2 py-1 rounded-md text-[10px] transition-colors max-w-[140px] ${isLG
+          ? 'bg-emerald-500/[0.06] text-emerald-400/60 hover:bg-emerald-500/[0.1]'
+          : 'bg-white/[0.04] text-white/40 hover:bg-white/[0.08]'
+          }`}
         title={t('left.switchSession', 'designer')}
       >
         <span className="truncate">{activeSession?.title || t('left.newSession', 'designer')}</span>
@@ -560,9 +564,8 @@ function SessionSelector() {
 
       {open && (
         <div
-          className={`absolute top-full left-0 mt-1 z-50 w-56 rounded-xl border py-1.5 ${
-            isLG ? 'border-emerald-500/[0.1]' : 'border-white/[0.08]'
-          }`}
+          className={`absolute top-full left-0 mt-1 z-50 w-56 rounded-xl border py-1.5 ${isLG ? 'border-emerald-500/[0.1]' : 'border-white/[0.08]'
+            }`}
           style={{
             background: isLG ? 'rgba(10,15,10,0.96)' : 'rgba(14,14,24,0.96)',
             backdropFilter: 'blur(16px)',
@@ -575,9 +578,8 @@ function SessionSelector() {
               createSession('default')
               setOpen(false)
             }}
-            className={`w-full flex items-center gap-2 px-3 py-2 text-[11px] transition-colors ${
-              isLG ? 'text-emerald-400/60 hover:bg-emerald-500/[0.06]' : 'text-violet-400/60 hover:bg-white/[0.04]'
-            }`}
+            className={`w-full flex items-center gap-2 px-3 py-2 text-[11px] transition-colors ${isLG ? 'text-emerald-400/60 hover:bg-emerald-500/[0.06]' : 'text-violet-400/60 hover:bg-white/[0.04]'
+              }`}
           >
             <MessageSquarePlus className="w-3.5 h-3.5" />
             {t('left.createSession', 'designer')}
@@ -592,11 +594,10 @@ function SessionSelector() {
             {allSessions.map(sess => (
               <div
                 key={sess.id}
-                className={`flex items-center gap-2 px-3 py-1.5 text-[10px] cursor-pointer transition-colors group ${
-                  sess.id === activeSessionId
-                    ? isLG ? 'bg-emerald-500/[0.06] text-emerald-400/70' : 'bg-white/[0.06] text-white/60'
-                    : 'text-white/35 hover:bg-white/[0.03] hover:text-white/50'
-                }`}
+                className={`flex items-center gap-2 px-3 py-1.5 text-[10px] cursor-pointer transition-colors group ${sess.id === activeSessionId
+                  ? isLG ? 'bg-emerald-500/[0.06] text-emerald-400/70' : 'bg-white/[0.06] text-white/60'
+                  : 'text-white/35 hover:bg-white/[0.03] hover:text-white/50'
+                  }`}
                 onClick={() => { setActiveSession(sess.id); setOpen(false) }}
               >
                 <span className="flex-1 truncate">{sess.title}</span>
@@ -690,7 +691,7 @@ export function LeftPanel() {
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
   const activeModel = aiModels.find(m => m.id === activeModelId) || null
-  const messages: SessionMessage[] = activeSessionId ? getSessionMessages(activeSessionId) : []
+  const messages: SessionMessage[] = useMemo(() => activeSessionId ? getSessionMessages(activeSessionId) : [], [activeSessionId, getSessionMessages])
 
   // Initialize: load from storage + create default session if none
   useEffect(() => {
@@ -700,9 +701,10 @@ export function LeftPanel() {
         state.createSession('default', 'YYC³ AI 会话')
       } else if (!state.activeSessionId) {
         const first = Object.keys(state.sessions)[0]
-        if (first) {state.setActiveSession(first)}
+        if (first) { state.setActiveSession(first) }
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Auto-resize textarea
@@ -722,10 +724,10 @@ export function LeftPanel() {
     if (messages.length > 0) {
       saveToStorage()
     }
-  }, [messagesContentHash])
+  }, [messagesContentHash, messages.length, saveToStorage])
 
   const triggerAIResponse = useCallback(async (chatHistory: { role: string; content: string }[]) => {
-    if (!activeSessionId) {return}
+    if (!activeSessionId) { return }
 
     startStreaming()
     setAiTyping(true)
@@ -763,7 +765,7 @@ export function LeftPanel() {
 
   const handleSend = useCallback(() => {
     const trimmed = input.trim()
-    if (!trimmed || isAiTyping) {return}
+    if (!trimmed || isAiTyping) { return }
 
     // Ensure we have an active session
     let sessId = activeSessionId
@@ -812,9 +814,9 @@ export function LeftPanel() {
   }
 
   const handleResend = (id: string) => {
-    if (!activeSessionId) {return}
+    if (!activeSessionId) { return }
     const msg = messages.find(m => m.id === id)
-    if (!msg) {return}
+    if (!msg) { return }
 
     // Delete this message and all after it
     const idx = messages.findIndex(m => m.id === id)
@@ -866,9 +868,8 @@ export function LeftPanel() {
       style={isLG ? panelSurfaceStyle : { background: 'var(--sidebar, #0d0d14)' }}
     >
       {/* Header */}
-      <div className={`h-9 flex items-center justify-between px-3 border-b shrink-0 ${
-        isLG ? 'border-emerald-500/[0.06]' : 'border-white/[0.04]'
-      }`}>
+      <div className={`h-9 flex items-center justify-between px-3 border-b shrink-0 ${isLG ? 'border-emerald-500/[0.06]' : 'border-white/[0.04]'
+        }`}>
         <div className="flex items-center gap-2">
           <img src={logoImage} alt="YYC³" className="w-4 h-4 rounded" />
           <span className="text-[11px] text-white/50">YYC³ AI</span>
@@ -877,13 +878,12 @@ export function LeftPanel() {
           <SessionSelector />
           <button
             onClick={openModelSettings}
-            className={`flex items-center gap-1 px-2 py-1 rounded-md text-[9px] transition-colors ${
-              activeModel
-                ? isLG
-                  ? 'bg-emerald-500/[0.08] text-emerald-400/60 hover:bg-emerald-500/[0.12]'
-                  : 'bg-white/[0.04] text-white/40 hover:bg-white/[0.08]'
-                : 'text-white/20 hover:text-white/40 hover:bg-white/[0.04]'
-            }`}
+            className={`flex items-center gap-1 px-2 py-1 rounded-md text-[9px] transition-colors ${activeModel
+              ? isLG
+                ? 'bg-emerald-500/[0.08] text-emerald-400/60 hover:bg-emerald-500/[0.12]'
+                : 'bg-white/[0.04] text-white/40 hover:bg-white/[0.08]'
+              : 'text-white/20 hover:text-white/40 hover:bg-white/[0.04]'
+              }`}
             title={t('left.modelSettings', 'designer')}
           >
             <Settings2 className="w-3 h-3" />
@@ -896,9 +896,8 @@ export function LeftPanel() {
       {messages.length === 0 ? (
         <div className="flex-1 flex items-center justify-center p-8">
           <div className="text-center">
-            <div className={`w-12 h-12 mx-auto mb-3 rounded-2xl flex items-center justify-center ${
-              isLG ? 'bg-emerald-500/10' : 'bg-violet-500/10'
-            }`}>
+            <div className={`w-12 h-12 mx-auto mb-3 rounded-2xl flex items-center justify-center ${isLG ? 'bg-emerald-500/10' : 'bg-violet-500/10'
+              }`}>
               <img src={logoImage} alt="YYC³" className="w-6 h-6 rounded-lg" />
             </div>
             <p className="text-[12px] text-white/40 mb-1">YYC³ Family AI</p>
@@ -932,9 +931,8 @@ export function LeftPanel() {
       )}
 
       {/* Input Area */}
-      <div className={`border-t px-3 py-2 shrink-0 ${
-        isLG ? 'border-emerald-500/[0.06]' : 'border-white/[0.04]'
-      }`}>
+      <div className={`border-t px-3 py-2 shrink-0 ${isLG ? 'border-emerald-500/[0.06]' : 'border-white/[0.04]'
+        }`}>
         {/* Editing indicator */}
         {editingMessageId && (
           <div className="flex items-center gap-2 mb-2 px-2 py-1 rounded-md bg-amber-500/10 border border-amber-500/20">
@@ -946,9 +944,8 @@ export function LeftPanel() {
           </div>
         )}
 
-        <div className={`flex items-end gap-2 rounded-xl border px-3 py-2 ${
-          isLG ? 'border-emerald-500/[0.1] bg-emerald-500/[0.03]' : 'border-white/[0.06] bg-white/[0.02]'
-        }`}>
+        <div className={`flex items-end gap-2 rounded-xl border px-3 py-2 ${isLG ? 'border-emerald-500/[0.1] bg-emerald-500/[0.03]' : 'border-white/[0.06] bg-white/[0.02]'
+          }`}>
           {/* Attachment buttons */}
           <div className="flex items-center gap-0.5 pb-0.5">
             <button className="p-1 rounded text-white/20 hover:text-white/50 hover:bg-white/[0.06] transition-colors" title={t('left.attachFile', 'designer')}>
@@ -970,9 +967,8 @@ export function LeftPanel() {
             onKeyDown={handleKeyDown}
             placeholder={t('left.inputPlaceholder', 'designer')}
             rows={1}
-            className={`flex-1 bg-transparent text-[12px] text-white/70 placeholder:text-white/20 outline-none resize-none leading-relaxed max-h-[120px] ${
-              isLG ? 'caret-emerald-400' : ''
-            }`}
+            className={`flex-1 bg-transparent text-[12px] text-white/70 placeholder:text-white/20 outline-none resize-none leading-relaxed max-h-[120px] ${isLG ? 'caret-emerald-400' : ''
+              }`}
           />
 
           {/* Send / Stop */}
@@ -988,13 +984,12 @@ export function LeftPanel() {
             <button
               onClick={handleSend}
               disabled={!input.trim()}
-              className={`p-1.5 rounded-lg transition-colors shrink-0 ${
-                input.trim()
-                  ? isLG
-                    ? 'bg-emerald-500/20 text-emerald-400/80 hover:bg-emerald-500/30'
-                    : 'bg-violet-500/20 text-violet-400/80 hover:bg-violet-500/30'
-                  : 'bg-white/[0.04] text-white/15'
-              }`}
+              className={`p-1.5 rounded-lg transition-colors shrink-0 ${input.trim()
+                ? isLG
+                  ? 'bg-emerald-500/20 text-emerald-400/80 hover:bg-emerald-500/30'
+                  : 'bg-violet-500/20 text-violet-400/80 hover:bg-violet-500/30'
+                : 'bg-white/[0.04] text-white/15'
+                }`}
               title={t('left.send', 'designer')}
             >
               <Send className="w-3.5 h-3.5" />

@@ -506,6 +506,7 @@ export function PreviewPanel() {
       updatePerf({ compileTime: performance.now() - t0 })
       setSrcdoc(null)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveCode, fileLanguage, refreshKey, inspectorEnabled, showMock, scrollSyncEnabled])
 
   // Record history on meaningful code changes

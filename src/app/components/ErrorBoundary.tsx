@@ -313,6 +313,8 @@ interface ErrorBoundaryProps {
   onRecovery?: () => void;
   /** 组件名称（用于日志） */
   name?: string;
+  /** 面板名称（用于标识不同面板） */
+  panelName?: string;
 }
 
 interface ErrorBoundaryState {

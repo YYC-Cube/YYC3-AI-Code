@@ -8,7 +8,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/tests/setup.ts'],
-    include: ['src/**/*.test.{ts,tsx}'],
+    include: ['src/**/*.test.{ts,tsx}', 'tests/**/*.test.{ts,tsx}'],
     maxConcurrency: 4,
     cache: {
       dir: 'cacheDir/vitest',
@@ -16,23 +16,21 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
-      ignoreEmptyLines: true,
-      all: true, // 统计所有文件
       include: [
         'src/app/**/*.{ts,tsx}',
-        'src/components/**/*.{ts,tsx}', // 如果有这个目录
+        'src/components/**/*.{ts,tsx}',
       ],
       exclude: [
         '**/*.test.*',
         '**/*.spec.*',
         '**/node_modules/**',
         '**/dist/**',
-        '**/tests/**', // 排除测试文件本身
+        '**/tests/**',
         '**/*.config.*',
         '**/coverage/**',
-        '**/cacheDir/**', // 排除缓存
-        '**/stories/**', // 排除 Storybook stories
-        '**/*.mock.*', // 排除 mock 文件
+        '**/cacheDir/**',
+        '**/stories/**',
+        '**/*.mock.*',
       ],
       thresholds: {
         statements: 10,

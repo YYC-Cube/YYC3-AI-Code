@@ -211,6 +211,7 @@ export function DesignerPage() {
 
   useEffect(() => {
     log.info('DesignerPage mounted', { view: currentView, theme: currentTheme.name })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

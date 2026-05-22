@@ -1467,7 +1467,7 @@ export function ModelSettings() {
     // Show toast
     setSelectionToast(model.name);
     setTimeout(() => setSelectionToast(null), 2500);
-  }, [allProviders, customUrls, apiKeys, aiModels, activateAIModel, addAIModel]);
+  }, [allProviders, customUrls, apiKeys, aiModels, activateAIModel, addAIModel, updateAIModel]);
 
   // Compute the "active model key" (providerId:modelId) from the current activeModelId in store
   const activeModelKey = useMemo(() => {

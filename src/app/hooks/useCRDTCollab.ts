@@ -885,8 +885,8 @@ export function useCRDTCollab(config: CRDTCollabConfig) {
   }, [roomName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ─── Derived ─── */
-  const canUndo = useMemo(() => (undoManagerRef.current?.undoStack.length ?? 0) > 0, [stats.undoStackSize]);
-  const canRedo = useMemo(() => (undoManagerRef.current?.redoStack.length ?? 0) > 0, [stats.redoStackSize]);
+  const canUndo = useMemo(() => (undoManagerRef.current?.undoStack.length ?? 0) > 0, [stats]); // eslint-disable-line react-hooks/exhaustive-deps
+  const canRedo = useMemo(() => (undoManagerRef.current?.redoStack.length ?? 0) > 0, [stats]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
     // State

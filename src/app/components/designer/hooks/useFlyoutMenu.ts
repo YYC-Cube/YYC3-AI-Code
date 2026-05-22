@@ -316,7 +316,7 @@ export function useFlyoutKeyboard<T extends FlyoutItemBase>({
       }
     }, 100);
     return () => clearTimeout(timer);
-  }, [searchable]);
+  }, [searchable, filteredItems.length]);
 
   const setItemRef = (index: number) => (el: HTMLButtonElement | null) => {
     itemRefs.current[index] = el;

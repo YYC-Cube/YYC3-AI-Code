@@ -532,6 +532,7 @@ export function DesignerProvider({ children }: { children: ReactNode }) {
       activeNavSection, secondaryNavOpen, activeNavSubItem,
       uiTheme, currentUserIdentity,
     } as DesignerState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectName, panels, components, theme, aiModels, activeModelId, dataBindings, snapEnabled]);
   
   /* ---- State Self-Healing: auto-detect & fix invalid state ---- */

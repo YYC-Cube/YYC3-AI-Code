@@ -1,70 +1,56 @@
 /**
  * @file routes.tsx
- * @description YYC3 应用路由配置 — 首页 / Designer / AI Code / AI Generator 四大入口
+ * @description YYC3 应用路由配置 — 首页 / Designer / AI Code / AI Generator 四大入口（全部路由级 lazy loading）
  * @author YanYuCloudCube Team <admin@0379.email>
- * @version v1.2.0
+ * @version v1.3.0
  * @created 2026-03-08
  * @updated 2026-03-19
  * @status dev
  * @license MIT
  * @copyright Copyright (c) 2026 YanYuCloudCube Team
- * @tags router,routes,navigation,app,error-boundary
+ * @tags router,routes,navigation,app,error-boundary,lazy-loading
  */
 
-import { createBrowserRouter } from 'react-router';
-import { AIHomePage } from './components/home/AIHomePage';
-import { AICodeSystem } from './components/ai-code/AICodeSystem';
-import { CodeGeneratorPanel } from './components/ai-code/CodeGeneratorPanel'; // 新增
-import { ErrorBoundary } from './components/ErrorBoundary';
-
-// Lazy-load the designer since it's large
-import { DndProvider } from 'react-dnd';
+import { lazy, Suspense } from 'react';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { DesignerProvider } from './store';
-import { DesignerLayout } from './components/designer/DesignerLayout';
-import { SettingsPage } from './components/settings/SettingsPage';
+import { createBrowserRouter } from 'react-router';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { LoadingPage } from './components/LoadingPage';
 
-function DesignerPage() {
-  return (
-    <ErrorBoundary level="route" name="Designer" autoRecoveryMs={3000} maxAutoRecovery={3}>
-      <DesignerProvider>
-        <DndProvider backend={HTML5Backend}>
-          <DesignerLayout />
-        </DndProvider>
-      </DesignerProvider>
-    </ErrorBoundary>
-  );
-}
+const AIHomePage = lazy(() =>
+  import('./components/home/AIHomePage').then(m => ({ default: m.AIHomePage }))
+);
 
-function AICodePage() {
-  return (
-    <ErrorBoundary level="route" name="AI-Code-Workbench" autoRecoveryMs={3000} maxAutoRecovery={3}>
-      <AICodeSystem />
-    </ErrorBoundary>
-  );
-}
+const AICodeSystem = lazy(() =>
+  import('./components/ai-code/AICodeSystem').then(m => ({ default: m.AICodeSystem }))
+);
 
-function HomePage() {
-  return (
-    <ErrorBoundary level="route" name="Home" autoRecoveryMs={2000} maxAutoRecovery={5}>
-      <AIHomePage />
-    </ErrorBoundary>
-  );
-}
+const CodeGeneratorPanel = lazy(() =>
+  import('./components/ai-code/CodeGeneratorPanel').then(m => ({ default: m.CodeGeneratorPanel }))
+);
 
-function SettingsPageWrapper() {
-  return (
-    <ErrorBoundary level="route" name="Settings" autoRecoveryMs={2000} maxAutoRecovery={3}>
-      <SettingsPage />
-    </ErrorBoundary>
-  );
-}
+const DesignerLayout = lazy(() =>
+  import('./components/designer/DesignerLayout').then(m => ({ default: m.DesignerLayout }))
+);
 
-// 新增 AI Code Generator Page
-function AICodeGeneratorPage() {
+const SettingsPage = lazy(() =>
+  import('./components/settings/SettingsPage').then(m => ({ default: m.SettingsPage }))
+);
+
+const DndProvider = lazy(() =>
+  import('react-dnd').then(m => ({ default: m.DndProvider }))
+);
+
+const DesignerProvider = lazy(() =>
+  import('./store').then(m => ({ default: m.DesignerProvider }))
+);
+
+function withSuspense(name: string, autoRecoveryMs: number, maxAutoRecovery: number, element: React.ReactNode) {
   return (
-    <ErrorBoundary level="route" name="AI-Generator" autoRecoveryMs={3000} maxAutoRecovery={3}>
-      <CodeGeneratorPanel />
+    <ErrorBoundary level="route" name={name} autoRecoveryMs={autoRecoveryMs} maxAutoRecovery={maxAutoRecovery}>
+      <Suspense fallback={<LoadingPage message={`加载 ${name}...`} />}>
+        {element}
+      </Suspense>
     </ErrorBoundary>
   );
 }
@@ -72,23 +58,29 @@ function AICodeGeneratorPage() {
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
+    element: withSuspense('Home', 2000, 5, <AIHomePage />),
     errorElement: <ErrorBoundary level="route">{null}</ErrorBoundary>,
   },
   {
     path: '/designer',
-    element: <DesignerPage />,
+    element: withSuspense('Designer', 3000, 3,
+      <DesignerProvider>
+        <DndProvider backend={HTML5Backend}>
+          <DesignerLayout />
+        </DndProvider>
+      </DesignerProvider>
+    ),
   },
   {
     path: '/ai-code',
-    element: <AICodePage />,
+    element: withSuspense('AI-Code-Workbench', 3000, 3, <AICodeSystem />),
   },
   {
-    path: '/ai-generator', // 新增路由
-    element: <AICodeGeneratorPage />,
+    path: '/ai-generator',
+    element: withSuspense('AI-Generator', 3000, 3, <CodeGeneratorPanel />),
   },
   {
     path: '/settings',
-    element: <SettingsPageWrapper />,
+    element: withSuspense('Settings', 2000, 3, <SettingsPage />),
   },
 ]);

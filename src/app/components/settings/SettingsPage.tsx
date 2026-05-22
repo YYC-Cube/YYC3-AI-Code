@@ -379,9 +379,8 @@ function KeybindingsEditor({
   const [recordingKey, setRecordingKey] = useState<string | null>(null);
 
   // Merge custom onto defaults
-  const resolved = { ...VSCODE_KEYBINDINGS, ...customKeybindings };
+  const resolved = useMemo(() => ({ ...VSCODE_KEYBINDINGS, ...customKeybindings }), [customKeybindings]);
 
-  // Conflict detection: find duplicate shortcuts
   const conflicts = useMemo(() => {
     const byShortcut: Record<string, string[]> = {};
     for (const [action, shortcut] of Object.entries(resolved)) {

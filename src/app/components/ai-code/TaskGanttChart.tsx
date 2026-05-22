@@ -139,9 +139,12 @@ export function TaskGanttChart({ tasks, onOpenDetail }: TaskGanttChartProps) {
   const rangeStart = addDays(today, viewOffset - Math.floor(visibleDays / 3));
   const rangeEnd = addDays(rangeStart, visibleDays);
 
+  const rangeStartMs = rangeStart.getTime();
+  const rangeEndMs = rangeEnd.getTime();
   const allDays = useMemo(() => {
     return eachDayOfInterval({ start: rangeStart, end: rangeEnd });
-  }, [rangeStart.getTime(), rangeEnd.getTime()]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rangeStartMs, rangeEndMs]);
 
   // Group days by month for header
   const monthGroups = useMemo(() => {

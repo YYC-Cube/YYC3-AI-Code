@@ -25,7 +25,7 @@ export function HeartbeatManager() {
       log.info('HeartbeatManager unmounting — stopping heartbeat monitor')
       stopHeartbeat()
     }
-  }, [])
+  }, [startHeartbeat, stopHeartbeat])
 
   return null
 }

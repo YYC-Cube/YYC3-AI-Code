@@ -137,6 +137,7 @@ export function usePerformanceMonitor(enabled: boolean = true) {
       observer.disconnect()
       setIsMonitoring(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enabled])
 
   // Check performance against thresholds

@@ -12,27 +12,57 @@
  * @tags task-board, kanban, react-dnd, ai-inference, detail-panel
  */
 
-import { useState, useMemo, useCallback, useRef, useEffect } from 'react'
 import {
-  Plus, X, Check, Trash2, Archive, Copy, ChevronDown, ChevronRight,
-  AlertTriangle, Clock, Tag, FileCode2, Sparkles, Loader2,
-  ArrowUpDown, Filter, Search, LayoutGrid, List, GripVertical,
-  CircleDot, CircleCheck, CirclePause, CircleX, CirclePlay,
-  Flag, Bug, Wrench, TestTube2, FileText, MoreHorizontal,
-  Calendar, Timer, Brain, CheckSquare, Square, Bell,
-  PanelRightClose, Edit3, Save, XCircle, CalendarClock,
-  Link2, Unlink,
+  AlertTriangle,
+  Archive,
+  ArrowUpDown,
+  Bell,
+  Brain,
+  Bug,
+  Calendar,
+  CalendarClock,
+  Check,
+  CheckSquare,
+  CircleCheck,
+  CircleDot,
+  CirclePause,
+  CirclePlay,
+  CircleX,
+  Copy,
+  Edit3,
+  FileCode2,
+  FileText,
+  Flag,
+  GripVertical,
+  LayoutGrid,
+  Link2,
+  List,
+  Loader2,
+  MoreHorizontal,
+  PanelRightClose,
+  Plus,
+  Save,
+  Search,
+  Square,
+  Tag,
+  TestTube2,
+  Timer,
+  Trash2,
+  Unlink,
+  Wrench,
+  X
 } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { DndProvider, useDrag, useDrop } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { motion, AnimatePresence } from 'motion/react'
-import { useTaskStore } from '../../stores/task-store'
-import type { Task, TaskStatus, TaskPriority, TaskType, TaskInference, WipLimits } from '../../stores/task-store'
+import { Virtuoso } from 'react-virtuoso'
+import { toast } from 'sonner'
 import { useAIServiceStore } from '../../stores/ai-service-store'
+import type { Task, TaskInference, TaskPriority, TaskStatus, TaskType } from '../../stores/task-store'
+import { useTaskStore } from '../../stores/task-store'
 import { useLiquidGlass } from '../../utils/liquid-glass'
 import { useI18n } from '../../utils/useI18n'
-import { toast } from 'sonner'
-import { Virtuoso } from 'react-virtuoso'
 import { GanttView } from './GanttView'
 
 // ============================================
@@ -58,27 +88,27 @@ interface DragItem { id: string; status: TaskStatus }
 // ============================================
 
 const STATUS_CONFIG: Record<TaskStatus, { label: string; icon: typeof CircleDot; color: string; bg: string }> = {
-  'todo':        { label: '待办',   icon: CircleDot,    color: 'text-blue-400/60',    bg: 'bg-blue-500/[0.06] border-blue-500/10' },
-  'in-progress': { label: '进行中', icon: CirclePlay,   color: 'text-amber-400/60',   bg: 'bg-amber-500/[0.06] border-amber-500/10' },
-  'review':      { label: '审查',   icon: CirclePause,  color: 'text-purple-400/60',  bg: 'bg-purple-500/[0.06] border-purple-500/10' },
-  'done':        { label: '完成',   icon: CircleCheck,  color: 'text-emerald-400/60',  bg: 'bg-emerald-500/[0.06] border-emerald-500/10' },
-  'blocked':     { label: '阻塞',   icon: CircleX,      color: 'text-red-400/60',     bg: 'bg-red-500/[0.06] border-red-500/10' },
+  'todo': { label: '待办', icon: CircleDot, color: 'text-blue-400/60', bg: 'bg-blue-500/[0.06] border-blue-500/10' },
+  'in-progress': { label: '进行中', icon: CirclePlay, color: 'text-amber-400/60', bg: 'bg-amber-500/[0.06] border-amber-500/10' },
+  'review': { label: '审查', icon: CirclePause, color: 'text-purple-400/60', bg: 'bg-purple-500/[0.06] border-purple-500/10' },
+  'done': { label: '完成', icon: CircleCheck, color: 'text-emerald-400/60', bg: 'bg-emerald-500/[0.06] border-emerald-500/10' },
+  'blocked': { label: '阻塞', icon: CircleX, color: 'text-red-400/60', bg: 'bg-red-500/[0.06] border-red-500/10' },
 }
 
 const PRIORITY_CONFIG: Record<TaskPriority, { label: string; color: string; dot: string }> = {
   critical: { label: '紧急', color: 'text-red-400', dot: 'bg-red-500' },
-  high:     { label: '高',   color: 'text-orange-400', dot: 'bg-orange-500' },
-  medium:   { label: '中',   color: 'text-yellow-400', dot: 'bg-yellow-500' },
-  low:      { label: '低',   color: 'text-green-400', dot: 'bg-green-500' },
+  high: { label: '高', color: 'text-orange-400', dot: 'bg-orange-500' },
+  medium: { label: '中', color: 'text-yellow-400', dot: 'bg-yellow-500' },
+  low: { label: '低', color: 'text-green-400', dot: 'bg-green-500' },
 }
 
 const TYPE_CONFIG: Record<TaskType, { label: string; icon: typeof Flag }> = {
-  feature:       { label: '功能', icon: Flag },
-  bug:           { label: 'Bug',  icon: Bug },
-  refactor:      { label: '重构', icon: Wrench },
-  test:          { label: '测试', icon: TestTube2 },
+  feature: { label: '功能', icon: Flag },
+  bug: { label: 'Bug', icon: Bug },
+  refactor: { label: '重构', icon: Wrench },
+  test: { label: '测试', icon: TestTube2 },
   documentation: { label: '文档', icon: FileText },
-  other:         { label: '其他', icon: MoreHorizontal },
+  other: { label: '其他', icon: MoreHorizontal },
 }
 
 const STATUSES: TaskStatus[] = ['todo', 'in-progress', 'review', 'done', 'blocked']
@@ -107,15 +137,14 @@ export function TaskBoardPanel({ standalone }: { standalone?: boolean }) {
     getStats, inferring, detailTaskId,
   } = useTaskStore()
 
-  const stats = useMemo(() => getStats(), [useTaskStore(s => s.tasks)])
+  const stats = useMemo(() => getStats(), [getStats])
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="h-full flex flex-col overflow-hidden relative">
         {/* Header toolbar */}
-        <div className={`flex items-center justify-between gap-2 px-3 py-1.5 border-b shrink-0 ${
-          isLG ? 'border-emerald-500/[0.06]' : 'border-white/[0.04]'
-        }`}>
+        <div className={`flex items-center justify-between gap-2 px-3 py-1.5 border-b shrink-0 ${isLG ? 'border-emerald-500/[0.06]' : 'border-white/[0.04]'
+          }`}>
           <div className="flex items-center gap-2">
             <span className="text-[10px] text-white/25">{stats.total} {t('taskBoard.tasks', 'designer')}</span>
             {stats.overdue > 0 && (
@@ -131,9 +160,8 @@ export function TaskBoardPanel({ standalone }: { standalone?: boolean }) {
             <AIInferButton />
             <button
               onClick={() => setAddFormOpen(true)}
-              className={`flex items-center gap-1 px-2 py-1 rounded-md text-[10px] transition-colors ${
-                isLG ? 'text-emerald-400/60 hover:bg-emerald-500/[0.06]' : 'text-violet-400/60 hover:bg-violet-500/[0.06]'
-              }`}
+              className={`flex items-center gap-1 px-2 py-1 rounded-md text-[10px] transition-colors ${isLG ? 'text-emerald-400/60 hover:bg-emerald-500/[0.06]' : 'text-violet-400/60 hover:bg-violet-500/[0.06]'
+                }`}
             >
               <Plus className="w-3 h-3" /> {t('taskBoard.addTask', 'designer')}
             </button>
@@ -205,7 +233,7 @@ function FilterBar() {
           onChange={e => setFilter({ searchQuery: e.target.value || undefined })}
           placeholder="搜索..."
           className="w-28 px-2 py-0.5 rounded bg-white/[0.03] border border-white/[0.04] text-[10px] text-white/50 placeholder:text-white/15 outline-none"
-          onBlur={() => { if (!filter.searchQuery) {setSearchOpen(false)} }}
+          onBlur={() => { if (!filter.searchQuery) { setSearchOpen(false) } }}
         />
       )}
       <select value={filter.status || ''} onChange={e => setFilter({ status: (e.target.value || undefined) as any })} className="bg-transparent text-[9px] text-white/25 outline-none cursor-pointer">
@@ -280,7 +308,7 @@ function AIInferButton() {
   const [inferences, setInferences] = useState<TaskInference[]>([])
 
   const handleInfer = async () => {
-    if (!inferText.trim()) {return}
+    if (!inferText.trim()) { return }
     const results = await inferTasksFromText(inferText)
     setInferences(results)
   }
@@ -366,7 +394,7 @@ function AIInferButton() {
 function ProviderBadge() {
   const provider = useAIServiceStore(s => s.getActiveProvider())
   const model = useAIServiceStore(s => s.getActiveModel())
-  if (!provider) {return null}
+  if (!provider) { return null }
   return (
     <span className="text-[8px] px-1.5 py-0.5 rounded bg-white/[0.03] text-white/20">
       {provider.displayName} / {model?.displayName || '—'}
@@ -387,7 +415,7 @@ function AddTaskForm({ onClose }: { onClose: () => void }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!title.trim()) {return}
+    if (!title.trim()) { return }
     addTask({ title: title.trim(), status: 'todo', priority, type, sortIndex: 0, source: 'manual' as any })
     toast.success('任务已创建')
     onClose()
@@ -503,13 +531,13 @@ function DndTaskCard({ task }: { task: Task }) {
     canDrop: (item) => item.id !== task.id,
     hover: (item, monitor) => {
       // RAF throttle: skip if a frame is already pending
-      if (rafRef.current) {return}
+      if (rafRef.current) { return }
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = null
-        if (!cardRef.current || item.id === task.id) {return}
+        if (!cardRef.current || item.id === task.id) { return }
         const hoverRect = cardRef.current.getBoundingClientRect()
         const clientOffset = monitor.getClientOffset()
-        if (!clientOffset) {return}
+        if (!clientOffset) { return }
         const hoverMiddleY = (hoverRect.bottom - hoverRect.top) / 2
         const hoverClientY = clientOffset.y - hoverRect.top
         // Only trigger reorder when cursor passes the midpoint
@@ -521,11 +549,11 @@ function DndTaskCard({ task }: { task: Task }) {
       })
     },
     drop: (item, monitor) => {
-      if (item.id === task.id) {return}
-      if (!cardRef.current) {return}
+      if (item.id === task.id) { return }
+      if (!cardRef.current) { return }
       const hoverRect = cardRef.current.getBoundingClientRect()
       const clientOffset = monitor.getClientOffset()
-      if (!clientOffset) {return}
+      if (!clientOffset) { return }
       const hoverMiddleY = (hoverRect.bottom - hoverRect.top) / 2
       const hoverClientY = clientOffset.y - hoverRect.top
       const position = hoverClientY < hoverMiddleY ? 'before' : 'after'
@@ -537,7 +565,7 @@ function DndTaskCard({ task }: { task: Task }) {
       }
       // Determine position for visual indicator
       const clientOffset = monitor.getClientOffset()
-      if (!clientOffset || !cardRef.current) {return { isOverCard: true, dropPosition: null }}
+      if (!clientOffset || !cardRef.current) { return { isOverCard: true, dropPosition: null } }
       const hoverRect = cardRef.current.getBoundingClientRect()
       const hoverMiddleY = (hoverRect.bottom - hoverRect.top) / 2
       const hoverClientY = clientOffset.y - hoverRect.top
@@ -568,11 +596,10 @@ function DndTaskCard({ task }: { task: Task }) {
     <div
       ref={combinedRef}
       onClick={() => setDetailTask(task.id)}
-      className={`relative p-2 rounded-lg border cursor-pointer transition-all group ${
-        isDragging ? 'opacity-30 scale-95' :
-        isSelected ? (isLG ? 'border-emerald-500/20 bg-emerald-500/[0.04]' : 'border-violet-500/20 bg-violet-500/[0.04]')
-          : 'border-white/[0.03] bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/[0.06]'
-      }`}
+      className={`relative p-2 rounded-lg border cursor-pointer transition-all group ${isDragging ? 'opacity-30 scale-95' :
+          isSelected ? (isLG ? 'border-emerald-500/20 bg-emerald-500/[0.04]' : 'border-violet-500/20 bg-violet-500/[0.04]')
+            : 'border-white/[0.03] bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/[0.06]'
+        }`}
     >
       {/* Drop position indicator */}
       {isOverCard && dropPosition === 'top' && (
@@ -664,7 +691,7 @@ function ListView() {
   const tasks = getFilteredTasks()
   const { selectedTaskIds, toggleSelectTask, setDetailTask } = useTaskStore()
 
-  if (tasks.length === 0) {return <div className="text-center text-[11px] text-white/15 py-8">无任务</div>}
+  if (tasks.length === 0) { return <div className="text-center text-[11px] text-white/15 py-8">无任务</div> }
 
   const renderRow = (task: Task) => {
     const isSelected = selectedTaskIds.includes(task.id)
@@ -732,9 +759,9 @@ function TaskDetailPanel() {
       setEditTitle(false)
       setEditDesc(false)
     }
-  }, [detailTaskId])
+  }, [detailTaskId, task])
 
-  if (!task) {return null}
+  if (!task) { return null }
 
   const completedSubs = task.subtasks?.filter(st => st.isCompleted).length || 0
   const totalSubs = task.subtasks?.length || 0
@@ -743,7 +770,7 @@ function TaskDetailPanel() {
   const TypeIcon = TYPE_CONFIG[task.type].icon
 
   const saveTitle = () => {
-    if (titleDraft.trim() && titleDraft !== task.title) {updateTask(task.id, { title: titleDraft.trim() })}
+    if (titleDraft.trim() && titleDraft !== task.title) { updateTask(task.id, { title: titleDraft.trim() }) }
     setEditTitle(false)
   }
   const saveDesc = () => {
@@ -751,12 +778,12 @@ function TaskDetailPanel() {
     setEditDesc(false)
   }
   const handleAddSubtask = () => {
-    if (!newSubtask.trim()) {return}
+    if (!newSubtask.trim()) { return }
     addSubtask(task.id, newSubtask.trim())
     setNewSubtask('')
   }
   const handleAddTag = () => {
-    if (!newTag.trim()) {return}
+    if (!newTag.trim()) { return }
     const tags = [...(task.tags || []), newTag.trim()]
     updateTask(task.id, { tags })
     setNewTag('')
@@ -769,7 +796,7 @@ function TaskDetailPanel() {
     updateTask(task.id, { dueDate: new Date(dateStr).getTime() })
   }
   const handleAddDeadlineReminder = () => {
-    if (!task.dueDate) {return}
+    if (!task.dueDate) { return }
     addReminder({
       taskId: task.id,
       type: 'deadline',

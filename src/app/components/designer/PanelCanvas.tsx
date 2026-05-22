@@ -11,19 +11,46 @@
  * @tags designer,panel,canvas,drag-drop,merge,split,crdt,preview
  */
 
-import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
-import { useDrop } from 'react-dnd';
 import {
-  GripHorizontal, X, Maximize2, Copy,
-  Table, ChartBar, TrendingUp, TextCursorInput, RectangleHorizontal,
-  Play, FileText, Code, List, Square, ChevronDown, Sparkles,
-  Plus, Columns, Rows, Eye, LayoutGrid, FileCode2, FormInput, Layers,
-  Merge, ArrowUpDown, Scissors, ArrowLeft, Magnet, Move,
-  Group, Lock, Unlock
+  ArrowLeft,
+  ArrowUpDown,
+  ChartBar,
+  ChevronDown,
+  Code,
+  Columns,
+  Copy,
+  Eye,
+  FileCode2,
+  FileText,
+  FormInput,
+  GripHorizontal,
+  Group,
+  Layers,
+  LayoutGrid,
+  List,
+  Lock,
+  Magnet,
+  Maximize2,
+  Merge,
+  Move,
+  Play,
+  Plus,
+  RectangleHorizontal,
+  Rows,
+  Scissors,
+  Sparkles,
+  Square,
+  Table,
+  TextCursorInput,
+  TrendingUp,
+  Unlock,
+  X
 } from 'lucide-react';
-import { useDesigner, type Panel as PanelType, type ComponentInstance } from '../../store';
-import { useThemeTokens } from './hooks/useThemeTokens';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useDrop } from 'react-dnd';
+import { useDesigner, type ComponentInstance, type Panel as PanelType } from '../../store';
 import { useLayoutConstraints } from './hooks/useLayoutConstraints';
+import { useThemeTokens } from './hooks/useThemeTokens';
 
 /* ================================================================
    Accent color helper — extract raw CSS accent color from theme tokens
@@ -45,18 +72,18 @@ function useAccentColors(t: ReturnType<typeof useThemeTokens>) {
     selectedShadow: isAurora
       ? '0 0 0 1px rgba(0,255,135,0.1), 0 8px 32px -8px rgba(0,0,0,0.5), 0 0 60px -20px rgba(0,255,135,0.12), inset 0 1px 0 rgba(255,255,255,0.04)'
       : isLiquid
-      ? '0 0 0 1px rgba(139,92,246,0.1), 0 8px 32px -8px rgba(0,0,0,0.5), 0 0 60px -20px rgba(139,92,246,0.12), inset 0 1px 0 rgba(255,255,255,0.04)'
-      : '0 0 0 1px rgba(99,102,241,0.1), 0 8px 32px -8px rgba(0,0,0,0.5), 0 0 60px -20px rgba(99,102,241,0.12), inset 0 1px 0 rgba(255,255,255,0.04)',
+        ? '0 0 0 1px rgba(139,92,246,0.1), 0 8px 32px -8px rgba(0,0,0,0.5), 0 0 60px -20px rgba(139,92,246,0.12), inset 0 1px 0 rgba(255,255,255,0.04)'
+        : '0 0 0 1px rgba(99,102,241,0.1), 0 8px 32px -8px rgba(0,0,0,0.5), 0 0 60px -20px rgba(99,102,241,0.12), inset 0 1px 0 rgba(255,255,255,0.04)',
     multiSelectShadow: isAurora
       ? '0 8px 40px -8px rgba(0,0,0,0.5), 0 0 60px -20px rgba(0,255,135,0.15)'
       : isLiquid
-      ? '0 8px 40px -8px rgba(0,0,0,0.5), 0 0 60px -20px rgba(139,92,246,0.15)'
-      : '0 8px 40px -8px rgba(0,0,0,0.5), 0 0 60px -20px rgba(34,211,238,0.15)',
+        ? '0 8px 40px -8px rgba(0,0,0,0.5), 0 0 60px -20px rgba(139,92,246,0.15)'
+        : '0 8px 40px -8px rgba(0,0,0,0.5), 0 0 60px -20px rgba(34,211,238,0.15)',
     subCanvasShadow: isAurora
       ? '0 0 0 1px rgba(0,255,135,0.08), 0 16px 60px -12px rgba(0,0,0,0.5), 0 0 120px -40px rgba(0,255,135,0.1)'
       : isLiquid
-      ? '0 0 0 1px rgba(139,92,246,0.08), 0 16px 60px -12px rgba(0,0,0,0.5), 0 0 120px -40px rgba(139,92,246,0.1)'
-      : '0 0 0 1px rgba(99,102,241,0.08), 0 16px 60px -12px rgba(0,0,0,0.5), 0 0 120px -40px rgba(99,102,241,0.1)',
+        ? '0 0 0 1px rgba(139,92,246,0.08), 0 16px 60px -12px rgba(0,0,0,0.5), 0 0 120px -40px rgba(139,92,246,0.1)'
+        : '0 0 0 1px rgba(99,102,241,0.08), 0 16px 60px -12px rgba(0,0,0,0.5), 0 0 120px -40px rgba(99,102,241,0.1)',
   };
 }
 
@@ -267,17 +294,17 @@ function MockChart({ type, title }: { type: string; title?: string }) {
 function MockTable({ columns }: { columns: string[] }) {
   const t = useThemeTokens();
   const ac = useAccentColors(t);
-  const rows = [
+  const rows = useMemo(() => [
     ['张三', 'zhang@mail.com', '管理', '活跃', '2025-01-15'],
     ['李四', 'li@mail.com', '编辑', '活跃', '2025-02-20'],
     ['王五', 'wang@mail.com', '浏览', '离线', '2025-03-01'],
     ['赵六', 'zhao@mail.com', '编辑', '活跃', '2025-03-05'],
-  ];
+  ], []);
 
-  const defaultWidthMap: Record<string, number> = {
+  const defaultWidthMap: Record<string, number> = useMemo(() => ({
     '姓名': 70, '邮箱': 160, '角色': 60, '状态': 60, '注册时间': 100,
     'Name': 80, 'Email': 160, 'Role': 70,
-  };
+  }), []);
 
   const [colOrder, setColOrder] = useState<string[]>(columns);
   const [colWidths, setColWidths] = useState<Record<string, number>>(() => {
@@ -300,7 +327,7 @@ function MockTable({ columns }: { columns: string[] }) {
       columns.forEach(c => { if (!next[c]) next[c] = defaultWidthMap[c] || 100; });
       return next;
     });
-  }, [columns]);
+  }, [columns, defaultWidthMap]);
 
   const handleDragStart = useCallback((col: string) => setDragCol(col), []);
   const handleDragOverCol = useCallback((e: React.DragEvent, col: string) => {
@@ -343,7 +370,7 @@ function MockTable({ columns }: { columns: string[] }) {
     document.addEventListener('mouseup', onUp);
   }, [colWidths]);
 
-  const getColIndex = (col: string) => columns.indexOf(col);
+  const getColIndex = useCallback((col: string) => columns.indexOf(col), [columns]);
 
   // Sort handler
   const handleSort = useCallback((col: string) => {
@@ -357,7 +384,7 @@ function MockTable({ columns }: { columns: string[] }) {
   }, []);
   const toggleAllRows = useCallback(() => {
     setSelectedRows(prev => prev.size === rows.length ? new Set() : new Set(rows.map((_, i) => i)));
-  }, [rows.length]);
+  }, [rows]);
 
   // Sorted rows (stable original index tracking)
   const indexedRows = useMemo(() => rows.map((r, i) => ({ r, oi: i })), [rows]);
@@ -403,9 +430,8 @@ function MockTable({ columns }: { columns: string[] }) {
                   onDragOver={(e) => handleDragOverCol(e, col)}
                   onDragEnd={() => { setDragCol(null); setDragOverCol(null); }}
                   onDrop={() => handleDrop(col)}
-                  className={`text-left px-3 py-2 ${t.textTertiary} border-b ${t.sectionBorder} whitespace-nowrap overflow-hidden text-ellipsis relative select-none cursor-grab active:cursor-grabbing transition-colors ${
-                    dragOverCol === col ? `${t.accentBg} opacity-60` : ''
-                  } ${dragCol === col ? 'opacity-40' : ''}`}
+                  className={`text-left px-3 py-2 ${t.textTertiary} border-b ${t.sectionBorder} whitespace-nowrap overflow-hidden text-ellipsis relative select-none cursor-grab active:cursor-grabbing transition-colors ${dragOverCol === col ? `${t.accentBg} opacity-60` : ''
+                    } ${dragCol === col ? 'opacity-40' : ''}`}
                 >
                   <span className={`inline-flex items-center gap-1 cursor-pointer hover:text-white/60 transition-colors`} onClick={(e) => { e.stopPropagation(); handleSort(col); }}>
                     {col}
@@ -591,11 +617,10 @@ function ComponentRenderer({ comp }: { comp: { id: string; type: string; props: 
       ref={containerRef}
       onClick={handleClick}
       data-comp-id={comp.id}
-      className={`relative group ${
-        isSelected ? `ring-1 ${t.accentBorder} rounded-lg` :
+      className={`relative group ${isSelected ? `ring-1 ${t.accentBorder} rounded-lg` :
         isMultiSelected ? 'ring-1 ring-cyan-500/40 rounded-lg' :
-        ''
-      }`}
+          ''
+        }`}
     >
       {/* Selection / group indicators */}
       {isSelected && (
@@ -666,13 +691,12 @@ function CtxItem({ icon: Icon, label, shortcut, onClick, danger, disabled }: {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`w-full flex items-center gap-2.5 px-3 py-1.5 transition-colors ${
-        danger
-          ? 'text-red-400/70 hover:text-red-400 hover:bg-red-500/[0.06]'
-          : disabled
+      className={`w-full flex items-center gap-2.5 px-3 py-1.5 transition-colors ${danger
+        ? 'text-red-400/70 hover:text-red-400 hover:bg-red-500/[0.06]'
+        : disabled
           ? 'text-white/15 cursor-not-allowed'
           : 'text-white/50 hover:text-white/80 hover:bg-white/[0.06]'
-      }`}
+        }`}
     >
       {Icon && <Icon className="w-3.5 h-3.5" />}
       <span className="flex-1 text-left">{label}</span>
@@ -840,20 +864,19 @@ function PanelCard({ panel }: { panel: PanelType }) {
       onClick={(e) => { e.stopPropagation(); selectPanel(panel.id); }}
       onDoubleClick={handleDoubleClick}
       onContextMenu={handleContextMenu}
-      className={`h-full flex flex-col rounded-xl border transition-all relative group ${t.scrollClass} ${ac.isAurora ? 'aurora-light-bleed' : ''} ${
-        mergeTarget
-          ? 'border-emerald-500/50 bg-emerald-500/[0.05] ring-2 ring-emerald-500/30'
-          : isSelected
+      className={`h-full flex flex-col rounded-xl border transition-all relative group ${t.scrollClass} ${ac.isAurora ? 'aurora-light-bleed' : ''} ${mergeTarget
+        ? 'border-emerald-500/50 bg-emerald-500/[0.05] ring-2 ring-emerald-500/30'
+        : isSelected
           ? `${t.accentBorder}`
           : `${t.panelBorder} hover:border-white/[0.1]`
-      } ${isOver && !mergeTarget ? `ring-2 ${t.accentBorder}` : ''}`}
+        } ${isOver && !mergeTarget ? `ring-2 ${t.accentBorder}` : ''}`}
       style={{
         backgroundColor: mergeTarget ? undefined : isSelected ? t.canvasCardSelectedBg : t.canvasCardBg,
         boxShadow: mergeTarget
           ? '0 0 0 2px rgba(16,185,129,0.2), 0 0 40px -10px rgba(16,185,129,0.2)'
           : isSelected
-          ? ac.selectedShadow
-          : '0 2px 12px -4px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03)',
+            ? ac.selectedShadow
+            : '0 2px 12px -4px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03)',
       }}
     >
       {/* Merge indicator overlay */}
@@ -1178,10 +1201,10 @@ export function PanelCanvas() {
 
   const handleAddPanelFromTemplate = useCallback((type: PanelType['type']) => {
     const templates: Record<PanelType['type'], Omit<PanelType, 'id'>> = {
-      blank:  { name: `空白面板 ${panels.length + 1}`, type: 'blank',  x: 0, y: 0, w: 6, h: 6, children: [] },
-      form:   { name: `表单面板 ${panels.length + 1}`, type: 'form',   x: 0, y: 0, w: 4, h: 6, children: [] },
-      table:  { name: `表格面板 ${panels.length + 1}`, type: 'table',  x: 0, y: 0, w: 6, h: 8, children: [] },
-      chart:  { name: `图表面板 ${panels.length + 1}`, type: 'chart',  x: 0, y: 0, w: 6, h: 6, children: [] },
+      blank: { name: `空白面板 ${panels.length + 1}`, type: 'blank', x: 0, y: 0, w: 6, h: 6, children: [] },
+      form: { name: `表单面板 ${panels.length + 1}`, type: 'form', x: 0, y: 0, w: 4, h: 6, children: [] },
+      table: { name: `表格面板 ${panels.length + 1}`, type: 'table', x: 0, y: 0, w: 6, h: 8, children: [] },
+      chart: { name: `图表面板 ${panels.length + 1}`, type: 'chart', x: 0, y: 0, w: 6, h: 6, children: [] },
       custom: { name: `自定义面板 ${panels.length + 1}`, type: 'custom', x: 0, y: 0, w: 6, h: 6, children: [] },
     };
     addPanel(templates[type]);
@@ -1361,11 +1384,10 @@ export function PanelCanvas() {
           {layoutAnalysis.collisions.map((c, i) => (
             <div
               key={`col-${i}`}
-              className={`flex items-start gap-2 px-3 py-2 rounded-lg backdrop-blur-sm border transition-all ${
-                c.severity === 'error'
-                  ? 'bg-red-500/[0.08] border-red-500/20 text-red-400/80'
-                  : 'bg-amber-500/[0.08] border-amber-500/20 text-amber-400/80'
-              }`}
+              className={`flex items-start gap-2 px-3 py-2 rounded-lg backdrop-blur-sm border transition-all ${c.severity === 'error'
+                ? 'bg-red-500/[0.08] border-red-500/20 text-red-400/80'
+                : 'bg-amber-500/[0.08] border-amber-500/20 text-amber-400/80'
+                }`}
               style={{ boxShadow: '0 4px 16px -4px rgba(0,0,0,0.4)' }}
             >
               <ArrowUpDown className={`w-3 h-3 shrink-0 mt-0.5 ${c.severity === 'error' ? 'text-red-400/70' : 'text-amber-400/70'}`} />
@@ -1650,7 +1672,7 @@ function IframeSandbox({ comps, panelName }: { comps: ComponentInstance[]; panel
   useEffect(() => {
     const html = generateIframeHTML(comps);
     setIframeHTML(html);
-  }, [compsKey]);
+  }, [compsKey, comps]);
 
   useEffect(() => {
     const currentRef = iframeRef.current;

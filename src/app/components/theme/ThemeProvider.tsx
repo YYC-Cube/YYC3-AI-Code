@@ -32,7 +32,7 @@ export function ThemeProvider() {
       document.title = appName
       log.debug('Document title updated', { title: appName })
     }
-  }, [currentTheme.branding.appName])
+  }, [currentTheme.branding])
 
   return <LiquidGlassBackground />
 }

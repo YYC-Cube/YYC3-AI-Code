@@ -385,7 +385,7 @@ export function SecurityPanel() {
   useEffect(() => {
     startMonitoring()
     return () => stopMonitoring()
-  }, [])
+  }, [startMonitoring, stopMonitoring])
 
   const tabs: { key: SecurityTab; label: string; icon: typeof Shield }[] = [
     { key: 'keychain', label: t('keychain', 'security'), icon: Shield },

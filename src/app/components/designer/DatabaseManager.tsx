@@ -357,7 +357,7 @@ function TableExplorer() {
 
   useEffect(() => {
     if (activeProfileId && activeProfile?.status === 'connected' && !schemas[activeProfileId]) {loadSchemas(activeProfileId)}
-  }, [activeProfileId, activeProfile?.status])
+  }, [activeProfileId, activeProfile?.status, schemas, loadSchemas])
 
   const handleSelectTable = (schema: string, table: string) => {
     if (!activeProfileId) {return}

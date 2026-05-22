@@ -38,7 +38,7 @@ function SyncBadge() {
   useEffect(() => {
     const id = setInterval(() => setTimeLabel(getTimeSinceLastSync()), 10_000)
     return () => clearInterval(id)
-  }, [])
+  }, [getTimeSinceLastSync])
 
   const statusConfig = {
     idle: { icon: Cloud, color: 'text-white/20', labelKey: 'sync.idle' as const },

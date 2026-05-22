@@ -11,48 +11,98 @@
  * @tags ai-code,ide,editor,preview,ai,task-board,collaboration
  */
 
-import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router';
-import { motion, AnimatePresence } from 'motion/react';
-import { useStreamingAI, type AIModelConfig } from '../designer/hooks/useStreamingAI';
-import { useGlobalAI } from '../../aiModelContext';
-import yyc3Logo from '/yyc3-logo-blue.png';
+import Editor from '@monaco-editor/react';
 import {
-  Home, Wrench, FolderOpen, Paintbrush, Zap, Bell,
-  Bot, Settings, ChevronLeft, Eye, Code2, Search, MoreHorizontal,
-  File, Monitor, FilePen, Send, Plus, Image as ImageIcon,
-  FileUp, Github, Figma, Clipboard, ChevronRight, ChevronDown,
-  FolderClosed, FileCode2, FileJson, FileCog, Folder,
-  Terminal, X, Copy, Download, Maximize2, Minimize2,
-  Split, RotateCcw, Sparkles, Layers, Rocket, Share2,
-  GitBranch, PanelRightClose, PanelLeftClose,
-  FileType, Shield, Trash2, Pencil, FilePlus, FolderPlus,
-  GripVertical, History, Hash,
-  Check, AlertCircle, Globe, FolderKanban,
-  Columns2, Pin, SquareSplitHorizontal, LayoutDashboard,
+  AlertCircle,
+  Bell,
+  Bot,
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Clipboard,
+  Code2,
+  Columns2,
+  Copy, Download,
+  Eye,
+  Figma,
+  File,
+  FileCode2,
+  FileCog,
+  FileJson,
+  FilePen,
+  FilePlus,
+  FileType,
+  FileUp,
+  Folder,
+  FolderClosed,
+  FolderKanban,
+  FolderOpen,
+  FolderPlus,
+  GitBranch,
+  Github,
+  Globe,
+  GripVertical,
+  Hash,
+  History,
+  Home,
+  Image as ImageIcon,
+  Layers,
+  LayoutDashboard,
+  Maximize2, Minimize2,
+  Monitor,
+  MoreHorizontal,
+  Paintbrush,
+  PanelLeftClose,
+  PanelRightClose,
+  Pencil,
+  Pin,
+  Plus,
+  Rocket,
+  RotateCcw,
+  Search,
+  Send,
+  Settings,
+  Share2,
+  Shield,
+  Sparkles,
+  Split,
+  SquareSplitHorizontal,
+  Terminal,
+  Trash2,
+  Wrench,
+  X,
+  Zap,
   type LucideIcon
 } from 'lucide-react';
-import Editor from '@monaco-editor/react';
-import { LivePreview } from './LivePreview';
+import { AnimatePresence, motion } from 'motion/react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { PanelGroup, PanelResizeHandle, Panel as ResizablePanel, type ImperativePanelHandle } from 'react-resizable-panels';
+import { useNavigate } from 'react-router';
+import { useGlobalAI } from '../../aiModelContext';
 import {
-  bridgeSendToDesigner, bridgeReadForCode, bridgeClearForCode,
+  bridgeClearForCode,
+  bridgeReadForCode,
+  bridgeSendToDesigner,
   parseCodeToComponents,
 } from '../../crossRouteBridge';
-import { useAppSettings } from '../../hooks/useAppSettings';
-import { Panel as ResizablePanel, PanelGroup, PanelResizeHandle, type ImperativePanelHandle } from 'react-resizable-panels';
-import { ActivityBar, type ActivityView } from './ActivityBar';
-import { LayoutPresetSwitcher, type LayoutPreset } from './LayoutPresets';
-import { EditorBreadcrumb } from './EditorBreadcrumb';
-import { SearchPanel, GitPanel, DebugPanel, RunPanel, ExtensionsPanel, DatabasePanel } from './SidebarViews';
-import { MultiInstanceManager } from './MultiInstanceManager';
-import { AIProviderManager } from './AIProviderManager';
-import { useWindowManager, MinimizedPanelTray, LayoutSaverDialog, FloatingPanelWrapper, PANEL_TYPE_REGISTRY, type TabConfig } from './WindowManager';
-import { AIChatPanel as AIChatStreamPanel } from './AIChatPanel';
-import { QuickActionsToolbar } from './QuickActionsToolbar';
 import { useAIService } from '../../hooks/useAIService';
+import { useAppSettings } from '../../hooks/useAppSettings';
 import { useCRDTCollab } from '../../hooks/useCRDTCollab';
-import { CollabCursors, CollabStatusIndicator } from './CollabCursors';
 import { usePerformanceMonitor } from '../../hooks/usePerformanceMonitor';
+import { useStreamingAI, type AIModelConfig } from '../designer/hooks/useStreamingAI';
+import { ActivityBar, type ActivityView } from './ActivityBar';
+import { AIChatPanel as AIChatStreamPanel } from './AIChatPanel';
+import { AIProviderManager } from './AIProviderManager';
+import { CollabCursors, CollabStatusIndicator } from './CollabCursors';
+import { EditorBreadcrumb } from './EditorBreadcrumb';
+import { LayoutPresetSwitcher, type LayoutPreset } from './LayoutPresets';
+import { LivePreview } from './LivePreview';
+import { MultiInstanceManager } from './MultiInstanceManager';
+import { QuickActionsToolbar } from './QuickActionsToolbar';
+import { DatabasePanel, DebugPanel, ExtensionsPanel, GitPanel, RunPanel, SearchPanel } from './SidebarViews';
+import { FloatingPanelWrapper, LayoutSaverDialog, MinimizedPanelTray, PANEL_TYPE_REGISTRY, useWindowManager } from './WindowManager';
+import yyc3Logo from '/yyc3-logo-blue.png';
 
 /* ================================================================
    TYPES
@@ -79,13 +129,11 @@ function PanelDragHandle({ direction = 'vertical' }: { direction?: 'vertical' | 
   const isVertical = direction === 'vertical';
   return (
     <PanelResizeHandle
-      className={`group relative flex items-center justify-center transition-colors duration-150 hover:bg-indigo-500/10 active:bg-indigo-500/20 ${
-        isVertical ? 'w-[6px] cursor-col-resize' : 'h-[6px] cursor-row-resize'
-      }`}
+      className={`group relative flex items-center justify-center transition-colors duration-150 hover:bg-indigo-500/10 active:bg-indigo-500/20 ${isVertical ? 'w-[6px] cursor-col-resize' : 'h-[6px] cursor-row-resize'
+        }`}
     >
-      <div className={`rounded-full bg-white/10 group-hover:bg-indigo-400/50 group-active:bg-indigo-400/70 transition-all ${
-        isVertical ? 'w-[3px] h-8' : 'h-[3px] w-8'
-      }`} />
+      <div className={`rounded-full bg-white/10 group-hover:bg-indigo-400/50 group-active:bg-indigo-400/70 transition-all ${isVertical ? 'w-[3px] h-8' : 'h-[3px] w-8'
+        }`} />
     </PanelResizeHandle>
   );
 }
@@ -267,20 +315,26 @@ function makeInitialTree(): FileNode[] {
                     { id: 'f13', name: 'StatusBar.tsx', type: 'file', icon: FileCode2, language: 'typescript' },
                   ]
                 },
-                { id: 'f14', name: 'home', type: 'folder', children: [
-                  { id: 'f15', name: 'AIHomePage.tsx', type: 'file', icon: FileCode2, language: 'typescript' },
-                ] },
-                { id: 'f16', name: 'ai-code', type: 'folder', children: [
-                  { id: 'f17', name: 'AICodeSystem.tsx', type: 'file', icon: FileCode2, language: 'typescript' },
-                ] },
+                {
+                  id: 'f14', name: 'home', type: 'folder', children: [
+                    { id: 'f15', name: 'AIHomePage.tsx', type: 'file', icon: FileCode2, language: 'typescript' },
+                  ]
+                },
+                {
+                  id: 'f16', name: 'ai-code', type: 'folder', children: [
+                    { id: 'f17', name: 'AICodeSystem.tsx', type: 'file', icon: FileCode2, language: 'typescript' },
+                  ]
+                },
               ]
             },
           ]
         },
-        { id: 'f18', name: 'styles', type: 'folder', children: [
-          { id: 'f19', name: 'theme.css', type: 'file', icon: FileType, language: 'css', content: '/* YYC3 Theme Tokens */\n:root {\n  --color-primary: #667eea;\n  --color-bg: #0a0b10;\n  --color-surface: #14151e;\n  --color-border: rgba(255,255,255,0.06);\n  --font-size-base: 14px;\n}' },
-          { id: 'f20', name: 'fonts.css', type: 'file', icon: FileType, language: 'css' },
-        ] },
+        {
+          id: 'f18', name: 'styles', type: 'folder', children: [
+            { id: 'f19', name: 'theme.css', type: 'file', icon: FileType, language: 'css', content: '/* YYC3 Theme Tokens */\n:root {\n  --color-primary: #667eea;\n  --color-bg: #0a0b10;\n  --color-surface: #14151e;\n  --color-border: rgba(255,255,255,0.06);\n  --font-size-base: 14px;\n}' },
+            { id: 'f20', name: 'fonts.css', type: 'file', icon: FileType, language: 'css' },
+          ]
+        },
       ]
     },
     { id: 'f21', name: 'package.json', type: 'file', icon: FileJson, language: 'json', content: '{\n  "name": "@yyc3/cloudpivot-ai",\n  "version": "3.0.0",\n  "type": "module",\n  "scripts": {\n    "dev": "vite",\n    "build": "tsc && vite build",\n    "preview": "vite preview",\n    "test": "jest --passWithNoTests"\n  }\n}' },
@@ -970,7 +1024,7 @@ const DEFAULT_AI_MODELS: AIModelEntry[] = [
 /* ── Persistent API key storage ── */
 const MODEL_KEYS_STORAGE = 'yyc3-ai-model-keys';
 function saveModelKeys(keys: Record<string, string>) {
-  try { localStorage.setItem(MODEL_KEYS_STORAGE, JSON.stringify(keys)); } catch {}
+  try { localStorage.setItem(MODEL_KEYS_STORAGE, JSON.stringify(keys)); } catch { }
 }
 
 /* ── Code block extraction from markdown ── */
@@ -1297,11 +1351,10 @@ function AIChatPanel({ onInjectCode, onCreateFileFromAI }: {
         style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.1) transparent' }}>
         {messages.filter(m => m.role !== 'system').map((msg) => (
           <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[90%] rounded-xl px-3 py-2 text-[11px] ${
-              msg.role === 'user'
-                ? 'bg-indigo-500/20 text-white/80 border border-indigo-500/20'
-                : 'bg-white/[0.04] text-white/70 border border-white/[0.06]'
-            }`} style={{ lineHeight: '1.6' }}>
+            <div className={`max-w-[90%] rounded-xl px-3 py-2 text-[11px] ${msg.role === 'user'
+              ? 'bg-indigo-500/20 text-white/80 border border-indigo-500/20'
+              : 'bg-white/[0.04] text-white/70 border border-white/[0.06]'
+              }`} style={{ lineHeight: '1.6' }}>
               {msg.role === 'assistant' ? (
                 <AIMessageContent
                   content={msg.content}
@@ -1332,7 +1385,7 @@ function AIChatPanel({ onInjectCode, onCreateFileFromAI }: {
           <TipIcon icon={Plus} tip="展开多功能菜单" size={13} className={showAddMenu ? 'text-indigo-400 bg-white/10 rounded-lg' : 'text-white/30'}
             onClick={() => setShowAddMenu(v => !v)} />
           <AnimatePresence>
-            {showAddMenu && <AddFunctionMenu onClose={() => setShowAddMenu(false)} onAction={() => {}} />}
+            {showAddMenu && <AddFunctionMenu onClose={() => setShowAddMenu(false)} onAction={() => { }} />}
           </AnimatePresence>
           <TipIcon icon={ImageIcon} tip="图片上传" size={13} className="text-white/30" />
           <TipIcon icon={FileUp} tip="文件导入" size={13} className="text-white/30" />
@@ -1354,9 +1407,8 @@ function AIChatPanel({ onInjectCode, onCreateFileFromAI }: {
           <button
             onClick={handleSend}
             disabled={!input.trim() || isTyping}
-            className={`p-2 rounded-xl shrink-0 transition-all ${
-              input.trim() ? 'bg-indigo-500 text-white hover:bg-indigo-400' : 'bg-white/[0.04] text-white/20'
-            }`}
+            className={`p-2 rounded-xl shrink-0 transition-all ${input.trim() ? 'bg-indigo-500 text-white hover:bg-indigo-400' : 'bg-white/[0.04] text-white/20'
+              }`}
           >
             <Send size={13} />
           </button>
@@ -2109,7 +2161,7 @@ export function AICodeSystem() {
   });
   const syncStatus = crdt.status === 'synced' ? 'synced'
     : crdt.status === 'syncing' || crdt.status === 'connecting' || crdt.status === 'connected' ? 'syncing'
-    : crdt.status === 'conflict' ? 'conflict' : 'synced';
+      : crdt.status === 'conflict' ? 'conflict' : 'synced';
 
   // Global AI context for auth
   const globalAI = useGlobalAI();
@@ -2189,7 +2241,7 @@ export function AICodeSystem() {
       id: tabId, fileId: id, name: node.name, language: lang,
       content, isModified: false, isPinned: false,
     });
-  }, []);
+  }, [windowMgr]);
 
   // Close tab (via windowMgr)
   const handleCloseTab = useCallback((tabId: string) => {
@@ -2439,7 +2491,7 @@ export function AICodeSystem() {
     }
     setDragTabId(null);
     setDragOverTabId(null);
-  }, [dragTabId]);
+  }, [dragTabId, windowMgr]);
 
   const handleTabDragEnd = useCallback(() => {
     setDragTabId(null);
@@ -2462,7 +2514,7 @@ export function AICodeSystem() {
       setLeftPanelOpen(true);
     }
     setActivityView(view);
-  }, [activityView, leftPanelOpen]);
+  }, [activityView, leftPanelOpen, navigate]);
 
   /* ═══════════ AI CODE INJECTION — Apply AI-generated code to editor ═══════════ */
   const handleAIInjectCode = useCallback((code: string, lang: string) => {
@@ -2581,11 +2633,11 @@ export function AICodeSystem() {
             label: hook,
             kind: monaco.languages.CompletionItemKind.Function,
             insertText: hook === 'useState' ? 'useState(${1:initialValue})' :
-                         hook === 'useEffect' ? 'useEffect(() => {\n  ${1}\n}, [${2}])' :
-                         hook === 'useCallback' ? 'useCallback((${1}) => {\n  ${2}\n}, [${3}])' :
-                         hook === 'useMemo' ? 'useMemo(() => ${1}, [${2}])' :
-                         hook === 'useRef' ? 'useRef<${1}>(${2:null})' :
-                         hook + '(${1})',
+              hook === 'useEffect' ? 'useEffect(() => {\n  ${1}\n}, [${2}])' :
+                hook === 'useCallback' ? 'useCallback((${1}) => {\n  ${2}\n}, [${3}])' :
+                  hook === 'useMemo' ? 'useMemo(() => ${1}, [${2}])' :
+                    hook === 'useRef' ? 'useRef<${1}>(${2:null})' :
+                      hook + '(${1})',
             insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
             detail: 'React Hook',
             documentation: 'React ' + hook + ' hook',
@@ -2657,7 +2709,7 @@ export function AICodeSystem() {
         };
       },
     });
-  }, [fileTree]);
+  }, [fileTree, crdt]);
 
   /* ═══════════ Error Marker Scanner — runs on content change ═══════════ */
   useEffect(() => {
@@ -2740,60 +2792,59 @@ export function AICodeSystem() {
     >
       {/* ═══════════ TOP NAVIGATION BAR ═══════════ */}
       {!fullScreen && (
-      <header className="flex items-center justify-between px-3 py-1.5 border-b border-white/[0.06] bg-[#0d0e14] shrink-0">
-        <div className="flex items-center gap-2.5">
-          <TipIcon icon={Home} tip="返回首���" size={15} className="text-white/50" onClick={() => navigate('/')} />
-          <div className="flex items-center gap-1.5">
-            <img src={yyc3Logo} alt="YYC³" className="w-6 h-6 rounded-lg object-contain" />
-            <span className="text-[13px] text-white/80" style={{ fontWeight: 600 }}>CloudPivot AI</span>
+        <header className="flex items-center justify-between px-3 py-1.5 border-b border-white/[0.06] bg-[#0d0e14] shrink-0">
+          <div className="flex items-center gap-2.5">
+            <TipIcon icon={Home} tip="返回首���" size={15} className="text-white/50" onClick={() => navigate('/')} />
+            <div className="flex items-center gap-1.5">
+              <img src={yyc3Logo} alt="YYC³" className="w-6 h-6 rounded-lg object-contain" />
+              <span className="text-[13px] text-white/80" style={{ fontWeight: 600 }}>CloudPivot AI</span>
+            </div>
           </div>
-        </div>
-        <div className="flex items-center gap-0.5">
-          {/* 项目管理 (Ctrl+Shift+P) */}
-          <div className="relative">
-            <TipIcon icon={FolderKanban} tip="项目管理" size={14} active={showProjectsPanel} className="text-white/40"
-              onClick={() => { setShowProjectsPanel(v => !v); setShowNotifications(false); }} />
-            <AnimatePresence>{showProjectsPanel && <ProjectsPanel onClose={() => setShowProjectsPanel(false)} />}</AnimatePresence>
-          </div>
-          {/* 通知中心 (Ctrl+Shift+N) */}
-          <div className="relative">
-            <TipIcon icon={Bell} tip="通知中心" size={14} active={showNotifications} className="text-white/40"
-              onClick={() => { setShowNotifications(v => !v); setShowProjectsPanel(false); }} />
-            {MOCK_NOTIFICATIONS.filter(n => !n.read).length > 0 && (
-              <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-red-400 pointer-events-none" />
-            )}
-            <AnimatePresence>{showNotifications && <NotificationsPanel onClose={() => setShowNotifications(false)} />}</AnimatePresence>
-          </div>
-          {/* 设置 (Ctrl+,) */}
-          <TipIcon icon={Settings} tip="设置" size={14} className="text-white/40"
-            onClick={() => setShowSettingsDialog(true)} />
-          <TipIcon icon={Github} tip="GitHub" size={14} className="text-white/40" />
-          <TipIcon icon={Share2} tip="分享" size={14} className="text-white/40" />
-          <TipIcon icon={Rocket} tip="发布" size={14} className="text-white/40" />
-          <TipIcon icon={Zap} tip="快速操作" size={14} className="text-white/40" />
-          {/* 语言切换 (Ctrl+Shift+L) */}
-          <TipIcon icon={Globe} tip={uiLang === 'zh-CN' ? '语言切换 (中文)' : 'Language (EN)'} size={14} className="text-white/40"
-            onClick={() => setUiLang(uiLang === 'zh-CN' ? 'en-US' : 'zh-CN')} />
-          {/* 用户头像 */}
-          <div className="relative">
-            <div className={`relative group ml-1.5 w-6 h-6 rounded-full flex items-center justify-center text-[10px] cursor-pointer hover:ring-2 hover:ring-violet-400/30 transition-all ${
-              globalAI.isAuthenticated
+          <div className="flex items-center gap-0.5">
+            {/* 项目管理 (Ctrl+Shift+P) */}
+            <div className="relative">
+              <TipIcon icon={FolderKanban} tip="项目管理" size={14} active={showProjectsPanel} className="text-white/40"
+                onClick={() => { setShowProjectsPanel(v => !v); setShowNotifications(false); }} />
+              <AnimatePresence>{showProjectsPanel && <ProjectsPanel onClose={() => setShowProjectsPanel(false)} />}</AnimatePresence>
+            </div>
+            {/* 通知中心 (Ctrl+Shift+N) */}
+            <div className="relative">
+              <TipIcon icon={Bell} tip="通知中心" size={14} active={showNotifications} className="text-white/40"
+                onClick={() => { setShowNotifications(v => !v); setShowProjectsPanel(false); }} />
+              {MOCK_NOTIFICATIONS.filter(n => !n.read).length > 0 && (
+                <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-red-400 pointer-events-none" />
+              )}
+              <AnimatePresence>{showNotifications && <NotificationsPanel onClose={() => setShowNotifications(false)} />}</AnimatePresence>
+            </div>
+            {/* 设置 (Ctrl+,) */}
+            <TipIcon icon={Settings} tip="设置" size={14} className="text-white/40"
+              onClick={() => setShowSettingsDialog(true)} />
+            <TipIcon icon={Github} tip="GitHub" size={14} className="text-white/40" />
+            <TipIcon icon={Share2} tip="分享" size={14} className="text-white/40" />
+            <TipIcon icon={Rocket} tip="发布" size={14} className="text-white/40" />
+            <TipIcon icon={Zap} tip="快速操作" size={14} className="text-white/40" />
+            {/* 语言切换 (Ctrl+Shift+L) */}
+            <TipIcon icon={Globe} tip={uiLang === 'zh-CN' ? '语言切换 (中文)' : 'Language (EN)'} size={14} className="text-white/40"
+              onClick={() => setUiLang(uiLang === 'zh-CN' ? 'en-US' : 'zh-CN')} />
+            {/* 用户头像 */}
+            <div className="relative">
+              <div className={`relative group ml-1.5 w-6 h-6 rounded-full flex items-center justify-center text-[10px] cursor-pointer hover:ring-2 hover:ring-violet-400/30 transition-all ${globalAI.isAuthenticated
                 ? 'bg-gradient-to-br from-emerald-500 to-cyan-500'
                 : 'bg-gradient-to-br from-violet-500 to-fuchsia-500'
-            }`} style={{ fontWeight: 600 }}
-              onClick={() => setShowUserProfile(v => !v)}>
-              {globalAI.isAuthenticated ? (globalAI.session?.user.name?.[0] || 'U') : 'Y'}
-              {globalAI.isAuthenticated && (
-                <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 border border-[#0d0e14]" />
-              )}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-[10px] bg-black/95 text-white/90 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[100] border border-white/10">
-                {globalAI.isAuthenticated ? (globalAI.session?.user.name + ' (' + globalAI.session?.user.role + ')') : '未登录'}
+                }`} style={{ fontWeight: 600 }}
+                onClick={() => setShowUserProfile(v => !v)}>
+                {globalAI.isAuthenticated ? (globalAI.session?.user.name?.[0] || 'U') : 'Y'}
+                {globalAI.isAuthenticated && (
+                  <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 border border-[#0d0e14]" />
+                )}
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-[10px] bg-black/95 text-white/90 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[100] border border-white/10">
+                  {globalAI.isAuthenticated ? (globalAI.session?.user.name + ' (' + globalAI.session?.user.role + ')') : '未登录'}
+                </div>
               </div>
+              <AnimatePresence>{showUserProfile && <UserProfilePanel onClose={() => setShowUserProfile(false)} user={{ name: globalAI.session?.user.name || 'YanYu', role: globalAI.session?.user.role || 'Developer', isAuth: globalAI.isAuthenticated }} rbacRole={rbacUser.currentRole} onlineStatus={rbacUser.onlineStatus} onStatusChange={setOnlineStatus} />}</AnimatePresence>
             </div>
-            <AnimatePresence>{showUserProfile && <UserProfilePanel onClose={() => setShowUserProfile(false)} user={{ name: globalAI.session?.user.name || 'YanYu', role: globalAI.session?.user.role || 'Developer', isAuth: globalAI.isAuthenticated }} rbacRole={rbacUser.currentRole} onlineStatus={rbacUser.onlineStatus} onStatusChange={setOnlineStatus} />}</AnimatePresence>
           </div>
-        </div>
-      </header>
+        </header>
       )}
 
       {/* ═══════════ VIEW SWITCH BAR ═══════════ */}
@@ -2869,527 +2920,523 @@ export function AICodeSystem() {
         <PanelGroup direction="vertical" autoSaveId="yyc3-ai-code-vertical">
           {/* Top: Horizontal panel group */}
           <ResizablePanel defaultSize={75} minSize={40} id="main-content-panel" order={1}>
-        <PanelGroup
-          direction="horizontal"
-          autoSaveId="yyc3-ai-code-layout"
-        >
-          {/* LEFT COLUMN — AI Chat (collapsible via imperative API) */}
-          {!fullScreen && (
-            <>
-              <ResizablePanel
-                ref={leftPanelRef}
-                defaultSize={25}
-                minSize={15}
-                maxSize={40}
-                collapsible
-                collapsedSize={0}
-                order={1}
-                id="ai-chat-panel"
-                onCollapse={() => setLeftPanelOpen(false)}
-                onExpand={() => setLeftPanelOpen(true)}
-              >
-                <div className="flex flex-col h-full bg-[#0d0e14]">
-                  {activityView === 'ai' && <AIChatPanel onInjectCode={handleAIInjectCode} onCreateFileFromAI={handleAICreateFile} />}
-                  {activityView === 'search' && <SearchPanel
-                    fileTree={fileTree}
-                    onOpenFile={(fileId, line) => {
-                      const findNode = (nodes: typeof fileTree): typeof fileTree[0] | null => {
-                        for (const n of nodes) {
-                          if (n.id === fileId) return n;
-                          if (n.children) { const f = findNode(n.children); if (f) return f; }
-                        }
-                        return null;
-                      };
-                      const node = findNode(fileTree);
-                      if (node) handleFileSelect(fileId, node);
-                    }}
-                  />}
-                  {activityView === 'git' && <GitPanel />}
-                  {activityView === 'debug' && <DebugPanel />}
-                  {activityView === 'run' && <RunPanel />}
-                  {activityView === 'extensions' && <ExtensionsPanel />}
-                  {activityView === 'database' && <DatabasePanel />}
-                  {activityView === 'multi-instance' && <MultiInstanceManager />}
-                  {activityView === 'files' && <AIChatPanel onInjectCode={handleAIInjectCode} onCreateFileFromAI={handleAICreateFile} />}
-                </div>
-              </ResizablePanel>
-              <PanelDragHandle />
-            </>
-          )}
-          {!leftPanelOpen && !fullScreen && (
-            <button
-              onClick={() => leftPanelRef.current?.expand()}
-              className="w-8 flex items-center justify-center border-r border-white/[0.06] bg-[#0d0e14] hover:bg-white/[0.03] transition-colors shrink-0"
+            <PanelGroup
+              direction="horizontal"
+              autoSaveId="yyc3-ai-code-layout"
             >
-              <PanelLeftClose size={14} className="text-white/30 rotate-180" />
-            </button>
-          )}
-
-          {/* MIDDLE COLUMN — File Resource Manager */}
-          <ResizablePanel
-            defaultSize={viewMode === 'preview' ? 60 : viewMode === 'split' ? 25 : 40}
-            minSize={20}
-            order={2}
-            id="file-manager-panel"
-          >
-            <motion.div
-              className="flex flex-col h-full bg-[#0c0d13]"
-              initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.3, delay: 0.15 }}
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.06] shrink-0">
-                <div className="flex items-center gap-2">
-                  <TipIcon icon={FolderOpen} tip="文件资源管理器" size={13} className="text-amber-400/60" />
-                  <span className="text-[11px] text-white/50" style={{ fontWeight: 500 }}>文件资源管理器</span>
-                  {copiedNode && (
-                    <span className="text-[9px] text-emerald-400/50 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/15">
-                      已复制: {copiedNode.name}
-                    </span>
-                  )}
-                </div>
-                <div className="flex items-center gap-0.5">
-                  <TipIcon icon={FilePlus} tip="新建文件" size={12} className="text-white/30"
-                    onClick={() => { setCreatingIn(fileTree[0]?.id || null); setCreatingType('file'); }} />
-                  <TipIcon icon={FolderPlus} tip="新建文件夹" size={12} className="text-white/30"
-                    onClick={() => { setCreatingIn(fileTree[0]?.id || null); setCreatingType('folder'); }} />
-                  <TipIcon icon={RotateCcw} tip="刷新" size={12} className="text-white/30"
-                    onClick={() => setFileTree(makeInitialTree())} />
-                  {leftPanelOpen && (
-                    <TipIcon icon={PanelRightClose} tip="收起左栏" size={12} className="text-white/30"
-                      onClick={() => leftPanelRef.current?.collapse()} />
-                  )}
-                </div>
-              </div>
-
-              {/* Search filter */}
-              <div className="px-3 py-1.5 border-b border-white/[0.04] shrink-0">
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] focus-within:border-indigo-500/30 transition-colors">
-                  <Search size={11} className="text-white/25" />
-                  <input
-                    value={treeSearchQuery}
-                    onChange={(e) => setTreeSearchQuery(e.target.value)}
-                    placeholder="搜索过滤..."
-                    className="flex-1 bg-transparent text-[11px] text-white/60 placeholder-white/20 outline-none"
-                  />
-                  {treeSearchQuery && (
-                    <button onClick={() => setTreeSearchQuery('')} className="text-white/25 hover:text-white/50">
-                      <X size={10} />
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {/* File tree + preview split */}
-              <div className="flex-1 flex min-h-0">
-                <div
-                  className={`${viewMode === 'preview' ? 'w-[220px] border-r border-white/[0.04]' : 'flex-1'} shrink-0 overflow-y-auto py-1.5`}
-                  style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.08) transparent' }}
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={(e) => { e.preventDefault(); if (dragNodeId) handleDrop(e, ''); }}
+              {/* LEFT COLUMN — AI Chat (collapsible via imperative API) */}
+              {!fullScreen && (
+                <>
+                  <ResizablePanel
+                    ref={leftPanelRef}
+                    defaultSize={25}
+                    minSize={15}
+                    maxSize={40}
+                    collapsible
+                    collapsedSize={0}
+                    order={1}
+                    id="ai-chat-panel"
+                    onCollapse={() => setLeftPanelOpen(false)}
+                    onExpand={() => setLeftPanelOpen(true)}
+                  >
+                    <div className="flex flex-col h-full bg-[#0d0e14]">
+                      {activityView === 'ai' && <AIChatPanel onInjectCode={handleAIInjectCode} onCreateFileFromAI={handleAICreateFile} />}
+                      {activityView === 'search' && <SearchPanel
+                        fileTree={fileTree}
+                        onOpenFile={(fileId, line) => {
+                          const findNode = (nodes: typeof fileTree): typeof fileTree[0] | null => {
+                            for (const n of nodes) {
+                              if (n.id === fileId) return n;
+                              if (n.children) { const f = findNode(n.children); if (f) return f; }
+                            }
+                            return null;
+                          };
+                          const node = findNode(fileTree);
+                          if (node) handleFileSelect(fileId, node);
+                        }}
+                      />}
+                      {activityView === 'git' && <GitPanel />}
+                      {activityView === 'debug' && <DebugPanel />}
+                      {activityView === 'run' && <RunPanel />}
+                      {activityView === 'extensions' && <ExtensionsPanel />}
+                      {activityView === 'database' && <DatabasePanel />}
+                      {activityView === 'multi-instance' && <MultiInstanceManager />}
+                      {activityView === 'files' && <AIChatPanel onInjectCode={handleAIInjectCode} onCreateFileFromAI={handleAICreateFile} />}
+                    </div>
+                  </ResizablePanel>
+                  <PanelDragHandle />
+                </>
+              )}
+              {!leftPanelOpen && !fullScreen && (
+                <button
+                  onClick={() => leftPanelRef.current?.expand()}
+                  className="w-8 flex items-center justify-center border-r border-white/[0.06] bg-[#0d0e14] hover:bg-white/[0.03] transition-colors shrink-0"
                 >
-                  <div className="px-3 py-1 mb-1">
-                    <div className="flex items-center gap-1.5">
-                      <FolderOpen size={12} className="text-amber-400/50" />
-                      <span className="text-[10px] text-white/30 uppercase" style={{ fontWeight: 600, letterSpacing: '0.5px' }}>项目结构</span>
-                    </div>
-                  </div>
-                  {displayTree.length > 0 ? displayTree.map(node => (
-                    <FileTreeNode
-                      key={node.id} node={node} selectedFile={selectedFileId}
-                      onSelect={handleFileSelect} onContextMenu={handleContextMenu}
-                      dragNodeId={dragNodeId} onDragStart={setDragNodeId} onDragOver={handleDragOver} onDrop={handleDrop}
-                      renamingId={renamingId} renameValue={renameValue} setRenameValue={setRenameValue}
-                      onRenameSubmit={handleRenameSubmit} onRenameCancel={() => setRenamingId(null)}
-                      creatingIn={creatingIn} creatingType={creatingType}
-                      onCreateSubmit={handleCreateSubmit} onCreateCancel={() => setCreatingIn(null)}
-                      searchQuery={treeSearchQuery}
-                    />
-                  )) : (
-                    <div className="px-4 py-6 text-center">
-                      <Search size={20} className="text-white/10 mx-auto mb-2" />
-                      <p className="text-[10px] text-white/20">无匹配文件</p>
-                    </div>
-                  )}
-                </div>
+                  <PanelLeftClose size={14} className="text-white/30 rotate-180" />
+                </button>
+              )}
 
-                {/* Preview area (preview mode merges mid+right) */}
-                {viewMode === 'preview' && (
-                  <div className="flex-1 flex flex-col bg-[#0a0b10]">
-                    <LivePreview
-                      code={fileContent}
-                      language={fileLanguage}
-                      autoRefresh={true}
-                      debounceMs={effectivePreviewDebounce}
-                      enableTailwind={appSettings.previewTailwind !== false}
-                      mode={effectivePreviewMode}
-                      scrollRatio={scrollRatio}
-                      onScrollRatioChange={(ratio) => {
-                        scrollSyncFromEditor.current = true;
-                        if (editorRef.current) {
-                          const scrollHeight = editorRef.current.getScrollHeight();
-                          const clientHeight = editorRef.current.getLayoutInfo().height;
-                          editorRef.current.setScrollTop(ratio * (scrollHeight - clientHeight));
-                        }
-                        setTimeout(() => { scrollSyncFromEditor.current = false; }, 100);
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </ResizablePanel>
-
-          {/* RIGHT COLUMN — Code Editor with Multi-Tab + Split View */}
-          <PanelDragHandle />
-          <ResizablePanel
-            ref={rightPanelRef}
-            defaultSize={35}
-            minSize={20}
-            maxSize={60}
-            collapsible
-            collapsedSize={0}
-            order={3}
-            id="code-editor-panel"
-          >
-            {(viewMode === 'edit' || viewMode === 'split') ? (
-              <div
-                className="flex flex-col h-full bg-[#0d0e14]"
+              {/* MIDDLE COLUMN — File Resource Manager */}
+              <ResizablePanel
+                defaultSize={viewMode === 'preview' ? 60 : viewMode === 'split' ? 25 : 40}
+                minSize={20}
+                order={2}
+                id="file-manager-panel"
               >
-                  {/* Editor header */}
+                <motion.div
+                  className="flex flex-col h-full bg-[#0c0d13]"
+                  initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.15 }}
+                >
+                  {/* Header */}
                   <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.06] shrink-0">
                     <div className="flex items-center gap-2">
-                      <Monitor size={13} className="text-cyan-400/60" />
-                      <span className="text-[11px] text-white/50" style={{ fontWeight: 500 }}>文件预览 / 编辑</span>
+                      <TipIcon icon={FolderOpen} tip="文件资源管理器" size={13} className="text-amber-400/60" />
+                      <span className="text-[11px] text-white/50" style={{ fontWeight: 500 }}>文件资源管理器</span>
+                      {copiedNode && (
+                        <span className="text-[9px] text-emerald-400/50 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/15">
+                          已复制: {copiedNode.name}
+                        </span>
+                      )}
                     </div>
                     <div className="flex items-center gap-0.5">
-                      <TipIcon icon={SquareSplitHorizontal} tip={splitView ? '关闭分屏' : '分屏编辑'} size={12}
-                        active={splitView} className="text-white/30" onClick={handleToggleSplit} />
-                      <TipIcon icon={Paintbrush} tip="格式化" size={12} className="text-white/30" onClick={handleFormat} />
-                      <TipIcon icon={Copy} tip="复制" size={12} className="text-white/30"
-                        onClick={() => navigator.clipboard?.writeText(fileContent)} />
-                      <TipIcon icon={Download} tip="下载" size={12} className="text-white/30" />
-                      <TipIcon icon={Maximize2} tip={windowMgr.maximizedPanel ? '退出全屏' : '全屏'} size={12}
-                        className="text-white/30" active={!!windowMgr.maximizedPanel}
-                        onClick={() => windowMgr.maximizePanel('panel-editor')} />
+                      <TipIcon icon={FilePlus} tip="新建文件" size={12} className="text-white/30"
+                        onClick={() => { setCreatingIn(fileTree[0]?.id || null); setCreatingType('file'); }} />
+                      <TipIcon icon={FolderPlus} tip="新建文件夹" size={12} className="text-white/30"
+                        onClick={() => { setCreatingIn(fileTree[0]?.id || null); setCreatingType('folder'); }} />
+                      <TipIcon icon={RotateCcw} tip="刷新" size={12} className="text-white/30"
+                        onClick={() => setFileTree(makeInitialTree())} />
+                      {leftPanelOpen && (
+                        <TipIcon icon={PanelRightClose} tip="收起左栏" size={12} className="text-white/30"
+                          onClick={() => leftPanelRef.current?.collapse()} />
+                      )}
                     </div>
                   </div>
 
-                  {/* Multi-Tab Bar with drag reorder */}
-                  <div className="flex items-center border-b border-white/[0.04] shrink-0 bg-[#0c0d13] overflow-x-auto"
-                    style={{ scrollbarWidth: 'none' }}>
-                    {openTabs.map(tab => (
-                      <div
-                        key={tab.id}
-                        draggable
-                        onDragStart={(e) => { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/tab-id', tab.id); handleTabDragStart(tab.id); }}
-                        onDragOver={(e) => handleTabDragOver(e, tab.id)}
-                        onDrop={(e) => handleTabDrop(e, tab.id)}
-                        onDragEnd={handleTabDragEnd}
-                        className={`group flex items-center gap-1 px-3 py-1.5 border-r border-white/[0.04] cursor-pointer transition-all shrink-0 min-w-0 ${
-                          activeTabId === tab.id
+                  {/* Search filter */}
+                  <div className="px-3 py-1.5 border-b border-white/[0.04] shrink-0">
+                    <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] focus-within:border-indigo-500/30 transition-colors">
+                      <Search size={11} className="text-white/25" />
+                      <input
+                        value={treeSearchQuery}
+                        onChange={(e) => setTreeSearchQuery(e.target.value)}
+                        placeholder="搜索过滤..."
+                        className="flex-1 bg-transparent text-[11px] text-white/60 placeholder-white/20 outline-none"
+                      />
+                      {treeSearchQuery && (
+                        <button onClick={() => setTreeSearchQuery('')} className="text-white/25 hover:text-white/50">
+                          <X size={10} />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* File tree + preview split */}
+                  <div className="flex-1 flex min-h-0">
+                    <div
+                      className={`${viewMode === 'preview' ? 'w-[220px] border-r border-white/[0.04]' : 'flex-1'} shrink-0 overflow-y-auto py-1.5`}
+                      style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.08) transparent' }}
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={(e) => { e.preventDefault(); if (dragNodeId) handleDrop(e, ''); }}
+                    >
+                      <div className="px-3 py-1 mb-1">
+                        <div className="flex items-center gap-1.5">
+                          <FolderOpen size={12} className="text-amber-400/50" />
+                          <span className="text-[10px] text-white/30 uppercase" style={{ fontWeight: 600, letterSpacing: '0.5px' }}>项目结构</span>
+                        </div>
+                      </div>
+                      {displayTree.length > 0 ? displayTree.map(node => (
+                        <FileTreeNode
+                          key={node.id} node={node} selectedFile={selectedFileId}
+                          onSelect={handleFileSelect} onContextMenu={handleContextMenu}
+                          dragNodeId={dragNodeId} onDragStart={setDragNodeId} onDragOver={handleDragOver} onDrop={handleDrop}
+                          renamingId={renamingId} renameValue={renameValue} setRenameValue={setRenameValue}
+                          onRenameSubmit={handleRenameSubmit} onRenameCancel={() => setRenamingId(null)}
+                          creatingIn={creatingIn} creatingType={creatingType}
+                          onCreateSubmit={handleCreateSubmit} onCreateCancel={() => setCreatingIn(null)}
+                          searchQuery={treeSearchQuery}
+                        />
+                      )) : (
+                        <div className="px-4 py-6 text-center">
+                          <Search size={20} className="text-white/10 mx-auto mb-2" />
+                          <p className="text-[10px] text-white/20">无匹配文件</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Preview area (preview mode merges mid+right) */}
+                    {viewMode === 'preview' && (
+                      <div className="flex-1 flex flex-col bg-[#0a0b10]">
+                        <LivePreview
+                          code={fileContent}
+                          language={fileLanguage}
+                          autoRefresh={true}
+                          debounceMs={effectivePreviewDebounce}
+                          enableTailwind={appSettings.previewTailwind !== false}
+                          mode={effectivePreviewMode}
+                          scrollRatio={scrollRatio}
+                          onScrollRatioChange={(ratio) => {
+                            scrollSyncFromEditor.current = true;
+                            if (editorRef.current) {
+                              const scrollHeight = editorRef.current.getScrollHeight();
+                              const clientHeight = editorRef.current.getLayoutInfo().height;
+                              editorRef.current.setScrollTop(ratio * (scrollHeight - clientHeight));
+                            }
+                            setTimeout(() => { scrollSyncFromEditor.current = false; }, 100);
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              </ResizablePanel>
+
+              {/* RIGHT COLUMN — Code Editor with Multi-Tab + Split View */}
+              <PanelDragHandle />
+              <ResizablePanel
+                ref={rightPanelRef}
+                defaultSize={35}
+                minSize={20}
+                maxSize={60}
+                collapsible
+                collapsedSize={0}
+                order={3}
+                id="code-editor-panel"
+              >
+                {(viewMode === 'edit' || viewMode === 'split') ? (
+                  <div
+                    className="flex flex-col h-full bg-[#0d0e14]"
+                  >
+                    {/* Editor header */}
+                    <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.06] shrink-0">
+                      <div className="flex items-center gap-2">
+                        <Monitor size={13} className="text-cyan-400/60" />
+                        <span className="text-[11px] text-white/50" style={{ fontWeight: 500 }}>文件预览 / 编辑</span>
+                      </div>
+                      <div className="flex items-center gap-0.5">
+                        <TipIcon icon={SquareSplitHorizontal} tip={splitView ? '关闭分屏' : '分屏编辑'} size={12}
+                          active={splitView} className="text-white/30" onClick={handleToggleSplit} />
+                        <TipIcon icon={Paintbrush} tip="格式化" size={12} className="text-white/30" onClick={handleFormat} />
+                        <TipIcon icon={Copy} tip="复制" size={12} className="text-white/30"
+                          onClick={() => navigator.clipboard?.writeText(fileContent)} />
+                        <TipIcon icon={Download} tip="下载" size={12} className="text-white/30" />
+                        <TipIcon icon={Maximize2} tip={windowMgr.maximizedPanel ? '退出全屏' : '全屏'} size={12}
+                          className="text-white/30" active={!!windowMgr.maximizedPanel}
+                          onClick={() => windowMgr.maximizePanel('panel-editor')} />
+                      </div>
+                    </div>
+
+                    {/* Multi-Tab Bar with drag reorder */}
+                    <div className="flex items-center border-b border-white/[0.04] shrink-0 bg-[#0c0d13] overflow-x-auto"
+                      style={{ scrollbarWidth: 'none' }}>
+                      {openTabs.map(tab => (
+                        <div
+                          key={tab.id}
+                          draggable
+                          onDragStart={(e) => { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/tab-id', tab.id); handleTabDragStart(tab.id); }}
+                          onDragOver={(e) => handleTabDragOver(e, tab.id)}
+                          onDrop={(e) => handleTabDrop(e, tab.id)}
+                          onDragEnd={handleTabDragEnd}
+                          className={`group flex items-center gap-1 px-3 py-1.5 border-r border-white/[0.04] cursor-pointer transition-all shrink-0 min-w-0 ${activeTabId === tab.id
                             ? 'bg-[#0d0e14] text-white/80 border-b-2 border-b-indigo-500'
                             : 'text-white/40 hover:bg-white/[0.04] hover:text-white/60'
-                        } ${dragTabId === tab.id ? 'opacity-40' : ''} ${dragOverTabId === tab.id && dragTabId !== tab.id ? 'border-l-2 border-l-indigo-400' : ''}`}
-                        onClick={() => handleSwitchTab(tab.id)}
-                        onContextMenu={(e) => { e.preventDefault(); handleTogglePin(tab.id); }}
-                      >
-                        {tab.isPinned ? (
-                          <Pin size={10} className="text-amber-400/60 shrink-0" />
-                        ) : (
-                          <FileCode2 size={10} className="text-cyan-400/60 shrink-0" />
-                        )}
-                        <span className="text-[10px] truncate max-w-[80px]">{tab.name}</span>
-                        {tab.isModified && (
-                          <div className="w-1.5 h-1.5 rounded-full bg-amber-400/80 shrink-0" title="已修改" />
-                        )}
-                        {!tab.isPinned && openTabs.length > 1 && (
-                          <X size={9}
-                            className="text-white/15 hover:text-white/60 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                            onClick={(e) => { e.stopPropagation(); handleCloseTab(tab.id); }}
-                          />
-                        )}
+                            } ${dragTabId === tab.id ? 'opacity-40' : ''} ${dragOverTabId === tab.id && dragTabId !== tab.id ? 'border-l-2 border-l-indigo-400' : ''}`}
+                          onClick={() => handleSwitchTab(tab.id)}
+                          onContextMenu={(e) => { e.preventDefault(); handleTogglePin(tab.id); }}
+                        >
+                          {tab.isPinned ? (
+                            <Pin size={10} className="text-amber-400/60 shrink-0" />
+                          ) : (
+                            <FileCode2 size={10} className="text-cyan-400/60 shrink-0" />
+                          )}
+                          <span className="text-[10px] truncate max-w-[80px]">{tab.name}</span>
+                          {tab.isModified && (
+                            <div className="w-1.5 h-1.5 rounded-full bg-amber-400/80 shrink-0" title="已修改" />
+                          )}
+                          {!tab.isPinned && openTabs.length > 1 && (
+                            <X size={9}
+                              className="text-white/15 hover:text-white/60 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                              onClick={(e) => { e.stopPropagation(); handleCloseTab(tab.id); }}
+                            />
+                          )}
+                        </div>
+                      ))}
+                      <div className="flex items-center gap-1 px-1 shrink-0">
+                        <span className="text-[8px] text-white/15 px-1">{openTabs.length} 个标签</span>
                       </div>
-                    ))}
-                    <div className="flex items-center gap-1 px-1 shrink-0">
-                      <span className="text-[8px] text-white/15 px-1">{openTabs.length} 个标签</span>
                     </div>
-                  </div>
 
-                  {/* Breadcrumb navigation */}
-                  <EditorBreadcrumb fileTree={fileTree} selectedFileId={selectedFileId} onNavigate={(id) => {
-                    const node = findNodeById(fileTree, id);
-                    if (node && node.type === 'file') handleFileSelect(id, node);
-                  }} />
+                    {/* Breadcrumb navigation */}
+                    <EditorBreadcrumb fileTree={fileTree} selectedFileId={selectedFileId} onNavigate={(id) => {
+                      const node = findNodeById(fileTree, id);
+                      if (node && node.type === 'file') handleFileSelect(id, node);
+                    }} />
 
-                  {/* Feature badges */}
-                  <div className="flex items-center gap-1.5 px-3 py-1 border-b border-white/[0.04] shrink-0 flex-wrap">
-                    <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/15">
-                      <Monitor size={9} className="text-cyan-400/60" />
-                      <span className="text-[8px] text-cyan-400/60">编辑器</span>
-                    </div>
-                    <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/15">
-                      <Paintbrush size={9} className="text-emerald-400/60" />
-                      <span className="text-[8px] text-emerald-400/60">高亮</span>
-                    </div>
-                    <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/15">
-                      <Zap size={9} className="text-amber-400/60" />
-                      <span className="text-[8px] text-amber-400/60">补全</span>
-                    </div>
-                    {splitView && (
-                      <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-violet-500/10 border border-violet-500/15">
-                        <Columns2 size={9} className="text-violet-400/60" />
-                        <span className="text-[8px] text-violet-400/60">分屏</span>
+                    {/* Feature badges */}
+                    <div className="flex items-center gap-1.5 px-3 py-1 border-b border-white/[0.04] shrink-0 flex-wrap">
+                      <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/15">
+                        <Monitor size={9} className="text-cyan-400/60" />
+                        <span className="text-[8px] text-cyan-400/60">编辑器</span>
                       </div>
-                    )}
-                  </div>
-
-                  {/* Monaco Editor — with optional split view + Collab Cursors overlay */}
-                  <div className="flex-1 min-h-0 relative">
-                    {/* Remote user cursors overlay (auto-disabled under performance pressure) */}
-                    {editorRef.current && monacoRef.current && crdt.remoteUsers.length > 0 && effectiveRemoteCursors && (
-                      <CollabCursors
-                        editor={editorRef.current}
-                        monaco={monacoRef.current}
-                        remoteUsers={crdt.remoteUsers}
-                        currentUserId={crdtUserIdentity.id}
-                        enableMinimapMarkers={effectiveMinimap}
-                        onJumpToUser={(u) => {
-                          if (u.cursor && editorRef.current) {
-                            editorRef.current.revealLineInCenter(u.cursor.line);
-                            editorRef.current.setPosition({ lineNumber: u.cursor.line, column: u.cursor.column });
-                          }
-                        }}
-                      />
-                    )}
-                    {viewMode === 'split' ? (
-                      /* Editor + LivePreview side by side */
-                      <PanelGroup direction="horizontal" autoSaveId="yyc3-editor-preview-split">
-                        <ResizablePanel defaultSize={50} minSize={25} id="split-editor-pane">
-                          <Editor
-                            height="100%"
-                            language={fileLanguage}
-                            theme="vs-dark"
-                            value={fileContent}
-                            onChange={(v) => handleContentChange(v || '')}
-                            onMount={handleEditorMount}
-                            options={{
-                              fontSize: appSettings.editorFontSize,
-                              lineHeight: appSettings.editorFontSize + 8,
-                              minimap: { enabled: false },
-                              tabSize: appSettings.indentStyle === '4-spaces' ? 4 : 2,
-                              insertSpaces: appSettings.indentStyle !== 'tab',
-                              scrollBeyondLastLine: false,
-                              folding: true, lineNumbers: 'on', renderLineHighlight: 'all',
-                              wordWrap: 'on', smoothScrolling: true, cursorBlinking: 'smooth',
-                              padding: { top: 8, bottom: 8 }, automaticLayout: true,
-                              formatOnPaste: true, suggestOnTriggerCharacters: true, quickSuggestions: true,
-                              bracketPairColorization: { enabled: true },
-                              guides: { bracketPairs: true, indentation: true },
-                            }}
-                          />
-                        </ResizablePanel>
-                        <PanelDragHandle />
-                        <ResizablePanel defaultSize={50} minSize={25} id="split-preview-pane">
-                          <LivePreview
-                            code={fileContent}
-                            language={fileLanguage}
-                            autoRefresh={true}
-                            debounceMs={perfDegradation.reducePreviewFrequency ? Math.max(600, 2000) : (appSettings.previewDebounceMs || 600)}
-                            enableTailwind={appSettings.previewTailwind !== false}
-                            mode={effectivePreviewMode}
-                            showConsole={false}
-                            scrollRatio={scrollRatio}
-                            onScrollRatioChange={(ratio) => {
-                              scrollSyncFromEditor.current = true;
-                              if (editorRef.current) {
-                                const scrollHeight = editorRef.current.getScrollHeight();
-                                const clientHeight = editorRef.current.getLayoutInfo().height;
-                                editorRef.current.setScrollTop(ratio * (scrollHeight - clientHeight));
-                              }
-                              setTimeout(() => { scrollSyncFromEditor.current = false; }, 100);
-                            }}
-                          />
-                        </ResizablePanel>
-                      </PanelGroup>
-                    ) : splitView ? (
-                      <PanelGroup direction="horizontal" autoSaveId="yyc3-editor-split">
-                        <ResizablePanel defaultSize={50} minSize={25} id="editor-split-left">
-                          <Editor
-                            height="100%"
-                            language={fileLanguage}
-                            theme="vs-dark"
-                            value={fileContent}
-                            onChange={(v) => handleContentChange(v || '')}
-                            onMount={handleEditorMount}
-                            options={{
-                              fontSize: appSettings.editorFontSize,
-                              lineHeight: appSettings.editorFontSize + 8,
-                              minimap: { enabled: effectiveMinimap, scale: 1 },
-                              tabSize: appSettings.indentStyle === '4-spaces' ? 4 : 2,
-                              insertSpaces: appSettings.indentStyle !== 'tab',
-                              scrollBeyondLastLine: false,
-                              folding: true,
-                              lineNumbers: 'on',
-                              renderLineHighlight: 'all',
-                              wordWrap: 'on',
-                              smoothScrolling: true,
-                              cursorBlinking: 'smooth',
-                              padding: { top: 8, bottom: 8 },
-                              automaticLayout: true,
-                              formatOnPaste: true,
-                              suggestOnTriggerCharacters: true,
-                              quickSuggestions: true,
-                              bracketPairColorization: { enabled: true },
-                              guides: { bracketPairs: true, indentation: true },
-                            }}
-                          />
-                        </ResizablePanel>
-                        <PanelDragHandle />
-                        <ResizablePanel defaultSize={50} minSize={25} id="editor-split-right">
-                          <Editor
-                            height="100%"
-                            language={splitLanguage}
-                            theme="vs-dark"
-                            value={splitContent}
-                            onChange={(v) => setSplitContent(v || '')}
-                            onMount={(editor) => { splitEditorRef.current = editor; }}
-                            options={{
-                              fontSize: appSettings.editorFontSize,
-                              lineHeight: appSettings.editorFontSize + 8,
-                              minimap: { enabled: false },
-                              tabSize: appSettings.indentStyle === '4-spaces' ? 4 : 2,
-                              insertSpaces: appSettings.indentStyle !== 'tab',
-                              scrollBeyondLastLine: false,
-                              folding: true,
-                              lineNumbers: 'on',
-                              renderLineHighlight: 'all',
-                              wordWrap: 'on',
-                              smoothScrolling: true,
-                              cursorBlinking: 'smooth',
-                              padding: { top: 8, bottom: 8 },
-                              automaticLayout: true,
-                              bracketPairColorization: { enabled: true },
-                              guides: { bracketPairs: true, indentation: true },
-                            }}
-                          />
-                        </ResizablePanel>
-                      </PanelGroup>
-                    ) : (
-                      <Editor
-                        height="100%"
-                        language={fileLanguage}
-                        theme="vs-dark"
-                        value={fileContent}
-                        onChange={(v) => handleContentChange(v || '')}
-                        onMount={handleEditorMount}
-                        options={{
-                          fontSize: appSettings.editorFontSize,
-                          lineHeight: appSettings.editorFontSize + 8,
-                          minimap: { enabled: effectiveMinimap, scale: 1 },
-                          tabSize: appSettings.indentStyle === '4-spaces' ? 4 : 2,
-                          insertSpaces: appSettings.indentStyle !== 'tab',
-                          scrollBeyondLastLine: false,
-                          folding: true,
-                          lineNumbers: 'on',
-                          renderLineHighlight: 'all',
-                          wordWrap: 'on',
-                          smoothScrolling: true,
-                          cursorBlinking: 'smooth',
-                          padding: { top: 8, bottom: 8 },
-                          automaticLayout: true,
-                          formatOnPaste: true,
-                          suggestOnTriggerCharacters: true,
-                          quickSuggestions: true,
-                          'semanticHighlighting.enabled': true,
-                          bracketPairColorization: { enabled: true },
-                          guides: { bracketPairs: true, indentation: true },
-                        }}
-                      />
-                    )}
-                  </div>
-
-                  {/* Bottom status bar — live diagnostics + CRDT sync */}
-                  <div className="flex items-center justify-between px-3 py-1.5 border-t border-white/[0.06] bg-[#0c0d13] shrink-0">
-                    <div className="flex items-center gap-2">
-                      <GitBranch size={11} className="text-white/25" />
-                      <span className="text-[9px] text-white/20">main</span>
-                      <div className="w-px h-3 bg-white/[0.06]" />
-                      <Check size={10} className="text-emerald-400/50" />
-                      <span className="text-[9px] text-white/25">{fileLanguage === 'typescript' ? 'TypeScript' : fileLanguage === 'json' ? 'JSON' : fileLanguage === 'css' ? 'CSS' : 'Plain'}</span>
-                      <div className="w-px h-3 bg-white/[0.06]" />
-                      {/* CRDT Sync + WS Status */}
-                      <div className="flex items-center gap-1">
-                        <div className={`w-1.5 h-1.5 rounded-full ${
-                          syncStatus === 'synced' ? 'bg-emerald-400' :
-                          syncStatus === 'syncing' ? 'bg-amber-400 animate-pulse' :
-                          'bg-red-400 animate-pulse'
-                        }`} />
-                        <span className={`text-[9px] ${
-                          syncStatus === 'synced' ? 'text-emerald-400/50' :
-                          syncStatus === 'syncing' ? 'text-amber-400/50' :
-                          'text-red-400/50'
-                        }`}>
-                          {syncStatus === 'synced' ? '已同步' : syncStatus === 'syncing' ? '同步中' : '冲突'}
-                        </span>
+                      <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/15">
+                        <Paintbrush size={9} className="text-emerald-400/60" />
+                        <span className="text-[8px] text-emerald-400/60">高亮</span>
                       </div>
-                      {/* Collab users indicator */}
-                      <CollabStatusIndicator
-                        connectedUsers={crdt.connectedUsers}
-                        currentUserId={crdtUserIdentity.id}
-                        wsState={crdt.wsState}
-                      />
-                      {/* Performance degradation indicator */}
-                      {perfLevel !== 'excellent' && perfLevel !== 'good' && (
-                        <div className={`flex items-center gap-1 px-1.5 py-0.5 rounded ${
-                          perfLevel === 'critical' ? 'bg-red-500/10 border border-red-500/15' :
-                          perfLevel === 'poor' ? 'bg-amber-500/10 border border-amber-500/15' :
-                          'bg-white/[0.04]'
-                        }`} title={`性能等级: ${perfLevel}${perfDegradation.disableAnimations ? ' · 动画已禁用' : ''}${perfDegradation.disableMinimap ? ' · Minimap 已禁用' : ''}${perfDegradation.reducePreviewFrequency ? ' · 预览已降频' : ''}${perfDegradation.disableRemoteCursors ? ' · 远程光标已禁用' : ''}`}>
-                          <Zap size={9} className={perfLevel === 'critical' ? 'text-red-400/70' : perfLevel === 'poor' ? 'text-amber-400/70' : 'text-white/30'} />
-                          <span className={`text-[9px] ${perfLevel === 'critical' ? 'text-red-400/60' : perfLevel === 'poor' ? 'text-amber-400/60' : 'text-white/20'}`}>
-                            {perfLevel === 'critical' ? '性能严重不足' : perfLevel === 'poor' ? '性能降级中' : '性能一般'}
+                      <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/15">
+                        <Zap size={9} className="text-amber-400/60" />
+                        <span className="text-[8px] text-amber-400/60">补全</span>
+                      </div>
+                      {splitView && (
+                        <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-violet-500/10 border border-violet-500/15">
+                          <Columns2 size={9} className="text-violet-400/60" />
+                          <span className="text-[8px] text-violet-400/60">分屏</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Monaco Editor — with optional split view + Collab Cursors overlay */}
+                    <div className="flex-1 min-h-0 relative">
+                      {/* Remote user cursors overlay (auto-disabled under performance pressure) */}
+                      {editorRef.current && monacoRef.current && crdt.remoteUsers.length > 0 && effectiveRemoteCursors && (
+                        <CollabCursors
+                          editor={editorRef.current}
+                          monaco={monacoRef.current}
+                          remoteUsers={crdt.remoteUsers}
+                          currentUserId={crdtUserIdentity.id}
+                          enableMinimapMarkers={effectiveMinimap}
+                          onJumpToUser={(u) => {
+                            if (u.cursor && editorRef.current) {
+                              editorRef.current.revealLineInCenter(u.cursor.line);
+                              editorRef.current.setPosition({ lineNumber: u.cursor.line, column: u.cursor.column });
+                            }
+                          }}
+                        />
+                      )}
+                      {viewMode === 'split' ? (
+                        /* Editor + LivePreview side by side */
+                        <PanelGroup direction="horizontal" autoSaveId="yyc3-editor-preview-split">
+                          <ResizablePanel defaultSize={50} minSize={25} id="split-editor-pane">
+                            <Editor
+                              height="100%"
+                              language={fileLanguage}
+                              theme="vs-dark"
+                              value={fileContent}
+                              onChange={(v) => handleContentChange(v || '')}
+                              onMount={handleEditorMount}
+                              options={{
+                                fontSize: appSettings.editorFontSize,
+                                lineHeight: appSettings.editorFontSize + 8,
+                                minimap: { enabled: false },
+                                tabSize: appSettings.indentStyle === '4-spaces' ? 4 : 2,
+                                insertSpaces: appSettings.indentStyle !== 'tab',
+                                scrollBeyondLastLine: false,
+                                folding: true, lineNumbers: 'on', renderLineHighlight: 'all',
+                                wordWrap: 'on', smoothScrolling: true, cursorBlinking: 'smooth',
+                                padding: { top: 8, bottom: 8 }, automaticLayout: true,
+                                formatOnPaste: true, suggestOnTriggerCharacters: true, quickSuggestions: true,
+                                bracketPairColorization: { enabled: true },
+                                guides: { bracketPairs: true, indentation: true },
+                              }}
+                            />
+                          </ResizablePanel>
+                          <PanelDragHandle />
+                          <ResizablePanel defaultSize={50} minSize={25} id="split-preview-pane">
+                            <LivePreview
+                              code={fileContent}
+                              language={fileLanguage}
+                              autoRefresh={true}
+                              debounceMs={perfDegradation.reducePreviewFrequency ? Math.max(600, 2000) : (appSettings.previewDebounceMs || 600)}
+                              enableTailwind={appSettings.previewTailwind !== false}
+                              mode={effectivePreviewMode}
+                              showConsole={false}
+                              scrollRatio={scrollRatio}
+                              onScrollRatioChange={(ratio) => {
+                                scrollSyncFromEditor.current = true;
+                                if (editorRef.current) {
+                                  const scrollHeight = editorRef.current.getScrollHeight();
+                                  const clientHeight = editorRef.current.getLayoutInfo().height;
+                                  editorRef.current.setScrollTop(ratio * (scrollHeight - clientHeight));
+                                }
+                                setTimeout(() => { scrollSyncFromEditor.current = false; }, 100);
+                              }}
+                            />
+                          </ResizablePanel>
+                        </PanelGroup>
+                      ) : splitView ? (
+                        <PanelGroup direction="horizontal" autoSaveId="yyc3-editor-split">
+                          <ResizablePanel defaultSize={50} minSize={25} id="editor-split-left">
+                            <Editor
+                              height="100%"
+                              language={fileLanguage}
+                              theme="vs-dark"
+                              value={fileContent}
+                              onChange={(v) => handleContentChange(v || '')}
+                              onMount={handleEditorMount}
+                              options={{
+                                fontSize: appSettings.editorFontSize,
+                                lineHeight: appSettings.editorFontSize + 8,
+                                minimap: { enabled: effectiveMinimap, scale: 1 },
+                                tabSize: appSettings.indentStyle === '4-spaces' ? 4 : 2,
+                                insertSpaces: appSettings.indentStyle !== 'tab',
+                                scrollBeyondLastLine: false,
+                                folding: true,
+                                lineNumbers: 'on',
+                                renderLineHighlight: 'all',
+                                wordWrap: 'on',
+                                smoothScrolling: true,
+                                cursorBlinking: 'smooth',
+                                padding: { top: 8, bottom: 8 },
+                                automaticLayout: true,
+                                formatOnPaste: true,
+                                suggestOnTriggerCharacters: true,
+                                quickSuggestions: true,
+                                bracketPairColorization: { enabled: true },
+                                guides: { bracketPairs: true, indentation: true },
+                              }}
+                            />
+                          </ResizablePanel>
+                          <PanelDragHandle />
+                          <ResizablePanel defaultSize={50} minSize={25} id="editor-split-right">
+                            <Editor
+                              height="100%"
+                              language={splitLanguage}
+                              theme="vs-dark"
+                              value={splitContent}
+                              onChange={(v) => setSplitContent(v || '')}
+                              onMount={(editor) => { splitEditorRef.current = editor; }}
+                              options={{
+                                fontSize: appSettings.editorFontSize,
+                                lineHeight: appSettings.editorFontSize + 8,
+                                minimap: { enabled: false },
+                                tabSize: appSettings.indentStyle === '4-spaces' ? 4 : 2,
+                                insertSpaces: appSettings.indentStyle !== 'tab',
+                                scrollBeyondLastLine: false,
+                                folding: true,
+                                lineNumbers: 'on',
+                                renderLineHighlight: 'all',
+                                wordWrap: 'on',
+                                smoothScrolling: true,
+                                cursorBlinking: 'smooth',
+                                padding: { top: 8, bottom: 8 },
+                                automaticLayout: true,
+                                bracketPairColorization: { enabled: true },
+                                guides: { bracketPairs: true, indentation: true },
+                              }}
+                            />
+                          </ResizablePanel>
+                        </PanelGroup>
+                      ) : (
+                        <Editor
+                          height="100%"
+                          language={fileLanguage}
+                          theme="vs-dark"
+                          value={fileContent}
+                          onChange={(v) => handleContentChange(v || '')}
+                          onMount={handleEditorMount}
+                          options={{
+                            fontSize: appSettings.editorFontSize,
+                            lineHeight: appSettings.editorFontSize + 8,
+                            minimap: { enabled: effectiveMinimap, scale: 1 },
+                            tabSize: appSettings.indentStyle === '4-spaces' ? 4 : 2,
+                            insertSpaces: appSettings.indentStyle !== 'tab',
+                            scrollBeyondLastLine: false,
+                            folding: true,
+                            lineNumbers: 'on',
+                            renderLineHighlight: 'all',
+                            wordWrap: 'on',
+                            smoothScrolling: true,
+                            cursorBlinking: 'smooth',
+                            padding: { top: 8, bottom: 8 },
+                            automaticLayout: true,
+                            formatOnPaste: true,
+                            suggestOnTriggerCharacters: true,
+                            quickSuggestions: true,
+                            'semanticHighlighting.enabled': true,
+                            bracketPairColorization: { enabled: true },
+                            guides: { bracketPairs: true, indentation: true },
+                          }}
+                        />
+                      )}
+                    </div>
+
+                    {/* Bottom status bar — live diagnostics + CRDT sync */}
+                    <div className="flex items-center justify-between px-3 py-1.5 border-t border-white/[0.06] bg-[#0c0d13] shrink-0">
+                      <div className="flex items-center gap-2">
+                        <GitBranch size={11} className="text-white/25" />
+                        <span className="text-[9px] text-white/20">main</span>
+                        <div className="w-px h-3 bg-white/[0.06]" />
+                        <Check size={10} className="text-emerald-400/50" />
+                        <span className="text-[9px] text-white/25">{fileLanguage === 'typescript' ? 'TypeScript' : fileLanguage === 'json' ? 'JSON' : fileLanguage === 'css' ? 'CSS' : 'Plain'}</span>
+                        <div className="w-px h-3 bg-white/[0.06]" />
+                        {/* CRDT Sync + WS Status */}
+                        <div className="flex items-center gap-1">
+                          <div className={`w-1.5 h-1.5 rounded-full ${syncStatus === 'synced' ? 'bg-emerald-400' :
+                            syncStatus === 'syncing' ? 'bg-amber-400 animate-pulse' :
+                              'bg-red-400 animate-pulse'
+                            }`} />
+                          <span className={`text-[9px] ${syncStatus === 'synced' ? 'text-emerald-400/50' :
+                            syncStatus === 'syncing' ? 'text-amber-400/50' :
+                              'text-red-400/50'
+                            }`}>
+                            {syncStatus === 'synced' ? '已同步' : syncStatus === 'syncing' ? '同步中' : '冲突'}
                           </span>
                         </div>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      {diagnostics.errors > 0 ? (
-                        <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-red-500/10 border border-red-500/15">
-                          <X size={9} className="text-red-400/70" />
-                          <span className="text-[9px] text-red-400/70">{diagnostics.errors} errors</span>
-                        </div>
-                      ) : (
+                        {/* Collab users indicator */}
+                        <CollabStatusIndicator
+                          connectedUsers={crdt.connectedUsers}
+                          currentUserId={crdtUserIdentity.id}
+                          wsState={crdt.wsState}
+                        />
+                        {/* Performance degradation indicator */}
+                        {perfLevel !== 'excellent' && perfLevel !== 'good' && (
+                          <div className={`flex items-center gap-1 px-1.5 py-0.5 rounded ${perfLevel === 'critical' ? 'bg-red-500/10 border border-red-500/15' :
+                            perfLevel === 'poor' ? 'bg-amber-500/10 border border-amber-500/15' :
+                              'bg-white/[0.04]'
+                            }`} title={`性能等级: ${perfLevel}${perfDegradation.disableAnimations ? ' · 动画已禁用' : ''}${perfDegradation.disableMinimap ? ' · Minimap 已禁用' : ''}${perfDegradation.reducePreviewFrequency ? ' · 预览已降频' : ''}${perfDegradation.disableRemoteCursors ? ' · 远程光标已禁用' : ''}`}>
+                            <Zap size={9} className={perfLevel === 'critical' ? 'text-red-400/70' : perfLevel === 'poor' ? 'text-amber-400/70' : 'text-white/30'} />
+                            <span className={`text-[9px] ${perfLevel === 'critical' ? 'text-red-400/60' : perfLevel === 'poor' ? 'text-amber-400/60' : 'text-white/20'}`}>
+                              {perfLevel === 'critical' ? '性能严重不足' : perfLevel === 'poor' ? '性能降级中' : '性能一般'}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-3">
+                        {diagnostics.errors > 0 ? (
+                          <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-red-500/10 border border-red-500/15">
+                            <X size={9} className="text-red-400/70" />
+                            <span className="text-[9px] text-red-400/70">{diagnostics.errors} errors</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-1">
+                            <Check size={9} className="text-emerald-400/50" />
+                            <span className="text-[9px] text-emerald-400/40">0 errors</span>
+                          </div>
+                        )}
+                        {diagnostics.warnings > 0 ? (
+                          <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/15">
+                            <AlertCircle size={9} className="text-amber-400/70" />
+                            <span className="text-[9px] text-amber-400/70">{diagnostics.warnings} warnings</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-1">
+                            <AlertCircle size={9} className="text-white/20" />
+                            <span className="text-[9px] text-white/15">0 warnings</span>
+                          </div>
+                        )}
+                        <span className="text-[9px] text-white/15">UTF-8</span>
+                        <div className="h-2.5 w-px bg-white/[0.08]" />
                         <div className="flex items-center gap-1">
-                          <Check size={9} className="text-emerald-400/50" />
-                          <span className="text-[9px] text-emerald-400/40">0 errors</span>
+                          <div className={'w-1.5 h-1.5 rounded-full ' + (rbacUser.onlineStatus === 'online' ? 'bg-emerald-400' : rbacUser.onlineStatus === 'busy' ? 'bg-amber-400' : 'bg-white/25')} />
+                          <span className="text-[9px] text-white/25">{rbacUser.currentRole === 'owner' ? '拥有者' : rbacUser.currentRole === 'admin' ? '管理员' : rbacUser.currentRole === 'editor' ? '编辑者' : '查看者'}</span>
                         </div>
-                      )}
-                      {diagnostics.warnings > 0 ? (
-                        <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/15">
-                          <AlertCircle size={9} className="text-amber-400/70" />
-                          <span className="text-[9px] text-amber-400/70">{diagnostics.warnings} warnings</span>
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-1">
-                          <AlertCircle size={9} className="text-white/20" />
-                          <span className="text-[9px] text-white/15">0 warnings</span>
-                        </div>
-                      )}
-                      <span className="text-[9px] text-white/15">UTF-8</span>
-                      <div className="h-2.5 w-px bg-white/[0.08]" />
-                      <div className="flex items-center gap-1">
-                        <div className={'w-1.5 h-1.5 rounded-full ' + (rbacUser.onlineStatus === 'online' ? 'bg-emerald-400' : rbacUser.onlineStatus === 'busy' ? 'bg-amber-400' : 'bg-white/25')} />
-                        <span className="text-[9px] text-white/25">{rbacUser.currentRole === 'owner' ? '拥有者' : rbacUser.currentRole === 'admin' ? '管理员' : rbacUser.currentRole === 'editor' ? '编辑者' : '查看者'}</span>
                       </div>
                     </div>
                   </div>
-                </div>
-            ) : (
-              <div className="h-full bg-[#0d0e14]" />
-            )}
-          </ResizablePanel>
-        </PanelGroup>
+                ) : (
+                  <div className="h-full bg-[#0d0e14]" />
+                )}
+              </ResizablePanel>
+            </PanelGroup>
           </ResizablePanel>
 
           {/* ═══════════ INTEGRATED TERMINAL — as resizable bottom panel ═══════════ */}
@@ -3438,11 +3485,10 @@ export function AICodeSystem() {
               <span className="text-[10px]">main</span>
             </div>
             <div className="flex items-center gap-1 px-1.5">
-              <div className={`w-1.5 h-1.5 rounded-full ${
-                syncStatus === 'synced' ? 'bg-emerald-300' :
+              <div className={`w-1.5 h-1.5 rounded-full ${syncStatus === 'synced' ? 'bg-emerald-300' :
                 syncStatus === 'syncing' ? 'bg-amber-300 animate-pulse' :
-                'bg-red-300 animate-pulse'
-              }`} />
+                  'bg-red-300 animate-pulse'
+                }`} />
               <span className="text-[10px]">{syncStatus === 'synced' ? '已同步' : syncStatus === 'syncing' ? '同步中...' : '冲突'}</span>
               {crdt.wsState !== 'closed' && (
                 <span className="text-[9px] opacity-70">
@@ -3553,41 +3599,41 @@ export function AICodeSystem() {
             .filter(p => p.id !== fp.id && p.position)
             .map(p => ({ id: p.id, x: p.position!.x, y: p.position!.y, w: 420, h: 380 }));
           return (
-          <FloatingPanelWrapper
-            key={fp.id}
-            panel={fp}
-            onUpdatePosition={windowMgr.updatePanelPosition}
-            onDock={windowMgr.dockPanel}
-            onClose={windowMgr.deletePanel}
-            otherFloatingPanels={otherSnap}
-            onBringToFront={(id) => windowMgr.updatePanel(id, { zIndex: Date.now() })}
-          >
-            {fp.type === 'aiChat' && (
-              <AIChatStreamPanel
-                onChatStream={aiService.chatStream as any}
-                activeModel={aiService.activeModel?.displayName}
-                activeProvider={aiService.activeProvider?.displayName}
-                isLoading={aiService.isLoading}
-                currentCode={fileContent}
-                selectedCode={editorSelection}
-                editorFileName={selectedNode?.name}
-              />
-            )}
-            {fp.type === 'terminal' && (
-              <div className="p-4 text-[10px] text-white/30">终端浮动面板（开发中）</div>
-            )}
-            {fp.type === 'quickActions' && (
-              <QuickActionsToolbar
-                selectedText={editorSelection}
-                currentCode={fileContent}
-                fileName={selectedNode?.name}
-                language={selectedNode?.name?.endsWith('.tsx') ? 'typescript' : selectedNode?.name?.endsWith('.css') ? 'css' : 'typescript'}
-              />
-            )}
-            {fp.type !== 'aiChat' && fp.type !== 'terminal' && fp.type !== 'quickActions' && (
-              <div className="p-4 text-[10px] text-white/30">{PANEL_TYPE_REGISTRY[fp.type]?.label || '面板'}（浮动模式）</div>
-            )}
-          </FloatingPanelWrapper>
+            <FloatingPanelWrapper
+              key={fp.id}
+              panel={fp}
+              onUpdatePosition={windowMgr.updatePanelPosition}
+              onDock={windowMgr.dockPanel}
+              onClose={windowMgr.deletePanel}
+              otherFloatingPanels={otherSnap}
+              onBringToFront={(id) => windowMgr.updatePanel(id, { zIndex: Date.now() })}
+            >
+              {fp.type === 'aiChat' && (
+                <AIChatStreamPanel
+                  onChatStream={aiService.chatStream as any}
+                  activeModel={aiService.activeModel?.displayName}
+                  activeProvider={aiService.activeProvider?.displayName}
+                  isLoading={aiService.isLoading}
+                  currentCode={fileContent}
+                  selectedCode={editorSelection}
+                  editorFileName={selectedNode?.name}
+                />
+              )}
+              {fp.type === 'terminal' && (
+                <div className="p-4 text-[10px] text-white/30">终端浮动面板（开发中）</div>
+              )}
+              {fp.type === 'quickActions' && (
+                <QuickActionsToolbar
+                  selectedText={editorSelection}
+                  currentCode={fileContent}
+                  fileName={selectedNode?.name}
+                  language={selectedNode?.name?.endsWith('.tsx') ? 'typescript' : selectedNode?.name?.endsWith('.css') ? 'css' : 'typescript'}
+                />
+              )}
+              {fp.type !== 'aiChat' && fp.type !== 'terminal' && fp.type !== 'quickActions' && (
+                <div className="p-4 text-[10px] text-white/30">{PANEL_TYPE_REGISTRY[fp.type]?.label || '面板'}（浮动模式）</div>
+              )}
+            </FloatingPanelWrapper>
           );
         })}
       </AnimatePresence>

@@ -13,65 +13,48 @@
  * @tags settings, keybindings, mcp, rules, agents, models
  */
 
-import { useState, useCallback, useEffect, useRef, useMemo } from 'react'
-import { useNavigate } from 'react-router'
 import {
-  useSettingsStore,
+  AlertCircle,
+  ArrowLeft,
+  BookOpen,
+  Bot,
+  Check,
+  Copy,
+  Cpu,
+  Database,
+  Download,
+  Edit3,
+  Eye,
+  EyeOff,
+  FileText,
+  Keyboard,
+  MessageSquare,
+  Play,
+  Plug,
+  Plus,
+  RotateCcw,
+  Search,
+  Settings,
+  Sparkles,
+  Trash2,
+  Upload,
+  User,
+  Volume2,
+  X,
+  Zap
+} from 'lucide-react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useNavigate } from 'react-router'
+import { toast } from 'sonner'
+import {
   DEFAULT_KEYBINDINGS,
-  type SettingsSectionId,
-  type AgentConfig,
-  type MCPConfig,
-  type RuleConfig,
-  type SkillConfig,
-  type ModelConfig,
-  type DocumentSet,
+  useSettingsStore,
   type SearchResult,
+  type SettingsSectionId
 } from '../stores/settings-store'
 import { useThemeStore } from '../stores/theme-store'
 import { useLiquidGlass } from '../utils/liquid-glass'
 import { useI18n } from '../utils/useI18n'
-import {
-  ArrowLeft,
-  Search,
-  User,
-  Settings,
-  Bot,
-  Plug,
-  Cpu,
-  FileText,
-  MessageSquare,
-  BookOpen,
-  Plus,
-  Trash2,
-  Edit3,
-  ChevronRight,
-  ToggleLeft,
-  ToggleRight,
-  ExternalLink,
-  RotateCcw,
-  Download,
-  Upload,
-  Keyboard,
-  Eye,
-  EyeOff,
-  X,
-  Check,
-  Globe,
-  Database,
-  FolderOpen,
-  Github,
-  Copy,
-  AlertCircle,
-  Volume2,
-  ListTodo,
-  Shield,
-  Play,
-  Terminal,
-  Bell,
-  Zap,
-  Sparkles,
-} from 'lucide-react'
-import { toast } from 'sonner'
 import { DataManagementPanel } from './designer/DataManagementPanel'
 
 // ============================================
@@ -82,7 +65,7 @@ function SearchResultsPanel({ results, onSelect }: { results: SearchResult[]; on
   const { t } = useI18n()
   const typeIcons: Record<string, typeof User> = { setting: Settings, agent: Bot, mcp: Plug, model: Cpu, rule: BookOpen, skill: Sparkles }
 
-  if (results.length === 0) {return null}
+  if (results.length === 0) { return null }
 
   return (
     <div className="bg-white/[0.02] rounded-lg border border-emerald-500/10 mb-4 max-h-[280px] overflow-y-auto">
@@ -153,14 +136,12 @@ function Toggle({ value, onChange }: { value: boolean; onChange: (v: boolean) =>
   return (
     <button
       onClick={() => onChange(!value)}
-      className={`w-9 h-5 rounded-full transition-colors relative ${
-        value ? 'bg-emerald-500/60' : 'bg-white/10'
-      }`}
+      className={`w-9 h-5 rounded-full transition-colors relative ${value ? 'bg-emerald-500/60' : 'bg-white/10'
+        }`}
     >
       <div
-        className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
-          value ? 'translate-x-[18px]' : 'translate-x-0.5'
-        }`}
+        className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${value ? 'translate-x-[18px]' : 'translate-x-0.5'
+          }`}
       />
     </button>
   )
@@ -253,11 +234,10 @@ function CardButton({ onClick, icon: Icon, label, desc, danger }: { onClick: () 
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-3 py-1.5 rounded text-[11px] transition-colors ${
-        danger
-          ? 'bg-red-500/10 text-red-400/70 hover:bg-red-500/20'
-          : 'bg-emerald-500/10 text-emerald-400/70 hover:bg-emerald-500/20'
-      }`}
+      className={`flex items-center gap-2 px-3 py-1.5 rounded text-[11px] transition-colors ${danger
+        ? 'bg-red-500/10 text-red-400/70 hover:bg-red-500/20'
+        : 'bg-emerald-500/10 text-emerald-400/70 hover:bg-emerald-500/20'
+        }`}
     >
       <Icon className="w-3.5 h-3.5" />
       {label}
@@ -363,9 +343,9 @@ function GeneralSection() {
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     e.preventDefault()
     const parts: string[] = []
-    if (e.ctrlKey || e.metaKey) {parts.push('Ctrl')}
-    if (e.shiftKey) {parts.push('Shift')}
-    if (e.altKey) {parts.push('Alt')}
+    if (e.ctrlKey || e.metaKey) { parts.push('Ctrl') }
+    if (e.shiftKey) { parts.push('Shift') }
+    if (e.altKey) { parts.push('Alt') }
     const key = e.key
     if (!['Control', 'Shift', 'Alt', 'Meta'].includes(key)) {
       parts.push(key.length === 1 ? key.toUpperCase() : key)
@@ -395,7 +375,7 @@ function GeneralSection() {
     const keyMap: Record<string, string[]> = {}
     Object.entries(general.customKeybindings).forEach(([action, keys]) => {
       const normalized = keys.trim()
-      if (!keyMap[normalized]) {keyMap[normalized] = []}
+      if (!keyMap[normalized]) { keyMap[normalized] = [] }
       keyMap[normalized].push(action)
     })
     const conflicts: Record<string, string[]> = {}
@@ -523,9 +503,8 @@ function GeneralSection() {
             const isDefault = DEFAULT_KEYBINDINGS[action] === keys
             const conflictsWith = keybindingConflicts[action]
             return (
-              <div key={action} className={`flex items-center justify-between py-2 border-b border-white/[0.03] last:border-b-0 group ${
-                conflictsWith ? 'bg-amber-500/[0.03]' : ''
-              }`}>
+              <div key={action} className={`flex items-center justify-between py-2 border-b border-white/[0.03] last:border-b-0 group ${conflictsWith ? 'bg-amber-500/[0.03]' : ''
+                }`}>
                 <div className="flex items-center gap-2 min-w-0 flex-1">
                   <Keyboard className={`w-3 h-3 shrink-0 ${conflictsWith ? 'text-amber-400/40' : 'text-white/20'}`} />
                   <span className={`text-[11px] truncate ${conflictsWith ? 'text-amber-400/50' : 'text-white/50'}`}>{action}</span>
@@ -556,9 +535,8 @@ function GeneralSection() {
                     </>
                   ) : (
                     <>
-                      <code className={`px-1.5 py-0.5 rounded text-[10px] ${
-                        isDefault ? 'bg-white/[0.06] text-white/40' : 'bg-emerald-500/10 text-emerald-400/60'
-                      }`}>
+                      <code className={`px-1.5 py-0.5 rounded text-[10px] ${isDefault ? 'bg-white/[0.06] text-white/40' : 'bg-emerald-500/10 text-emerald-400/60'
+                        }`}>
                         {keys}
                       </code>
                       <button
@@ -595,7 +573,7 @@ function AgentsSection() {
   const [draftTemp, setDraftTemp] = useState(0.7)
 
   const handleCreate = () => {
-    if (!draftName.trim()) {return}
+    if (!draftName.trim()) { return }
     addAgent({
       id: `agent-${Date.now()}`,
       name: draftName,
@@ -704,15 +682,15 @@ function MCPSection() {
     try {
       const result = await testMCPConnection(mcpId)
       setTestResults(prev => ({ ...prev, [mcpId]: result }))
-      if (result.connected) {toast.success(result.message)}
-      else {toast.error(result.message)}
+      if (result.connected) { toast.success(result.message) }
+      else { toast.error(result.message) }
     } finally {
       setTestingId(null)
     }
   }
 
   const handleAdd = () => {
-    if (!draftName.trim()) {return}
+    if (!draftName.trim()) { return }
     addMCP({
       id: `mcp-${Date.now()}`,
       name: draftName,
@@ -772,9 +750,8 @@ function MCPSection() {
 
       <div className="space-y-2">
         {settings.mcpConfigs.map((mcp) => (
-          <div key={mcp.id} className={`bg-white/[0.02] rounded-lg p-3 border transition-colors ${
-            mcp.enabled ? 'border-emerald-500/10' : 'border-white/[0.04] opacity-60'
-          } group`}>
+          <div key={mcp.id} className={`bg-white/[0.02] rounded-lg p-3 border transition-colors ${mcp.enabled ? 'border-emerald-500/10' : 'border-white/[0.04] opacity-60'
+            } group`}>
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-start gap-2 min-w-0 flex-1">
                 <Plug className={`w-4 h-4 mt-0.5 shrink-0 ${mcp.enabled ? 'text-emerald-400/50' : 'text-white/20'}`} />
@@ -823,13 +800,12 @@ function MCPSection() {
                 <button
                   onClick={() => handleTestMCP(mcp.id)}
                   disabled={testingId === mcp.id}
-                  className={`px-2 py-0.5 rounded text-[9px] transition-colors ${
-                    testingId === mcp.id
-                      ? 'bg-white/[0.04] text-white/20 cursor-wait'
-                      : testResults[mcp.id]?.connected
-                        ? 'bg-emerald-500/10 text-emerald-400/60'
-                        : 'bg-blue-500/10 text-blue-400/60 hover:bg-blue-500/20'
-                  }`}
+                  className={`px-2 py-0.5 rounded text-[9px] transition-colors ${testingId === mcp.id
+                    ? 'bg-white/[0.04] text-white/20 cursor-wait'
+                    : testResults[mcp.id]?.connected
+                      ? 'bg-emerald-500/10 text-emerald-400/60'
+                      : 'bg-blue-500/10 text-blue-400/60 hover:bg-blue-500/20'
+                    }`}
                 >
                   {testingId === mcp.id ? '...' : testResults[mcp.id]?.connected ? '✓' : t('page.testConnection', 'settings')}
                 </button>
@@ -880,7 +856,7 @@ function ModelsSection() {
   }
 
   const handleAdd = () => {
-    if (!draftModel.trim()) {return}
+    if (!draftModel.trim()) { return }
     addModel({
       id: `model-${Date.now()}`,
       provider: draftProvider,
@@ -943,9 +919,8 @@ function ModelsSection() {
                   </div>
                   {/* Validation result */}
                   {validationResults[model.id] && (
-                    <div className={`flex items-center gap-1 mt-0.5 text-[9px] ${
-                      validationResults[model.id].valid ? 'text-emerald-400/60' : 'text-red-400/60'
-                    }`}>
+                    <div className={`flex items-center gap-1 mt-0.5 text-[9px] ${validationResults[model.id].valid ? 'text-emerald-400/60' : 'text-red-400/60'
+                      }`}>
                       {validationResults[model.id].valid ? <Check className="w-2.5 h-2.5" /> : <AlertCircle className="w-2.5 h-2.5" />}
                       {validationResults[model.id].message}
                       {validationResults[model.id].latency && <span className="text-white/20 ml-1">({validationResults[model.id].latency}ms)</span>}
@@ -957,13 +932,12 @@ function ModelsSection() {
                 <button
                   onClick={() => handleValidate(model.id)}
                   disabled={validating === model.id || !model.apiKey}
-                  className={`px-2 py-0.5 rounded text-[9px] transition-colors ${
-                    validating === model.id
-                      ? 'bg-white/[0.04] text-white/20 cursor-wait'
-                      : !model.apiKey
-                        ? 'bg-white/[0.02] text-white/10 cursor-not-allowed'
-                        : 'bg-emerald-500/10 text-emerald-400/60 hover:bg-emerald-500/20'
-                  }`}
+                  className={`px-2 py-0.5 rounded text-[9px] transition-colors ${validating === model.id
+                    ? 'bg-white/[0.04] text-white/20 cursor-wait'
+                    : !model.apiKey
+                      ? 'bg-white/[0.02] text-white/10 cursor-not-allowed'
+                      : 'bg-emerald-500/10 text-emerald-400/60 hover:bg-emerald-500/20'
+                    }`}
                   title={t('page.validateKey', 'settings')}
                 >
                   {validating === model.id ? '...' : t('page.validate', 'settings')}
@@ -999,12 +973,11 @@ function ContextSection() {
         <SectionHeader title={t('page.context', 'settings')} desc={t('page.contextDesc', 'settings')} />
         <div className="bg-white/[0.02] rounded-lg p-4 border border-white/[0.04]">
           <SettingRow label={t('page.indexStatus', 'settings')}>
-            <span className={`text-[10px] px-2 py-0.5 rounded ${
-              settings.context.indexStatus === 'completed' ? 'bg-emerald-500/10 text-emerald-400/70' :
+            <span className={`text-[10px] px-2 py-0.5 rounded ${settings.context.indexStatus === 'completed' ? 'bg-emerald-500/10 text-emerald-400/70' :
               settings.context.indexStatus === 'indexing' ? 'bg-blue-500/10 text-blue-400/70' :
-              settings.context.indexStatus === 'error' ? 'bg-red-500/10 text-red-400/70' :
-              'bg-white/[0.06] text-white/40'
-            }`}>{settings.context.indexStatus}</span>
+                settings.context.indexStatus === 'error' ? 'bg-red-500/10 text-red-400/70' :
+                  'bg-white/[0.06] text-white/40'
+              }`}>{settings.context.indexStatus}</span>
           </SettingRow>
           <SettingRow label={t('page.reindex', 'settings')}>
             <CardButton onClick={() => {
@@ -1198,10 +1171,10 @@ function RulesSection() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editContent, setEditContent] = useState('')
 
-  const injectedContent = useMemo(() => getEnabledRulesContent(), [settings.rules, settings.skills])
+  const injectedContent = useMemo(() => getEnabledRulesContent(), [getEnabledRulesContent])
 
   const handleAddRule = () => {
-    if (!draftRuleName.trim()) {return}
+    if (!draftRuleName.trim()) { return }
     addRule({
       id: `rule-${Date.now()}`,
       name: draftRuleName,
@@ -1215,7 +1188,7 @@ function RulesSection() {
   }
 
   const handleAddSkill = () => {
-    if (!draftSkillName.trim()) {return}
+    if (!draftSkillName.trim()) { return }
     addSkill({
       id: `skill-${Date.now()}`,
       name: draftSkillName,
@@ -1240,9 +1213,8 @@ function RulesSection() {
           <button
             key={tb}
             onClick={() => setTab(tb)}
-            className={`px-3 py-1.5 text-[11px] rounded transition-colors ${
-              tab === tb ? 'bg-emerald-500/15 text-emerald-400/80' : 'text-white/30 hover:text-white/50'
-            }`}
+            className={`px-3 py-1.5 text-[11px] rounded transition-colors ${tab === tb ? 'bg-emerald-500/15 text-emerald-400/80' : 'text-white/30 hover:text-white/50'
+              }`}
           >
             {tb === 'rules' ? t('page.rulesTab', 'settings') : tb === 'skills' ? t('page.skillsTab', 'settings') : t('page.injectionPreview', 'settings')}
           </button>
@@ -1280,17 +1252,15 @@ function RulesSection() {
 
           <div className="space-y-2">
             {settings.rules.map((rule) => (
-              <div key={rule.id} className={`bg-white/[0.02] rounded-lg p-3 border transition-colors ${
-                rule.enabled ? 'border-emerald-500/10' : 'border-white/[0.04] opacity-50'
-              } group`}>
+              <div key={rule.id} className={`bg-white/[0.02] rounded-lg p-3 border transition-colors ${rule.enabled ? 'border-emerald-500/10' : 'border-white/[0.04] opacity-50'
+                } group`}>
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0 flex-1">
                     <div className="text-[12px] text-white/70 flex items-center gap-2">
                       <BookOpen className="w-3 h-3 text-white/20" />
                       {rule.name}
-                      <span className={`text-[9px] px-1 py-0.5 rounded ${
-                        rule.scope === 'project' ? 'bg-violet-500/10 text-violet-400/60' : 'bg-white/[0.06] text-white/30'
-                      }`}>{rule.scope}</span>
+                      <span className={`text-[9px] px-1 py-0.5 rounded ${rule.scope === 'project' ? 'bg-violet-500/10 text-violet-400/60' : 'bg-white/[0.06] text-white/30'
+                        }`}>{rule.scope}</span>
                     </div>
                     {editingId === rule.id ? (
                       <div className="mt-2">
@@ -1350,9 +1320,8 @@ function RulesSection() {
 
           <div className="space-y-2">
             {settings.skills.map((skill) => (
-              <div key={skill.id} className={`bg-white/[0.02] rounded-lg p-3 border transition-colors ${
-                skill.enabled ? 'border-emerald-500/10' : 'border-white/[0.04] opacity-50'
-              } group`}>
+              <div key={skill.id} className={`bg-white/[0.02] rounded-lg p-3 border transition-colors ${skill.enabled ? 'border-emerald-500/10' : 'border-white/[0.04] opacity-50'
+                } group`}>
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0 flex-1">
                     <div className="text-[12px] text-white/70 flex items-center gap-2">
@@ -1442,11 +1411,11 @@ export function SettingsPage() {
   }, [navigate])
 
   // Deep search results
-  const searchResults = useMemo(() => deepSearch(searchQuery), [searchQuery, settings, deepSearch])
+  const searchResults = useMemo(() => deepSearch(searchQuery), [searchQuery, deepSearch])
 
   // Filter sections by search
   const filteredSections = useMemo(() => {
-    if (!searchQuery.trim()) {return SECTIONS}
+    if (!searchQuery.trim()) { return SECTIONS }
     // If we have search results, show sections that have matches
     if (searchResults.length > 0) {
       const matchedSections = new Set(searchResults.map(r => r.section))
@@ -1485,7 +1454,7 @@ export function SettingsPage() {
     input.accept = '.json'
     input.onchange = async (e) => {
       const file = (e.target as HTMLInputElement).files?.[0]
-      if (!file) {return}
+      if (!file) { return }
       try {
         const text = await file.text()
         const data = JSON.parse(text)
@@ -1586,13 +1555,12 @@ export function SettingsPage() {
                 <button
                   key={section.id}
                   onClick={() => setActiveSection(section.id)}
-                  className={`w-full flex items-center gap-2.5 px-4 py-2 text-left transition-colors ${
-                    isActive
-                      ? isLG
-                        ? 'bg-emerald-500/10 text-emerald-400/80 border-r-2 border-emerald-400/40'
-                        : 'bg-white/[0.06] text-white/70 border-r-2 border-violet-400/40'
-                      : 'text-white/35 hover:text-white/50 hover:bg-white/[0.02]'
-                  }`}
+                  className={`w-full flex items-center gap-2.5 px-4 py-2 text-left transition-colors ${isActive
+                    ? isLG
+                      ? 'bg-emerald-500/10 text-emerald-400/80 border-r-2 border-emerald-400/40'
+                      : 'bg-white/[0.06] text-white/70 border-r-2 border-violet-400/40'
+                    : 'text-white/35 hover:text-white/50 hover:bg-white/[0.02]'
+                    }`}
                 >
                   <Icon className="w-4 h-4 shrink-0" />
                   <span className="text-[11px] truncate">{t(section.labelKey, 'settings')}</span>

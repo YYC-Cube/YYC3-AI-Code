@@ -49,7 +49,7 @@ function useModelHealth(intervalMs = 30_000) {
       mountedRef.current = false;
       clearInterval(timer);
     };
-  }, [activeModel?.id, intervalMs]);
+  }, [activeModel, intervalMs]);
 
   return { status, latency, activeModel };
 }

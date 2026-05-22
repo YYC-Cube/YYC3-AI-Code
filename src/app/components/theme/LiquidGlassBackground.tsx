@@ -5,8 +5,8 @@
  * @version 1.0.0
  */
 
-import { useEffect, useState, useMemo } from 'react'
-import { useThemeStore, type ThemeLiquidGlass } from '../../stores/theme-store'
+import { useEffect, useMemo, useState } from 'react'
+import { useThemeStore } from '../../stores/theme-store'
 
 /* ============================================
    Floating Orb Component
@@ -95,12 +95,12 @@ export function LiquidGlassBackground() {
   }, [])
 
   const speed = lg?.animationSpeed ?? 1
-  const baseDuration = (d: number) => d / speed
+  const baseDuration = useCallback((d: number) => d / speed, [speed])
 
   // Generate orbs based on settings - MUST be before any conditional returns
   const orbs: OrbProps[] = useMemo(() => {
     if (!lg?.backgroundOrbs) return []
-    
+
     const glowPrimary = lg.glowColor || 'rgba(0, 255, 135, 0.35)'
     const glowSecondary = lg.secondaryGlowColor || 'rgba(6, 182, 212, 0.3)'
     return [
@@ -110,12 +110,12 @@ export function LiquidGlassBackground() {
       { size: 280, color: glowPrimary.replace(/[\d.]+\)$/, '0.2)'), top: '20%', left: '80%', delay: -3, duration: baseDuration(25), variant: 0 },
       { size: 200, color: glowSecondary.replace(/[\d.]+\)$/, '0.15)'), top: '85%', left: '50%', delay: -8, duration: baseDuration(16), variant: 1 },
     ]
-  }, [lg?.enabled, lg?.backgroundOrbs, lg?.glowColor, lg?.secondaryGlowColor, speed])
+  }, [lg?.backgroundOrbs, lg?.glowColor, lg?.secondaryGlowColor, baseDuration])
 
   // Generate particles - MUST be before any conditional returns
   const particles: ParticleProps[] = useMemo(() => {
     if (!lg?.particles) return []
-    
+
     const count = 18
     const result: ParticleProps[] = []
     for (let i = 0; i < count; i++) {
@@ -131,10 +131,10 @@ export function LiquidGlassBackground() {
       })
     }
     return result
-  }, [lg?.enabled, lg?.particles, speed])
+  }, [lg?.particles, baseDuration])
 
   // Don't render if liquid glass is not enabled
-  if (!lg?.enabled) {return null}
+  if (!lg?.enabled) { return null }
 
   if (reducedMotion) {
     // Static background for reduced motion

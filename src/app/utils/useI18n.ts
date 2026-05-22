@@ -72,7 +72,7 @@ export function useI18n(): UseI18nReturn {
 
   const exists = useCallback(
     (key: string, ns?: TranslationNamespace) => i18nService.exists(key, ns),
-    [locale]
+    []
   )
 
   const localeInfo = useMemo(() => {

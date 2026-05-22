@@ -263,7 +263,7 @@ export function GanttView() {
       const todayOffset = Math.floor((now - startDate.getTime()) / DAY_MS) * dayWidth
       scrollRef.current.scrollLeft = Math.max(0, todayOffset - 200)
     }
-  }, [subView])
+  }, [subView, dayWidth, now, startDate])
 
   const getBarPosition = (task: Task) => {
     const taskStart = task.createdAt

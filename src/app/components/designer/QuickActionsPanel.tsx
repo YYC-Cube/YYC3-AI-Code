@@ -75,7 +75,7 @@ export function QuickActionsPanel() {
 
   const [activeTab, setActiveTab] = useState<'actions' | 'history' | 'clipboard'>('actions')
 
-  const filteredActions = useMemo(() => getFilteredActions(), [activeCategory, searchFilter])
+  const filteredActions = useMemo(() => getFilteredActions(), [getFilteredActions])
 
   if (!panelOpen) {return null}
 

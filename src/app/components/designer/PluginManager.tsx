@@ -7,17 +7,29 @@
  * 3. Runtime rendering — dynamically resolve plugin components at render time
  */
 
-import React, { useState, useCallback, useMemo, createContext, useContext, type ReactNode } from 'react';
 import {
-  Package, Puzzle, Download, Check, Trash2, Search,
-  X, Star, ExternalLink, Zap, ChartBar, Table2,
-  Map, FileText, Calendar, Image, Activity, Loader,
-  Shield, ShieldCheck, RefreshCw, ToggleLeft, ToggleRight,
-  ShieldAlert, Lock,
+  Activity,
+  ChartBar,
+  Check,
+  Download,
+  FileText,
+  Loader,
+  Lock,
+  Map,
+  Package, Puzzle,
+  Search,
+  ShieldAlert,
+  ShieldCheck,
+  Star,
+  Table2,
+  ToggleLeft, ToggleRight,
+  Trash2,
+  X
 } from 'lucide-react';
-import { useThemeTokens, type ThemeTokens } from './hooks/useThemeTokens';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
+import React, { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
 import { useDesigner } from '../../store';
+import { useThemeTokens } from './hooks/useThemeTokens';
 
 /* ================================================================
    Plugin Types
@@ -196,9 +208,9 @@ export function usePluginRegistry() {
     return {
       installed: [] as InstalledPlugin[],
       available: AVAILABLE_PLUGINS,
-      install: () => {},
-      uninstall: () => {},
-      toggle: () => {},
+      install: () => { },
+      uninstall: () => { },
+      toggle: () => { },
       getPluginComponents: () => [] as PluginComponentDef[],
       isInstalled: () => false,
     };
@@ -217,7 +229,7 @@ function loadInstalled(): InstalledPlugin[] {
 }
 
 function saveInstalled(plugins: InstalledPlugin[]) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(plugins)); } catch {}
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(plugins)); } catch { }
 }
 
 export function PluginRegistryProvider({ children }: { children: ReactNode }) {
@@ -345,22 +357,20 @@ export function PluginStoreDialog({ onClose }: { onClose: () => void }) {
           <div className={`flex items-center ${t.inputBg} rounded-lg p-0.5`}>
             <button
               onClick={() => setTab('browse')}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] transition-all ${
-                tab === 'browse'
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] transition-all ${tab === 'browse'
                   ? 'bg-violet-500/20 text-violet-300'
                   : `${t.textTertiary} hover:text-white/60`
-              }`}
+                }`}
             >
               <Package className="w-3 h-3" />
               浏览
             </button>
             <button
               onClick={() => setTab('installed')}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] transition-all ${
-                tab === 'installed'
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] transition-all ${tab === 'installed'
                   ? 'bg-violet-500/20 text-violet-300'
                   : `${t.textTertiary} hover:text-white/60`
-              }`}
+                }`}
             >
               <Check className="w-3 h-3" />
               已安装 ({installed.length})
@@ -492,11 +502,10 @@ export function PluginStoreDialog({ onClose }: { onClose: () => void }) {
                     <>
                       <button
                         onClick={() => toggle(plugin.id)}
-                        className={`p-1.5 rounded-md transition-all ${
-                          plugin.enabled
+                        className={`p-1.5 rounded-md transition-all ${plugin.enabled
                             ? 'text-emerald-400 hover:bg-emerald-500/10'
                             : `${t.textMuted} ${t.hoverBg}`
-                        }`}
+                          }`}
                         title={plugin.enabled ? '禁用' : '启用'}
                       >
                         {plugin.enabled ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
@@ -538,4 +547,9 @@ export function PluginStoreDialog({ onClose }: { onClose: () => void }) {
       </motion.div>
     </motion.div>
   );
+}
+
+export function PluginManager({ open, onClose }: { open: boolean; onClose: () => void }) {
+  if (!open) return null;
+  return <PluginStoreDialog onClose={onClose} />;
 }
