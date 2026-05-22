@@ -38,11 +38,10 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react-dom') || id.includes('react-router') || id.includes('scheduler')) {
-              return 'vendor-react'
-            }
-            if (id.includes('@radix-ui')) {
-              return 'vendor-radix'
+            // 将React和Radix UI合并到同一个chunk避免循环依赖
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') ||
+                id.includes('scheduler') || id.includes('@radix-ui') || id.includes('@emotion')) {
+              return 'vendor-react-ui'
             }
             if (id.includes('motion')) {
               return 'vendor-motion'
