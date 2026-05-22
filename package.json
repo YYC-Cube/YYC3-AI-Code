@@ -10,8 +10,19 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
+    "test:e2e": "playwright test",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 50",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
+    "security-audit": "node scripts/security-audit.cjs",
+    "deps-update": "npm update && npm audit fix",
+    "deps-check": "npm outdated",
+    "pre-commit": "npm run lint && npm run test",
+    "ci-build": "npm run lint && npm run test && npm run build",
+    "analyze": "vite build --mode analyze",
+    "deploy": "scripts/auto-deploy.sh",
+    "deploy:build": "npm run ci-build && node scripts/generate-build-info.js",
+    "deploy:push": "git push origin main",
+    "deploy:full": "npm run deploy:build && git add . && git commit -m 'chore: 生产部署' && npm run deploy:push"
   },
   "dependencies": {
     "@babel/standalone": "^7.29.1",
